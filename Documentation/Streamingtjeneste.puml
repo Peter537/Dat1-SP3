@@ -10,8 +10,24 @@ class Main {
 
 ' MAIN KLASSEN
 class ChillMedia {
+    - ArrayList<IGenre> genres
+    - ArrayList<IMovie> movies
+    - ArrayList<ISerie> series
+    - ArrayList<IUser> users
 
     + ChillMedia()
+    - void load()
+    + void run()
+
+    - void listMovies()
+    - void listSeries()
+
+    - ArrayList<IMedia> getPage(int page)
+
+    + ArrayList<IMovie> getMovies()
+    + ArrayList<ISeries> getSeries()
+    + ArrayList<IGenre> getGenres()
+    + ArrayList<IUser> getUsers()
 }
 
 class LogIn {
@@ -23,36 +39,47 @@ class Query {
     ' STATIC CLASS, EVT. KUNNE MAN LAVE EN INSTANS AF DENNE
     ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
 
+    + static ArrayList<ISeries> search(SeriesGenre genre)
+    + static ArrayList<IMovie> search(MovieGenre genre)
 }
 
 class TextIO {
+    - Scanner scanner
 
     + TextIO()
+    + void print(String message)
+    + String getUserInput(String message)
+    + String getUserInput(String message, String[] optionsList)
 }
 
-class FileIO implements ISaveable {
-
+class FileIO {
     + FileIO()
+    + ArrayList<IUser> loadUsers()
+    + ArrayList<IMovie> loadMovies()
+    + ArrayList<ISeries> loadSeries()
 }
 
 class User implements IUser {
     - static int idCounter
+    - int id
     - String name
     - String password
     - String email
     - int age
+    - ArrayList<IMovie> myMovies
+    - ArrayList<IMovie> watchedMovies
 
     + User(String name, String email, String password, int age)
 }
 
 class Movie extends AMovie {
 
-    + Movie(String title, int year, float rating, Genre[] genres)
+    + Movie(String title, int year, float rating, ArrayList<Genre> genres)
 }
 
 class Series extends ASeries {
 
-    + Series(String title, int startYear, int endYear, float rating, Genre[] genres, Season[] seasons)
+    + Series(String title, int startYear, int endYear, float rating, ArrayList<Genre> genres, ArrayList<Season> seasons)
 }
 
 class Season extends ASeason {
@@ -60,60 +87,144 @@ class Season extends ASeason {
     + Season(int seasonNumber, int episodeCount)
 }
 
+class LanguageDanish implements ILanguage {
+
+    + LanguageDanish()
+}
+
+class LanguageEnglish implements ILanguage {
+
+    + LanguageEnglish()
+}
+
 ' *****************
 ' ABSTRACT CLASS
 ' *****************
 
 abstract class AMovie implements IMovie {
+    - String title
+    - int year
+    - float rating
+    - ArrayList<Genre> genres
 
+    + AMovie(String title, int year, float rating, ArrayList<Genre> genres)
 }
 
 abstract class ASeries implements ISeries {
+    - String title
+    - int startYear
+    - int endYear
+    - float rating
+    - ArrayList<Genre> genres
+    - ArrayList<Season> seasons
 
+    + ASeries(String title, int startYear, int endYear, float rating, ArrayList<Genre> genres, ArrayList<Season> seasons)
 }
 
 abstract class ASeason implements ISeason {
+    - int seasonNumber
+    - int episodeCount
 
+    + ASeason(int seasonNumber, int episodeCount)
 }
 
 ' *****************
 ' INTERFACES
 ' *****************
 
-interface IMedia extends ISaveable, Query {
-
-}
-
-interface ISeason implements ISeries {
-
+interface IMedia extends Query {
+    + String getName()
+    + float getRating()
+    + ArrayList<Genre> getGenres()
 }
 
 interface ISeries implements IMedia {
+    + int getStartYear()
+    + int getEndYear()
+    + ArrayList<Season> getSeasons()
+}
 
+interface ISeason implements ISeries {
+    + int getSeasonNumber()
+    + int getEpisodeCount()
 }
 
 interface IMovie implements IMedia {
-
+    + int getYear()
 }
 
 interface IUser implements ISaveable {
-
+    + int getId()
+    + String getName()
+    + String getEmail()
+    + String getPassword()
+    + int getAge()
+    + ArrayList<Movie> getMyMovies()
+    + ArrayList<Movie> getWatchedMovies()
+    + void addMyMovie(Movie movie)
+    + void addWatchedMovie(Movie movie)
+    + void removeMyMovie(Movie movie)
+    + void save()
+    - void saveWatchedMovies()
+    - void saveMyMovies()
 }
 
 interface ILanguage {
-
+    ' WILL MAKE THIS AT A LATER POINT
 }
 
 interface ISaveable {
-
+    + void save()
 }
 
 ' *****************
 ' ENUMS
 ' *****************
 
-enum Genre {
+enum MovieGenre {
+    CRIME,
+    DRAMA,
+    BIOGRAPHY,
+    SPORT,
+    HISTORY,
+    ROMANCE,
+    WAR,
+    MYSTERY,
+    ADVENTURE,
+    FAMILY,
+    FANTASY,
+    THRILLER,
+    HORROR,
+    FILM_NOIR,
+    ACTION,
+    SCI_FI,
+    COMEDY,
+    MUSICAL,
+    WESTERN,
+    MUSIC
+}
 
+enum SeriesGenre {
+    TALK_SHOW,
+    DOCUMENTARY,
+    CRIME,
+    DRAMA,
+    ACTION,
+    ADVENTURE,
+    COMEDY,
+    FANTASY,
+    ANIMATION,
+    HORROR,
+    SCI_FI,
+    WAR,
+    THRILLER,
+    MYSTERY,
+    BIOGRAPHY,
+    HISTORY,
+    FAMILY,
+    WESTERN,
+    ROMANCE,
+    SPORT
 }
 
 ' *****************
