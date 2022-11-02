@@ -31,16 +31,28 @@ class ChillMedia {
 }
 
 class LogIn {
+    - IUser currentUser
 
     + LogIn(ChillMedia cm)
+
+    - void signUp()
+    - IUser signIn()
+
+    + IUser createUser()
 }
 
 class Query {
     ' STATIC CLASS, EVT. KUNNE MAN LAVE EN INSTANS AF DENNE
     ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
 
-    + static ArrayList<ISeries> search(SeriesGenre genre)
-    + static ArrayList<IMovie> search(MovieGenre genre)
+    + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, SeriesGenre genre)
+    + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre)
+    + static ArrayList<ISeries> searchSeriesName(ArrayList<ISeries> series, String name)
+    + static ArrayList<IMovie> searchMovieName(ArrayList<IMovie> movies, String name)
+    + static ArrayList<IMedia> searchName(ArrayList<IMedia> medias, String name)
+    + static ArrayList<ISeries> searchSeriesRating(ArrayList<ISeries> series, int minimumRating)
+    + static ArrayList<IMovie> searchMovieRating(ArrayList<IMovie> movies, int minimumRating)
+    + static ArrayList<IMedia> searchRating(ArrayList<IMedia> medias, int minimumRating)
 }
 
 class TextIO {
@@ -52,7 +64,7 @@ class TextIO {
     + String getUserInput(String message, String[] optionsList)
 }
 
-class FileIO {
+class FileIO implements IDataIO {
     + FileIO()
     + ArrayList<IUser> loadUsers()
     + ArrayList<IMovie> loadMovies()
@@ -74,12 +86,12 @@ class User implements IUser {
 
 class Movie extends AMovie {
 
-    + Movie(String title, int year, float rating, ArrayList<Genre> genres)
+    + Movie(String title, int year, float rating, ArrayList<IGenre> genres)
 }
 
 class Series extends ASeries {
 
-    + Series(String title, int startYear, int endYear, float rating, ArrayList<Genre> genres, ArrayList<Season> seasons)
+    + Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<ISeason> seasons)
 }
 
 class Season extends ASeason {
@@ -105,9 +117,9 @@ abstract class AMovie implements IMovie {
     - String title
     - int year
     - float rating
-    - ArrayList<Genre> genres
+    - ArrayList<IGenre> genres
 
-    + AMovie(String title, int year, float rating, ArrayList<Genre> genres)
+    + AMovie(String title, int year, float rating, ArrayList<IGenre> genres)
 }
 
 abstract class ASeries implements ISeries {
@@ -115,10 +127,10 @@ abstract class ASeries implements ISeries {
     - int startYear
     - int endYear
     - float rating
-    - ArrayList<Genre> genres
-    - ArrayList<Season> seasons
+    - ArrayList<IGenre> genres
+    - ArrayList<ISeason> seasons
 
-    + ASeries(String title, int startYear, int endYear, float rating, ArrayList<Genre> genres, ArrayList<Season> seasons)
+    + ASeries(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<ISeason> seasons)
 }
 
 abstract class ASeason implements ISeason {
@@ -135,13 +147,13 @@ abstract class ASeason implements ISeason {
 interface IMedia extends Query {
     + String getName()
     + float getRating()
-    + ArrayList<Genre> getGenres()
+    + ArrayList<IGenre> getGenres()
 }
 
 interface ISeries implements IMedia {
     + int getStartYear()
     + int getEndYear()
-    + ArrayList<Season> getSeasons()
+    + ArrayList<ISeason> getSeasons()
 }
 
 interface ISeason implements ISeries {
@@ -159,14 +171,20 @@ interface IUser implements ISaveable {
     + String getEmail()
     + String getPassword()
     + int getAge()
-    + ArrayList<Movie> getMyMovies()
-    + ArrayList<Movie> getWatchedMovies()
-    + void addMyMovie(Movie movie)
-    + void addWatchedMovie(Movie movie)
-    + void removeMyMovie(Movie movie)
+    + ArrayList<IMovie> getMyMovies()
+    + ArrayList<IMovie> getWatchedMovies()
+    + void addMyMovie(IMovie movie)
+    + void addWatchedMovie(IMovie movie)
+    + void removeMyMovie(IMovie movie)
     + void save()
     - void saveWatchedMovies()
     - void saveMyMovies()
+}
+
+interface IDataIO {
+    + ArrayList<IUser> loadUsers()
+    + ArrayList<IMovie> loadMovies()
+    + ArrayList<ISeries> loadSeries()
 }
 
 interface ILanguage {
@@ -235,7 +253,7 @@ Main *-- ChillMedia
 
 ChillMedia *-- IMedia
 ChillMedia *-- TextIO
-ChillMedia *-- FileIO
+ChillMedia *-- IDataIO
 ChillMedia *-- ILanguage
 ChillMedia *-- IUser
 ChillMedia *-- LogIn
