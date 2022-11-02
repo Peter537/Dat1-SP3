@@ -8,7 +8,7 @@ class Main {
     + static void main(String[] args)
 }
 
-' MAIN KLASSEN
+' Main klassen
 class ChillMedia {
     - ArrayList<IGenre> genres
     - ArrayList<IMovie> movies
@@ -36,17 +36,17 @@ class LogIn {
     + LogIn(ChillMedia cm)
 
     - void signUp()
-    - IUser signIn()
-
-    + IUser createUser()
+    - void signIn()
+    - void createUser()
+    + IUser getCurrentUser()
 }
 
 class Query {
     ' STATIC CLASS, EVT. KUNNE MAN LAVE EN INSTANS AF DENNE
     ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
-
     + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, SeriesGenre genre)
     + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre)
+    + static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, IGenre genre)
     + static ArrayList<ISeries> searchSeriesName(ArrayList<ISeries> series, String name)
     + static ArrayList<IMovie> searchMovieName(ArrayList<IMovie> movies, String name)
     + static ArrayList<IMedia> searchName(ArrayList<IMedia> medias, String name)
@@ -59,6 +59,7 @@ class TextIO {
     - Scanner scanner
 
     + TextIO()
+
     + void print(String message)
     + String getUserInput(String message)
     + String getUserInput(String message, String[] optionsList)
@@ -66,6 +67,7 @@ class TextIO {
 
 class FileIO implements IDataIO {
     + FileIO()
+
     + ArrayList<IUser> loadUsers()
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
@@ -84,28 +86,35 @@ class User implements IUser {
     + User(String name, String email, String password, int age)
 }
 
-class Movie extends AMovie {
+class Movie implements IMovie {
+    - int year
 
     + Movie(String title, int year, float rating, ArrayList<IGenre> genres)
+
+    + int getYear()
 }
 
-class Series extends ASeries {
+class Series implements ISeries {
+    - int startYear
+    - int endYear
+    - ArrayList<ISeason> seasons
 
     + Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<ISeason> seasons)
+
+    + int getStartYear()
+    + int getEndYear()
+    + ArrayList<ISeason> getSeasons()
 }
 
 class Season extends ASeason {
-
     + Season(int seasonNumber, int episodeCount)
 }
 
 class LanguageDanish implements ILanguage {
-
     + LanguageDanish()
 }
 
 class LanguageEnglish implements ILanguage {
-
     + LanguageEnglish()
 }
 
@@ -113,25 +122,18 @@ class LanguageEnglish implements ILanguage {
 ' ABSTRACT CLASS
 ' *****************
 
-abstract class AMovie implements IMovie {
+abstract class AWatchable implements IMedia {
     - String title
-    - int year
     - float rating
     - ArrayList<IGenre> genres
 
-    + AMovie(String title, int year, float rating, ArrayList<IGenre> genres)
+    + AWatchable(String title, int year, float rating, ArrayList<IGenre> genres)
+
+    + String getTitle()
+    + float getRating()
+    + ArrayList<IGenre> getGenres()
 }
 
-abstract class ASeries implements ISeries {
-    - String title
-    - int startYear
-    - int endYear
-    - float rating
-    - ArrayList<IGenre> genres
-    - ArrayList<ISeason> seasons
-
-    + ASeries(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<ISeason> seasons)
-}
 
 abstract class ASeason implements ISeason {
     - int seasonNumber
@@ -150,7 +152,7 @@ interface IMedia extends Query {
     + ArrayList<IGenre> getGenres()
 }
 
-interface ISeries implements IMedia {
+interface ISeries extends AWatchable {
     + int getStartYear()
     + int getEndYear()
     + ArrayList<ISeason> getSeasons()
@@ -161,7 +163,7 @@ interface ISeason implements ISeries {
     + int getEpisodeCount()
 }
 
-interface IMovie implements IMedia {
+interface IMovie extends AWatchable {
     + int getYear()
 }
 
@@ -195,11 +197,13 @@ interface ISaveable {
     + void save()
 }
 
+interface IGenre { }
+
 ' *****************
 ' ENUMS
 ' *****************
 
-enum MovieGenre {
+enum MovieGenre implements IGenre {
     CRIME,
     DRAMA,
     BIOGRAPHY,
@@ -222,7 +226,7 @@ enum MovieGenre {
     MUSIC
 }
 
-enum SeriesGenre {
+enum SeriesGenre implements IGenre {
     TALK_SHOW,
     DOCUMENTARY,
     CRIME,
