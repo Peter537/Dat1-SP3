@@ -1,4 +1,3 @@
-package Media_classes;
-
 public interface IMovie {
+    int getYear();
 }
