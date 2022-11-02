@@ -8,23 +8,103 @@ class Main {
     + static void main(String[] args)
 }
 
+' MAIN KLASSEN
+class ChillMedia {
+
+}
+
+class Query {
+
+}
+
+class TextIO {
+
+}
+
+class FileIO implements ISaveable {
+
+}
+
+class User implements IUser {
+
+}
+
+class Movie extends AMovie {
+
+}
+
+class Series extends ASeries {
+
+}
+
+class Episode extends AEpisode {
+
+}
+
 ' *****************
 ' ABSTRACT CLASS
 ' *****************
 
+abstract class AMovie implements IMovie {
+
+}
+
+abstract class ASeries implements ISeries {
+
+
+}
+
+abstract class AEpisode extends ASeries {
+
+}
 
 ' *****************
 ' INTERFACES
 ' *****************
 
+interface IMedia extends ISaveable, Query {
+
+}
+
+interface ISeries implements IMedia {
+
+}
+
+interface IMovie implements IMedia {
+
+}
+
+interface IUser implements ISaveable {
+
+}
+
+interface ILanguage {
+
+}
+
+interface ISaveable {
+
+}
+
 ' *****************
 ' ENUMS
 ' *****************
 
+enum Genre {
+
+
+}
 
 ' *****************
 ' RELATIONS
 ' *****************
 
+Main *-- ChillMedia
+
+ChillMedia *-- IMedia
+ChillMedia *-- TextIO
+ChillMedia *-- FileIO
+ChillMedia *-- ILanguage
+ChillMedia *-- IUser
 
 @enduml
