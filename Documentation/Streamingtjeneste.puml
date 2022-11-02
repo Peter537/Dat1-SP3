@@ -11,34 +11,53 @@ class Main {
 ' MAIN KLASSEN
 class ChillMedia {
 
+    + ChillMedia()
+}
+
+class LogIn {
+
+    + LogIn(ChillMedia cm)
 }
 
 class Query {
+    ' STATIC CLASS, EVT. KUNNE MAN LAVE EN INSTANS AF DENNE
+    ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
 
 }
 
 class TextIO {
 
+    + TextIO()
 }
 
 class FileIO implements ISaveable {
 
+    + FileIO()
 }
 
 class User implements IUser {
+    - static int idCounter
+    - String name
+    - String password
+    - String email
+    - int age
 
+    + User(String name, String email, String password, int age)
 }
 
 class Movie extends AMovie {
 
+    + Movie(String title, int year, float rating, Genre[] genres)
 }
 
 class Series extends ASeries {
 
+    + Series(String title, int startYear, int endYear, float rating, Genre[] genres, Season[] seasons)
 }
 
-class Episode extends AEpisode {
+class Season extends ASeason {
 
+    + Season(int seasonNumber, int episodeCount)
 }
 
 ' *****************
@@ -51,10 +70,9 @@ abstract class AMovie implements IMovie {
 
 abstract class ASeries implements ISeries {
 
-
 }
 
-abstract class AEpisode extends ASeries {
+abstract class ASeason implements ISeason {
 
 }
 
@@ -63,6 +81,10 @@ abstract class AEpisode extends ASeries {
 ' *****************
 
 interface IMedia extends ISaveable, Query {
+
+}
+
+interface ISeason implements ISeries {
 
 }
 
@@ -92,7 +114,6 @@ interface ISaveable {
 
 enum Genre {
 
-
 }
 
 ' *****************
@@ -106,5 +127,6 @@ ChillMedia *-- TextIO
 ChillMedia *-- FileIO
 ChillMedia *-- ILanguage
 ChillMedia *-- IUser
+ChillMedia *-- LogIn
 
 @enduml
