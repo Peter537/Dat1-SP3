@@ -2,6 +2,8 @@ package user;
 
 import user.IUser;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import media.IMovie;
 
@@ -78,7 +80,21 @@ public class User implements IUser {
         return "Name: " + name + " Email: " + email;
     }
 
-    public void save() {
+    public void save(ArrayList<IUser> users) {
+
+        try {
+            FileWriter writer = new FileWriter("Data/user.csv");
+
+            for (IUser user : users) {
+                String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
+                String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
+                writer.write(user.getId() + "," + user.getName() + "," + user.getEmail() + "," + user.getPassword() + "," + user.getAge() + "," + myMovies + "," + watchedMovies +"\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
         saveWatchedMovies();
         saveMyMovies();
     }

@@ -11,4 +11,4 @@ Kategorierne er: Talk-show, Documentary, Crime, Drama, Action, Adventure, Drama,
 Tilhørende billeder ligger i filen serieforsider.zip. De enkelte billeder er navngivet efter serien.
 Billederne kan være (og er sikkert) beskyttet af copyright, så lad dem blive indenfor vores lukkede kreds :-)
 
-User format: ID; Name; Email; Password; Listed movies; Watched movies
+User format: ID; Name; Email; Password; age; Listed movies; Watched movies

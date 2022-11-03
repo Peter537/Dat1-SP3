@@ -14,5 +14,5 @@ public interface IUser extends ISaveable {
     boolean addMyMovie(IMovie movie);
     boolean removeMyMovie(IMovie movie);
     void addWatchedMovie(IMovie movie);
-    void save();
+    void save(ArrayList<IUser> users);
 }

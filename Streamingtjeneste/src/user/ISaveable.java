@@ -1,5 +1,7 @@
 package user;
 
+import java.util.ArrayList;
+
 public interface ISaveable {
-    void save();
+    void save(ArrayList<IUser> users);
 }
