@@ -16,8 +16,16 @@ public class Query {
         return series.stream().filter(s -> s.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, String genre) {
+        return searchSeriesGenre(series, SeriesGenre.valueOf(genre.toUpperCase()));
+    }
+
     public static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre) {
         return movies.stream().filter(m -> m.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, String genre) {
+        return searchMovieGenre(movies, MovieGenre.valueOf(genre.toUpperCase()));
     }
 
     public static ArrayList<IMedia> searchGenre(ArrayList<IMedia> media, IGenre genre) {
@@ -25,15 +33,15 @@ public class Query {
     }
 
     public static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String name) {
-        return series.stream().filter(s -> s.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
+        return series.stream().filter(s -> s.getTitle().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String name) {
-        return movies.stream().filter(m -> m.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
+        return movies.stream().filter(m -> m.getTitle().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, String name) {
-        return media.stream().filter(m -> m.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
+        return media.stream().filter(m -> m.getTitle().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<ISeries> searchSeriesRating(ArrayList<ISeries> series, float rating) {
