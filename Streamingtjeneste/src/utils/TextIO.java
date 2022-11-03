@@ -21,21 +21,14 @@ public class TextIO {
 
     /*
         receives a message and displays it to the user
-        prompts the user for multiple[iterations] input values
-        returns a list of inputs
+        and displays some options to the user
     */
-    public ArrayList<String> getUserInput(String msg, int iterations) {
-        ArrayList<String> inputs = new ArrayList<>();
-        while (iterations > 0) {
-            print(msg);
-            String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("q")) {
-                break;
-            }
-            inputs.add(input);
-            iterations--;
+    public String getUserInput(String message, String[] optionsList) {
+        print(message);
+        for (int i = 0; i < optionsList.length; i++) {
+            print((i + 1) + ". " + optionsList[i]);
         }
-        return inputs;
+        return scanner.nextLine();
     }
 
     /*
