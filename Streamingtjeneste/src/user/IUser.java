@@ -3,7 +3,7 @@ package user;
 import java.util.ArrayList;
 import media.IMovie;
 
-public interface IUser {
+public interface IUser extends ISaveable {
     int getId();
     String getName();
     String getEmail();
