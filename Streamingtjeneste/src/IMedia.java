@@ -1,11 +1,7 @@
 import java.util.ArrayList;
 
 public interface IMedia {
-
-    ArrayList<IGenre> getGenres();
-
-    String getName();
-
+    String getTitle();
     float getRating();
-
+    ArrayList<IGenre> getGenres();
 }
