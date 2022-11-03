@@ -16,15 +16,15 @@ public class Query {
     }
 
     public static ArrayList<ISeries> searchSeriesName(ArrayList<ISeries> series, String name) {
-        return series.stream().filter(s -> s.getName().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
+        return series.stream().filter(s -> s.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<IMovie> searchMovieName(ArrayList<IMovie> movies, String name) {
-        return movies.stream().filter(m -> m.getName().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
+        return movies.stream().filter(m -> m.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<IMedia> searchName(ArrayList<IMedia> media, String name) {
-        return media.stream().filter(m -> m.getName().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
+        return media.stream().filter(m -> m.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<ISeries> searchSeriesRating(ArrayList<ISeries> series, float rating) {
