@@ -208,23 +208,29 @@ public class ChillMediaFlow {
     public void searchMovies(ArrayList<IMovie> movies) {
         int page = 1;
         int pageSize = 10;
+        int maxPage = Math.round((float) movies.size() / (float) pageSize);
+        if (movies.size() % pageSize != 0) {
+            maxPage++;
+        }
 
         boolean b = true;
         while (b) {
+            chillMedia.getTextIO().println("Page " + page + " of " + maxPage);
+            chillMedia.getTextIO().println("Series:" + movies.size());
             int choice = chooseMovie(movies, page, pageSize);
             if (choice < 0) {
                 switch (choice) {
                     case -1 -> b = false;
                     case -2 -> {
                         page++;
-                        if (page > movies.size() / pageSize) {
+                        if (page > maxPage) {
                             page = 1;
                         }
                     }
                     case -3 -> {
                         page--;
                         if (page < 1) {
-                            page = movies.size() / pageSize;
+                            page = maxPage;
                         }
                     }
                 }
@@ -309,23 +315,29 @@ public class ChillMediaFlow {
     public void searchSeries(ArrayList<ISeries> seriesList) {
         int page = 1;
         int pageSize = 10;
+        int maxPage = Math.round((float) seriesList.size() / (float) pageSize);
+        if (seriesList.size() % pageSize != 0) {
+            maxPage++;
+        }
 
         boolean b = true;
         while (b) {
+            chillMedia.getTextIO().println("Page " + page + " of " + maxPage);
+            chillMedia.getTextIO().println("Series:" + seriesList.size());
             int choice = chooseSeries(seriesList, page, pageSize);
             if (choice < 0) {
                 switch (choice + 1) {
                     case 0 -> b = false;
                     case -1 -> {
                         page++;
-                        if (page > seriesList.size() / pageSize) {
+                        if (page > maxPage) {
                             page = 1;
                         }
                     }
                     case -2 -> {
                         page--;
                         if (page < 1) {
-                            page = seriesList.size() / pageSize;
+                            page = maxPage;
                         }
                     }
                 }
