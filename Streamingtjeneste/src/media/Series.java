@@ -1,21 +1,23 @@
 package media;
 
 import genre.IGenre;
-import media.ISeason;
-import media.ISeries;
 
 import java.util.ArrayList;
 
 public class Series extends AWatchable implements ISeries {
     int startYear;
     int endYear;
-    ArrayList<ISeason> seasons;
+    ArrayList<Season> seasons;
 
-    public Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<ISeason> seasons) {
+    public Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons) {
         super(title, rating, genres);
         this.startYear = startYear;
         this.endYear = endYear;
         this.seasons = seasons;
+    }
+
+    public Series() {
+        super("", 0, new ArrayList<>());
     }
 
     public int getStartYear() {
@@ -26,7 +28,7 @@ public class Series extends AWatchable implements ISeries {
         return endYear;
     }
 
-    public ArrayList<ISeason> getSeasons() {
+    public ArrayList<Season> getSeasons() {
         return seasons;
     }
 }

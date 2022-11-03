@@ -137,7 +137,7 @@ abstract class AWatchable implements IMedia {
 }
 
 
-abstract class ASeason implements ISeason {
+abstract class ASeason extends Series {
     - int seasonNumber
     - int episodeCount
 
@@ -158,11 +158,6 @@ interface ISeries extends IMedia {
     + int getStartYear()
     + int getEndYear()
     + ArrayList<ISeason> getSeasons()
-}
-
-interface ISeason extends ISeries {
-    + int getSeasonNumber()
-    + int getEpisodeCount()
 }
 
 interface IMovie extends IMedia {

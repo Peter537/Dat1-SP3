@@ -1,6 +1,6 @@
 package media;
 
-public abstract class ASeason implements ISeason {
+public abstract class ASeason extends Series {
     int seasonNumber;
     int episodeCount;
 
