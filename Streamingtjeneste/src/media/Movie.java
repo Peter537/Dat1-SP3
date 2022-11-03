@@ -15,4 +15,8 @@ public class Movie extends AWatchable implements IMovie {
     public int getYear() {
         return this.year;
     }
+
+    public String toString() {
+        return "Movie: " + this.getTitle() + " (" + this.getYear() + ")";
+    }
 }
