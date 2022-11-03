@@ -181,8 +181,6 @@ interface IUser implements ISaveable {
     + void addWatchedMovie(IMovie movie)
     + void removeMyMovie(IMovie movie)
     + void save()
-    - void saveWatchedMovies()
-    - void saveMyMovies()
 }
 
 interface IDataIO {

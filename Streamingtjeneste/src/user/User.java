@@ -51,6 +51,14 @@ public class User implements IUser {
         return watchedMovies;
     }
 
+    public void addMyMovie(IMovie movie) {
+        myMovies.add(movie);
+    }
+
+    public void removeMyMovie(IMovie movie) {
+        myMovies.remove(movie);
+    }
+
     public void addMovie(IMovie movie) {
         myMovies.add(movie);
     }

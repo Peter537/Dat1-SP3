@@ -11,8 +11,8 @@ public interface IUser extends ISaveable {
     int getAge();
     ArrayList<IMovie> getMyMovies();
     ArrayList<IMovie> getWatchedMovies();
-    void addMovie(IMovie movie);
-    void removeMovie(IMovie movie);
+    void addMyMovie(IMovie movie);
+    void removeMyMovie(IMovie movie);
     void addWatchedMovie(IMovie movie);
     void save();
 }
