@@ -9,13 +9,15 @@ public class TextIO {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    public TextIO() { }
+    
     /*
         receives a message and displays it to the user
         prompts the user for one input value
         returns the input
     */
     public String getUserInput(String msg){
-        print(msg);
+        println(msg);
         return scanner.nextLine();
     }
 
@@ -24,9 +26,9 @@ public class TextIO {
         and displays some options to the user
     */
     public String getUserInput(String message, String[] optionsList) {
-        print(message);
+        println(message);
         for (int i = 0; i < optionsList.length; i++) {
-            print((i + 1) + ". " + optionsList[i]);
+            println((i + 1) + ". " + optionsList[i]);
         }
         return scanner.nextLine();
     }
@@ -38,14 +40,18 @@ public class TextIO {
         returns the input
     */
     public int getUserInput(String msg, ArrayList<String> arr){
-        print(msg);
+        println(msg);
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println((i + 1) + ". " + arr.get(i));
+            println((i + 1) + ". " + arr.get(i));
         }
         return scanner.nextInt();
     }
 
-    public void print(String msg) {
+    public void println(String msg) {
         System.out.println(msg);
+    }
+
+    public void print(String msg) {
+        System.out.print(msg);
     }
 }
