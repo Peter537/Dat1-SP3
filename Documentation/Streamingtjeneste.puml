@@ -86,6 +86,8 @@ class User implements IUser {
     - ArrayList<IMovie> watchedMovies
 
     + User(String name, String email, String password, int age)
+    - void saveWatchedMovies()
+    - void saveMyMovies()
 }
 
 class Movie extends AWatchable implements IMovie {
@@ -172,10 +174,9 @@ interface IUser implements ISaveable {
     + int getAge()
     + ArrayList<IMovie> getMyMovies()
     + ArrayList<IMovie> getWatchedMovies()
-    + void addMyMovie(IMovie movie)
+    + boolean addMyMovie(IMovie movie)
     + void addWatchedMovie(IMovie movie)
-    + void removeMyMovie(IMovie movie)
-    + void save()
+    + boolean removeMyMovie(IMovie movie)
 }
 
 interface IDataIO {

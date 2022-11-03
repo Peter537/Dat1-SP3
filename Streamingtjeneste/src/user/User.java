@@ -51,16 +51,26 @@ public class User implements IUser {
         return watchedMovies;
     }
 
-    public void addMyMovie(IMovie movie) {
-        myMovies.add(movie);
+    public boolean addMyMovie(IMovie movie) {
+        if (!myMovies.contains(movie)) {
+            myMovies.add(movie);
+            return true;
+        }
+        return false;
     }
 
-    public void removeMyMovie(IMovie movie) {
-        myMovies.remove(movie);
+    public boolean removeMyMovie(IMovie movie) {
+        if (myMovies.contains(movie)) {
+            myMovies.remove(movie);
+            return true;
+        }
+        return false;
     }
 
     public void addWatchedMovie(IMovie movie) {
-        watchedMovies.add(movie);
+        if (!watchedMovies.contains(movie)) {
+            watchedMovies.add(movie);
+        }
     }
 
     public void save() {
