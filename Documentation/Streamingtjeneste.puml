@@ -88,15 +88,15 @@ class User implements IUser {
     + User(String name, String email, String password, int age)
 }
 
-class Movie implements IMovie {
+class Movie extends AWatchable implements IMovie {
     - int year
 
-    + Movie(String title, int year, float rating, ArrayList<IGenre> genres)
+    + Movie(String title, float rating, ArrayList<IGenre> genres, int year)
 
     + int getYear()
 }
 
-class Series implements ISeries {
+class Series extends AWatchable implements ISeries {
     - int startYear
     - int endYear
     - ArrayList<ISeason> seasons
@@ -129,7 +129,7 @@ abstract class AWatchable implements IMedia {
     - float rating
     - ArrayList<IGenre> genres
 
-    + AWatchable(String title, int year, float rating, ArrayList<IGenre> genres)
+    + AWatchable(String title, float rating, ArrayList<IGenre> genres)
 
     + String getTitle()
     + float getRating()
@@ -148,24 +148,24 @@ abstract class ASeason implements ISeason {
 ' INTERFACES
 ' *****************
 
-interface IMedia extends Query {
+interface IMedia {
     + String getTitle()
     + float getRating()
     + ArrayList<IGenre> getGenres()
 }
 
-interface ISeries extends AWatchable {
+interface ISeries extends IMedia {
     + int getStartYear()
     + int getEndYear()
     + ArrayList<ISeason> getSeasons()
 }
 
-interface ISeason implements ISeries {
+interface ISeason extends ISeries {
     + int getSeasonNumber()
     + int getEpisodeCount()
 }
 
-interface IMovie extends AWatchable {
+interface IMovie extends IMedia {
     + int getYear()
 }
 
