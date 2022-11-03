@@ -31,4 +31,11 @@ public class Series extends AWatchable implements ISeries {
     public ArrayList<Season> getSeasons() {
         return seasons;
     }
+
+    public String toString() {
+        if (endYear == -1) {
+            return getTitle() + " (" + startYear + " - ongoing)";
+        } else {
+            return getTitle() + " (" + startYear + " - " + endYear + ")";
+        }}
 }

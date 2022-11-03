@@ -15,8 +15,9 @@ public class User implements IUser {
     private final ArrayList<IMovie> myMovies = new ArrayList<>();
     private final ArrayList<IMovie> watchedMovies = new ArrayList<>();
 
-    public User(String name, String password, String email, int age) {
-        this.id = idCounter++;
+    public User(int ID, String name, String password, String email, int age) {
+        if (ID != -1)
+            this.id = ID;
         this.name = name;
         this.password = password;
         this.email = email;
@@ -71,6 +72,10 @@ public class User implements IUser {
         if (!watchedMovies.contains(movie)) {
             watchedMovies.add(movie);
         }
+    }
+
+    public String toString() {
+        return "Name: " + name + " Email: " + email;
     }
 
     public void save() {
