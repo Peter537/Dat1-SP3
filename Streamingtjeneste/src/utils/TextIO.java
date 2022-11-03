@@ -1,5 +1,9 @@
 package utils;
 
+import media.IMedia;
+import media.IMovie;
+import media.ISeries;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,6 +41,17 @@ public class TextIO {
         println(message);
         for (int i = 0; i < optionsList.length; i++) {
             println((startIndex + i) + ". " + optionsList[i]);
+        }
+        return scanner.nextLine();
+    }
+
+    public String getUserInputFromMedia(String message, int page, ArrayList<IMedia> media) {
+        println(message);
+        println("-2 - Previous page");
+        println("-1 - Next page");
+        println("0 - Exit");
+        for (int i = 0; i < media.size(); i++) {
+            println((i + 1 + ((page - 1) * 10)) + " - " + media.get(i).getTitle());
         }
         return scanner.nextLine();
     }
