@@ -1,3 +1,7 @@
+package media;
+
+import genre.IGenre;
+
 import java.util.ArrayList;
 
 public class Movie extends AWatchable implements IMovie {

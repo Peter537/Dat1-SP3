@@ -1,3 +1,5 @@
+package genre;
+
 public enum SeriesGenre implements IGenre {
     TALK_SHOW,
     DOCUMENTARY,

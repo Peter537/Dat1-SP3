@@ -1,3 +1,5 @@
+package media;
+
 public abstract class ASeason implements ISeason {
     int seasonNumber;
     int episodeCount;

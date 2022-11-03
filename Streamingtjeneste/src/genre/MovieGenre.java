@@ -1,3 +1,5 @@
+package genre;
+
 public enum MovieGenre implements IGenre {
     CRIME,
     DRAMA,

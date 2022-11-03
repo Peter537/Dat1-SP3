@@ -1,4 +1,9 @@
+package user;
+
+import user.IUser;
+
 import java.util.ArrayList;
+import media.IMovie;
 
 public class User implements IUser {
     private static int idCounter = 0;
@@ -7,8 +12,8 @@ public class User implements IUser {
     private String password;
     private String email;
     private int age;
-    private ArrayList<IMovie> myMovies;
-    private ArrayList<IMovie> watchedMovies;
+    private final ArrayList<IMovie> myMovies = new ArrayList<>();
+    private final ArrayList<IMovie> watchedMovies = new ArrayList<>();
 
     public User(String name, String password, String email, int age) {
         this.id = idCounter++;
@@ -16,8 +21,6 @@ public class User implements IUser {
         this.password = password;
         this.email = email;
         this.age = age;
-//        this.myMovies = new ArrayList<IMovie>();
-//        this.watchedMovies = new ArrayList<IMovie>();
     }
 
     public int getId() {
@@ -65,11 +68,11 @@ public class User implements IUser {
         saveMyMovies();
     }
 
-    public void saveWatchedMovies() {
+    private void saveWatchedMovies() {
 
     }
 
-    public void saveMyMovies() {
+    private void saveMyMovies() {
 
     }
 }

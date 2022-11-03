@@ -1,3 +1,5 @@
+package media;
+
 import java.util.ArrayList;
 
 public interface ISeries extends IMedia {

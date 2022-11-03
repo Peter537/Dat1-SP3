@@ -1,3 +1,12 @@
+package utils;
+
+import genre.IGenre;
+import genre.MovieGenre;
+import genre.SeriesGenre;
+import media.IMedia;
+import media.ISeries;
+import media.IMovie;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 

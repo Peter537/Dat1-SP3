@@ -1,3 +1,9 @@
+package media;
+
+import genre.IGenre;
+import media.ISeason;
+import media.ISeries;
+
 import java.util.ArrayList;
 
 public class Series extends AWatchable implements ISeries {
