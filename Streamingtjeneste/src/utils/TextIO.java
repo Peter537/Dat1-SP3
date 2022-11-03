@@ -17,7 +17,7 @@ public class TextIO {
         returns the input
     */
     public String getUserInput(String msg){
-        println(msg);
+        print(msg);
         return scanner.nextLine();
     }
 
@@ -28,7 +28,15 @@ public class TextIO {
     public String getUserInput(String message, String[] optionsList) {
         println(message);
         for (int i = 0; i < optionsList.length; i++) {
-            println((i + 1) + ". " + optionsList[i]);
+            println((i) + ". " + optionsList[i]);
+        }
+        return scanner.nextLine();
+    }
+
+    public String getUserInput(String message, int startIndex, String[] optionsList) {
+        println(message);
+        for (int i = 0; i < optionsList.length; i++) {
+            println((startIndex + i) + ". " + optionsList[i]);
         }
         return scanner.nextLine();
     }
