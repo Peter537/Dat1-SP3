@@ -20,6 +20,10 @@ public class ChillMediaFlow {
     // "Watch movie" / "Watch series"
     // "Add to my movies" / NOTHING
     // "Remove from my movies" / NOTHING
+    //
+    // ****
+    // SER UD TIL NOGEN LUNDE AT VIRKE...
+    // SKAL LIGE HAVE SET OM DER KAN VÆRE 5 FILM PÅ EN SIDE HVIS NU DER ER 45 FILM SOM BLEV SØGT EFTER
 
     private final ChillMedia chillMedia;
     private final IUser currentUser;
@@ -207,39 +211,46 @@ public class ChillMediaFlow {
 
         boolean b = true;
         while (b) {
-            IMovie movie = chooseMovie(movies);
-            if (movie == null) {
-                return;
-            }
+            int choice = chooseMovie(movies, page, pageSize);
+            if (choice < 0) {
+                switch (choice) {
+                    case -1 -> b = false;
+                    case -2 -> {
+                        page++;
+                        if (page > movies.size() / pageSize) {
+                            page = 1;
+                        }
+                    }
+                    case -3 -> {
+                        page--;
+                        if (page < 1) {
+                            page = movies.size() / pageSize;
+                        }
+                    }
+                }
+            } else {
+                IMovie movie = movies.get(choice);
+                if (movie == null) {
+                    return;
+                }
 
-            int select = selectMovieOptions();
-            switch (select) {
-                case 0 -> b = false;
-                case 1 -> {
-                    watchMovie(movie);
-                    b = false;
-                }
-                case 2 -> {
-                    addMovieToMyMovies(movie);
-                    b = false;
-                }
-                case 3 -> {
-                    removeMovieFromMyMovies(movie);
-                    b = false;
-                }
-                case 4 -> {
-                    page++;
-                    if (page > movies.size() / pageSize) {
-                        page = 1;
+                int select = selectMovieOptions();
+                switch (select) {
+                    case 0 -> b = false;
+                    case 1 -> {
+                        watchMovie(movie);
+                        b = false;
                     }
-                }
-                case 5 -> {
-                    page--;
-                    if (page < 1) {
-                        page = movies.size() / pageSize;
+                    case 2 -> {
+                        addMovieToMyMovies(movie);
+                        b = false;
                     }
+                    case 3 -> {
+                        removeMovieFromMyMovies(movie);
+                        b = false;
+                    }
+                    default -> chillMedia.getTextIO().println("Invalid input!");
                 }
-                default -> chillMedia.getTextIO().println("Invalid input!");
             }
         }
 
@@ -301,31 +312,35 @@ public class ChillMediaFlow {
 
         boolean b = true;
         while (b) {
-            ISeries series = chooseSeries(seriesList);
-            if (series == null) {
-                return;
-            }
+            int choice = chooseSeries(seriesList, page, pageSize);
+            if (choice < 0) {
+                switch (choice + 1) {
+                    case 0 -> b = false;
+                    case -1 -> {
+                        page++;
+                        if (page > seriesList.size() / pageSize) {
+                            page = 1;
+                        }
+                    }
+                    case -2 -> {
+                        page--;
+                        if (page < 1) {
+                            page = seriesList.size() / pageSize;
+                        }
+                    }
+                }
+            } else {
+                ISeries series = seriesList.get(choice);
 
-            int select = selectSeriesOptions();
-            switch (select) {
-                case 0 -> b = false;
-                case 1 -> {
-                    watchSeries(series);
-                    b = false;
-                }
-                case 2 -> {
-                    page++;
-                    if (page > seriesList.size() / pageSize) {
-                        page = 1;
+                int select = selectSeriesOptions();
+                switch (select) {
+                    case 0 -> b = false;
+                    case 1 -> {
+                        watchSeries(series);
+                        b = false;
                     }
+                    default -> chillMedia.getTextIO().println("Invalid input!");
                 }
-                case 3 -> {
-                    page--;
-                    if (page < 1) {
-                        page = seriesList.size() / pageSize;
-                    }
-                }
-                default -> chillMedia.getTextIO().println("Invalid input!");
             }
         }
 
@@ -340,33 +355,74 @@ public class ChillMediaFlow {
 
 
 
-    public IMovie chooseMovie(ArrayList<IMovie> movies) {
+    /*
+    public IMovie chooseMovie(ArrayList<IMovie> movies, int page) {
         ArrayList<IMedia> media = new ArrayList<>(movies);
-        return (IMovie) chooseMedia(media);
+        return (IMovie) chooseMedia(media, page);
+    }
+     */
+
+    public int chooseSeries(ArrayList<ISeries> series, int page, int pageSize) {
+        return chooseMedia(new ArrayList<>(series), page, pageSize);
     }
 
-    public ISeries chooseSeries(ArrayList<ISeries> series) {
+    public int chooseMovie(ArrayList<IMovie> movies, int page, int pageSize) {
+        return chooseMedia(new ArrayList<>(movies), page, pageSize);
+    }
+
+    /*
+    public ISeries chooseSeries(ArrayList<ISeries> series, int page) {
         ArrayList<IMedia> media = new ArrayList<>(series);
-        return (ISeries) chooseMedia(media);
+        return (ISeries) chooseMedia(media, page);
     }
+     */
 
-    public IMedia chooseMedia(ArrayList<IMedia> media) {
-        String[] options = new String[media.size()];
-        for (int i = 0; i < media.size(); i++) {
-            options[i] = media.get(i).getTitle();
-        }
+    public int chooseMedia(ArrayList<IMedia> media, int page, int pageSize) {
         while (true) {
             try {
-                String indexChoice = chillMedia.getTextIO().getUserInput("What do you want to see?", 1, options);
+                ArrayList<IMedia> shownMedia = new ArrayList<>();
+                for (int i = (page - 1) * pageSize; i < page * pageSize; i++) {
+                    if (i >= media.size()) {
+                        break;
+                    }
+                    shownMedia.add(media.get(i));
+                }
+                String indexChoice = chillMedia.getTextIO().getUserInputFromMedia("What do you want to see?", page, shownMedia);
                 int index = Integer.parseInt(indexChoice) - 1;
-                if (index >= 0 && index < media.size()) {
-                    return media.get(index);
+                if (index >= -3 && index < media.size()) {
+                    return index;
                 }
             } catch (Exception e) {
                 chillMedia.getTextIO().println("Invalid input. Please try again.");
             }
         }
     }
+
+    /*
+    public IMedia chooseMedia(ArrayList<IMedia> media, int page) {
+        while (true) {
+            try {
+                ArrayList<IMedia> shownMedia = new ArrayList<>();
+                for (int i = (page - 1) * 10; i < page * 10; i++) {
+                    if (i >= media.size()) {
+                        break;
+                    }
+                    shownMedia.add(media.get(i));
+                }
+                String indexChoice = chillMedia.getTextIO().getUserInputFromMedia("What do you want to see?", page, shownMedia);
+                int index = Integer.parseInt(indexChoice) - 1;
+                if (index >= 0 && index < media.size()) {
+                    return media.get(index);
+                } else if (index <= -1 && index >= -3) {
+                    return null;
+                }
+            } catch (Exception e) {
+                chillMedia.getTextIO().println("Invalid input. Please try again.");
+            }
+        }
+    }
+     */
+
 
     public void addMovieToMyMovies(IMovie movie) {
         if (currentUser.addMyMovie(movie)) {
@@ -451,13 +507,11 @@ public class ChillMediaFlow {
                 "Watch movie",
                 "Add to my movies",
                 "Remove from my movies",
-                "Next page",
-                "Previous page"
         };
 
         while (true) {
             String input = chillMedia.getTextIO().getUserInput("What would you like to do?", movieOptions);
-            if (input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5")) {
+            if (input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3")) {
                 return Integer.parseInt(input);
             }
             chillMedia.getTextIO().println("Invalid input!");
@@ -468,13 +522,11 @@ public class ChillMediaFlow {
         String[] seriesOptions = new String[]{
                 "Exit",
                 "Watch series",
-                "Next page",
-                "Previous page"
         };
 
         while (true) {
             String input = chillMedia.getTextIO().getUserInput("What would you like to do?", seriesOptions);
-            if (input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3")) {
+            if (input.equals("0") || input.equals("1")) {
                 return Integer.parseInt(input);
             }
             chillMedia.getTextIO().println("Invalid input!");
@@ -520,4 +572,397 @@ public class ChillMediaFlow {
         }
     }
     */
+
+
+    /*
+     * SKAL SLETTES PÅ ET TIDSPUNKT
+     * VAR INDE FRA ChillMedia, men så lavede jeg denne klasse,
+     * så idk tbh hvad jeg vil gøre med det her, så jeg lader det bare stå her
+     *
+    private void listMoviesOLD() {
+        String[] options = new String[] {
+                "Exit",
+                "Search by title",
+                "Search by genre",
+                "Search by rating",
+                "Search my movies",
+                "Search my watched movies"
+        };
+        while (true) {
+            String input = textIO.getUserInput("How do you want to search?", options);
+            switch (input) {
+                case "0" -> {
+                    run();
+                    return;
+                }
+                case "1" -> {
+                    int page = 1;
+                    int pageSize = 10;
+                    while (true) {
+                        String title = textIO.getUserInput("What title do you want to search for?");
+                        ArrayList<IMovie> movies = Query.searchMovieTitle(this.getMovies(), title);
+                        if (movies.isEmpty()) {
+                            textIO.println("No movies found!");
+                            return;
+                        }
+
+                        String[] movieTitles = new String[10];
+                        for (int i = (page - 1) * pageSize; i < page * pageSize; i++) {
+                            movieTitles[i] = movies.get(i).getTitle();
+                        }
+
+                        if (movies.isEmpty()) {
+                            textIO.println("No movies found!");
+                            return;
+                        }
+
+                        IMovie movie;
+                        try {
+                            String indexString = textIO.getUserInput("Which movie do you want to see?", movieTitles);
+                            int index = Integer.parseInt(indexString);
+                            index += ((page - 1) * pageSize) - 1;
+                            movie = movies.get(index);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        String[] movieOptions = new String[] {
+                                "Exit",
+                                "Watch movie",
+                                "Add to my movies",
+                                "Remove from my movies",
+                                "Next page",
+                                "Previous page"
+                        };
+
+                        String input2 = textIO.getUserInput("What would you like to do?", movieOptions);
+                        switch (input2) {
+                            case "0" -> {
+                                listMovies();
+                                return;
+                            }
+                            case "1" -> {
+                                textIO.println("You are now watching " + movie.getTitle());
+                                currentUser.addWatchedMovie(movie);
+                            }
+                            case "2" -> {
+                                currentUser.addMyMovie(movie);
+                                textIO.println("Added " + movie.getTitle() + " to your movies!");
+                            }
+                            case "3" -> {
+                                currentUser.removeMyMovie(movie);
+                                textIO.println("Removed " + movie.getTitle() + " from your movies!");
+                            }
+                            case "4" -> {
+                                page++;
+                                if (page > movies.size() / pageSize) {
+                                    page = 1;
+                                }
+                            }
+                            case "5" -> {
+                                page--;
+                                if (page < 1) {
+                                    page = movies.size() / pageSize;
+                                }
+                            }
+                            default -> textIO.println("Invalid input!");
+                        }
+                    }
+                }
+                case "2" -> {
+                    int page = 1;
+                    int pageSize = 10;
+                    while (true) {
+                        String[] genreNames = new String[MovieGenre.values().length];
+                        for (int i = 0; i < MovieGenre.values().length; i++) {
+                            genreNames[i] = MovieGenre.values()[i].toString();
+                        }
+                        String genreName = textIO.getUserInput("What genre do you want to search for?", genreNames);
+                        MovieGenre genre;
+                        try {
+                            genre = MovieGenre.valueOf(genreName);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        ArrayList<IMovie> movies = Query.searchMovieGenre(this.getMovies(), genre);
+                        if (movies.isEmpty()) {
+                            textIO.println("No movies found!");
+                            return;
+                        }
+
+                        String[] movieTitles = new String[10];
+                        for (int i = (page - 1) * pageSize; i < page * pageSize; i++) {
+                            movieTitles[i] = movies.get(i).getTitle();
+                        }
+
+                        IMovie movie;
+                        try {
+                            String indexString = textIO.getUserInput("Which movie do you want to see?", movieTitles);
+                            int index = Integer.parseInt(indexString);
+                            index += ((page - 1) * pageSize) - 1;
+                            movie = movies.get(index);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        String[] movieOptions = new String[]{
+                                "Exit",
+                                "Watch movie",
+                                "Add to my movies",
+                                "Remove from my movies",
+                                "Next page",
+                                "Previous page"
+                        };
+
+                        String input2 = textIO.getUserInput("What would you like to do?", movieOptions);
+                        switch (input2) {
+                            case "0" -> {
+                                listMovies();
+                                return;
+                            }
+                            case "1" -> {
+                                textIO.println("You are now watching " + movie.getTitle());
+                                currentUser.addWatchedMovie(movie);
+                            }
+                            case "2" -> {
+                                currentUser.addMyMovie(movie);
+                                textIO.println("Added " + movie.getTitle() + " to your movies!");
+                            }
+                            case "3" -> {
+                                currentUser.removeMyMovie(movie);
+                                textIO.println("Removed " + movie.getTitle() + " from your movies!");
+                            }
+                            case "4" -> {
+                                page++;
+                                if (page > movies.size() / pageSize) {
+                                    page = 1;
+                                }
+                            }
+                            case "5" -> {
+                                page--;
+                                if (page < 1) {
+                                    page = movies.size() / pageSize;
+                                }
+                            }
+                            default -> textIO.println("Invalid input!");
+                        }
+                    }
+                }
+                case "3" -> {
+                    int page = 1;
+                    int pageSize = 10;
+                    while (true) {
+                        String minRatingString = textIO.getUserInput("What is the minimum rating?");
+                        float minRating;
+                        try {
+                            minRating = Float.parseFloat(minRatingString);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        ArrayList<IMovie> movies = Query.searchMovieRating(this.getMovies(), minRating);
+                        if (movies.isEmpty()) {
+                            textIO.println("No movies found!");
+                            return;
+                        }
+
+                        String[] movieTitles = new String[10];
+                        for (int i = (page - 1) * pageSize; i < page * pageSize; i++) {
+                            movieTitles[i] = movies.get(i).getTitle();
+                        }
+
+                        IMovie movie;
+                        try {
+                            String indexString = textIO.getUserInput("Which movie do you want to see?", movieTitles);
+                            int index = Integer.parseInt(indexString);
+                            index += ((page - 1) * pageSize) - 1;
+                            movie = movies.get(index);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        String[] movieOptions = new String[]{
+                                "Exit",
+                                "Watch movie",
+                                "Add to my movies",
+                                "Remove from my movies",
+                                "Next page",
+                                "Previous page"
+                        };
+
+                        String input2 = textIO.getUserInput("What would you like to do?", movieOptions);
+                        switch (input2) {
+                            case "0" -> {
+                                listMovies();
+                                return;
+                            }
+                            case "1" -> {
+                                textIO.println("You are now watching " + movie.getTitle());
+                                currentUser.addWatchedMovie(movie);
+                            }
+                            case "2" -> {
+                                currentUser.addMyMovie(movie);
+                                textIO.println("Added " + movie.getTitle() + " to your movies!");
+                            }
+                            case "3" -> {
+                                currentUser.removeMyMovie(movie);
+                                textIO.println("Removed " + movie.getTitle() + " from your movies!");
+                            }
+                            case "4" -> {
+                                page++;
+                                if (page > movies.size() / pageSize) {
+                                    page = 1;
+                                }
+                            }
+                            case "5" -> {
+                                page--;
+                                if (page < 1) {
+                                    page = movies.size() / pageSize;
+                                }
+                            }
+                            default -> textIO.println("Invalid input!");
+                        }
+                    }
+                }
+                case "4" -> {
+                    int page = 1;
+                    int pageSize = 10;
+                    while (true) {
+                        // my movies
+                        ArrayList<IMovie> movies = currentUser.getMyMovies();
+                        if (movies.isEmpty()) {
+                            textIO.println("No movies found!");
+                            return;
+                        }
+
+                        String[] movieTitles = new String[10];
+                        for (int i = (page - 1) * pageSize; i < page * pageSize; i++) {
+                            movieTitles[i] = movies.get(i).getTitle();
+                        }
+
+                        IMovie movie;
+                        try {
+                            String indexString = textIO.getUserInput("Which movie do you want to see?", movieTitles);
+                            int index = Integer.parseInt(indexString);
+                            index += ((page - 1) * pageSize) - 1;
+                            movie = movies.get(index);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        String[] movieOptions = new String[]{
+                                "Exit",
+                                "Watch movie",
+                                "Remove from my movies",
+                                "Next page",
+                                "Previous page"
+                        };
+
+                        String input2 = textIO.getUserInput("What would you like to do?", movieOptions);
+                        switch (input2) {
+                            case "0" -> {
+                                listMovies();
+                                return;
+                            }
+                            case "1" -> {
+                                textIO.println("You are now watching " + movie.getTitle());
+                                currentUser.addWatchedMovie(movie);
+                            }
+                            case "2" -> {
+                                currentUser.removeMyMovie(movie);
+                                textIO.println("Removed " + movie.getTitle() + " from your movies!");
+                            }
+                            case "3" -> {
+                                page++;
+                                if (page > movies.size() / pageSize) {
+                                    page = 1;
+                                }
+                            }
+                            case "4" -> {
+                                page--;
+                                if (page < 1) {
+                                    page = movies.size() / pageSize;
+                                }
+                            }
+                            default -> textIO.println("Invalid input!");
+                        }
+                    }
+                }
+                case "5" -> {
+                    int page = 1;
+                    int pageSize = 10;
+                    while (true) {
+                        // watched movies
+                        ArrayList<IMovie> movies = currentUser.getWatchedMovies();
+                        if (movies.isEmpty()) {
+                            textIO.println("No movies found!");
+                            return;
+                        }
+
+                        String[] movieTitles = new String[10];
+                        for (int i = (page - 1) * pageSize; i < page * pageSize; i++) {
+                            movieTitles[i] = movies.get(i).getTitle();
+                        }
+
+                        IMovie movie;
+                        try {
+                            String indexString = textIO.getUserInput("Which movie do you want to see?", movieTitles);
+                            int index = Integer.parseInt(indexString);
+                            index += ((page - 1) * pageSize) - 1;
+                            movie = movies.get(index);
+                        } catch (Exception e) {
+                            textIO.println("Invalid input!");
+                            return;
+                        }
+
+                        String[] movieOptions = new String[]{
+                                "Exit",
+                                "Add to my movies",
+                                "Remove from my movies",
+                                "Next page",
+                                "Previous page"
+                        };
+
+                        String input2 = textIO.getUserInput("What would you like to do?", movieOptions);
+                        switch (input2) {
+                            case "0" -> {
+                                listMovies();
+                                return;
+                            }
+                            case "1" -> {
+                                currentUser.addMyMovie(movie);
+                                textIO.println("Added " + movie.getTitle() + " to your movies!");
+                            }
+                            case "2" -> {
+                                currentUser.removeMyMovie(movie);
+                                textIO.println("Removed " + movie.getTitle() + " from your movies!");
+                            }
+                            case "3" -> {
+                                page++;
+                                if (page > movies.size() / pageSize) {
+                                    page = 1;
+                                }
+                            }
+                            case "4" -> {
+                                page--;
+                                if (page < 1) {
+                                    page = movies.size() / pageSize;
+                                }
+                            }
+                            default -> textIO.println("Invalid input!");
+                        }
+                    }
+                }
+                default -> textIO.println("Invalid input!");
+            }
+        }
+    }
+     */
 }
