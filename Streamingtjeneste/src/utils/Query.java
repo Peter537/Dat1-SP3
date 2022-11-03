@@ -24,15 +24,15 @@ public class Query {
         return media.stream().filter(m -> m.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static ArrayList<ISeries> searchSeriesName(ArrayList<ISeries> series, String name) {
+    public static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String name) {
         return series.stream().filter(s -> s.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static ArrayList<IMovie> searchMovieName(ArrayList<IMovie> movies, String name) {
+    public static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String name) {
         return movies.stream().filter(m -> m.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static ArrayList<IMedia> searchName(ArrayList<IMedia> media, String name) {
+    public static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, String name) {
         return media.stream().filter(m -> m.getTitle().equalsIgnoreCase(name)).collect(Collectors.toCollection(ArrayList::new));
     }
 

@@ -47,7 +47,7 @@ class Query {
     ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
     + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, SeriesGenre genre)
     + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre)
-    + static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, IGenre genre)
+    + static ArrayList<IMovie> searchGenre(ArrayList<IMedia> movies, IGenre genre)
     + static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String title)
     + static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String title)
     + static ArrayList<IMedia> searchTitle(ArrayList<IMedia> medias, String title)
