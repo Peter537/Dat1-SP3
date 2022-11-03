@@ -38,7 +38,7 @@ public class Main {
 
                 float rating = Float.parseFloat(values[3].replace(",", "."));
 
-            ArrayList<ISeason> seasons = new ArrayList<>();
+            ArrayList<Season> seasons = new ArrayList<>();
             String[] seasonValues = values[4].split(",");
 
             for (String season : seasonValues) {
@@ -47,7 +47,7 @@ public class Main {
                 int seasonNumber = Integer.parseInt(seasonSplit[0].trim());
                 int episodeCount = Integer.parseInt(seasonSplit[1].trim());
 
-                ISeason thisSeason = new Season(seasonNumber, episodeCount);
+                Season thisSeason = new Season(seasonNumber, episodeCount);
 
                 seasons.add(thisSeason);
             }
