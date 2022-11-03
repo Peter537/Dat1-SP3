@@ -47,9 +47,9 @@ class Query {
     + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, SeriesGenre genre)
     + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre)
     + static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, IGenre genre)
-    + static ArrayList<ISeries> searchSeriesName(ArrayList<ISeries> series, String name)
-    + static ArrayList<IMovie> searchMovieName(ArrayList<IMovie> movies, String name)
-    + static ArrayList<IMedia> searchName(ArrayList<IMedia> medias, String name)
+    + static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String title)
+    + static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String title)
+    + static ArrayList<IMedia> searchTitle(ArrayList<IMedia> medias, String title)
     + static ArrayList<ISeries> searchSeriesRating(ArrayList<ISeries> series, int minimumRating)
     + static ArrayList<IMovie> searchMovieRating(ArrayList<IMovie> movies, int minimumRating)
     + static ArrayList<IMedia> searchRating(ArrayList<IMedia> medias, int minimumRating)
@@ -147,7 +147,7 @@ abstract class ASeason implements ISeason {
 ' *****************
 
 interface IMedia extends Query {
-    + String getName()
+    + String getTitle()
     + float getRating()
     + ArrayList<IGenre> getGenres()
 }
