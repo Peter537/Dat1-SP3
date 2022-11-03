@@ -2,6 +2,7 @@ import genre.IGenre;
 import media.IMovie;
 import media.ISeries;
 import user.IUser;
+import utils.data.FileIO;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,6 @@ public class ChillMedia {
     }
 
     public void run() {
-
     }
 
     private void listMovies() {
