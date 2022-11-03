@@ -29,4 +29,8 @@ public class Series extends AWatchable implements ISeries {
     public ArrayList<ISeason> getSeasons() {
         return seasons;
     }
+
+    public String toString() {
+        return "Series: " + title + " (" + startYear + "-" + endYear + ") with " + seasons.size() + " seasons and a rating of " + rating + " and genres: " + genres + ". \n";
+    }
 }

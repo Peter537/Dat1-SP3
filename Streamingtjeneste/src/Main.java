@@ -8,6 +8,7 @@ import media.Series;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +57,12 @@ public class Main {
             String[] genreValues = values[2].split(",");
 
             for (String genre : genreValues) {
-                genres.add(SeriesGenre.valueOf(genre.trim().toUpperCase().replaceAll("-", "_")));
+                try {
+                    String genreName = genre.trim().toUpperCase().replaceAll("-", "_");
+                    genres.add(SeriesGenre.valueOf(genreName));
+                }
+                catch (Exception e){
+                }
             }
 
             ISeries thisSeries = new Series(title, startYear, endYear, rating, genres, seasons);
