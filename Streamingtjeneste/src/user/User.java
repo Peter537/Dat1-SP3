@@ -20,6 +20,7 @@ public class User implements IUser {
     public User(int ID, String name, String password, String email, int age) {
         if (ID != -1)
             this.id = ID;
+        idCounter++;
         this.name = name;
         this.password = password;
         this.email = email;

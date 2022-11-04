@@ -29,13 +29,13 @@ public class FileIO implements IDataIO {
                 String line = readUsers.nextLine();
                 String[] values = line.split(";");
 
-                int iD = Integer.parseInt(values[0]);
+                int ID = Integer.parseInt(values[0]);
                 String userName = values[1];
                 String password = values[2];
                 String email = values[3];
                 int age = Integer.parseInt(values[4]);
 
-                users.add(new User(iD, userName, password, email, age));
+                users.add(new User(ID, userName, password, email, age));
             }
         } catch (IOException e) {
             e.printStackTrace();
