@@ -85,8 +85,6 @@ public class FileIO implements IDataIO {
         return movieData;
     }
 
-    // SKAL SLETTES, VI SKAL BRUGE YUSUF'S FILEIO, BARE TIL
-    // AT TESTE SÅ JEG KAN FÅ NOGET DATA
     @Override
     public ArrayList<ISeries> loadSeries() {
         File file = new File("Data/serier.csv");
