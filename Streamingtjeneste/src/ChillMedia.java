@@ -27,7 +27,7 @@ public class ChillMedia {
         load();
         //LogIn logIn = new LogIn(this); // SKAL IKKE VÆRE UDKOMMENTERET
         //this.currentUser = logIn.getCurrentUser(); // SKAL IKKE VÆRE UDKOMMENTERET
-        this.currentUser = new User(1, "Test", "password", "test@gmail.com", 19); // SKAL FJERNES
+        this.currentUser = new User(1, "Test", "password", "test@gmail.com", 19, new ArrayList<>(), new ArrayList<>()); // SKAL FJERNES
         this.textIO = new TextIO();
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
