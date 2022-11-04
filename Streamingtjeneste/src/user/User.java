@@ -17,7 +17,7 @@ public class User implements IUser {
     private final ArrayList<IMovie> myMovies = new ArrayList<>();
     private final ArrayList<IMovie> watchedMovies = new ArrayList<>();
 
-    public User(int ID, String name, String password, String email, int age) {
+    public User(int ID, String name, String password, String email, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
         if (ID != -1)
             this.id = ID;
         idCounter++;
@@ -25,6 +25,8 @@ public class User implements IUser {
         this.password = password;
         this.email = email;
         this.age = age;
+        this.myMovies = myMovies;
+        this.watchedMovies = watchedMovies;
     }
 
     public int getId() {
