@@ -94,16 +94,5 @@ public class User implements IUser {
         } catch (IOException e) {
             System.out.println(e);
         }
-
-        saveWatchedMovies();
-        saveMyMovies();
-    }
-
-    private void saveWatchedMovies() {
-
-    }
-
-    private void saveMyMovies() {
-
     }
 }

@@ -5,9 +5,9 @@ import genre.IGenre;
 import java.util.ArrayList;
 
 public class Series extends AWatchable implements ISeries {
-    int startYear;
-    int endYear;
-    ArrayList<Season> seasons;
+    private int startYear;
+    private int endYear;
+    private ArrayList<Season> seasons;
 
     public Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons) {
         super(title, rating, genres);
@@ -32,10 +32,15 @@ public class Series extends AWatchable implements ISeries {
         return seasons;
     }
 
+    @Override
     public String toString() {
+        return getTitle() + " (" + getStartYear() + "-" + ((endYear == -1) ? "ongoing" : getEndYear()) + ")";
+        /*
         if (endYear == -1) {
             return getTitle() + " (" + startYear + " - ongoing)";
         } else {
             return getTitle() + " (" + startYear + " - " + endYear + ")";
-        }}
+        }
+         */
+    }
 }

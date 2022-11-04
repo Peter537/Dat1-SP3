@@ -5,7 +5,7 @@ import genre.IGenre;
 import java.util.ArrayList;
 
 public class Movie extends AWatchable implements IMovie {
-    int year;
+    private final int year;
 
     public Movie(String title, float rating, ArrayList<IGenre> genres, int year) {
         super(title, rating, genres);
