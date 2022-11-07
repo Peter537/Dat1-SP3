@@ -70,8 +70,8 @@ public class Query {
      * @param title The title to search for
      * @return ArrayList<ISeries> list of series that matches the given title
      */
-    public static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String name) {
-        return series.stream().filter(s -> s.getTitle().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
+    public static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String title) {
+        return series.stream().filter(s -> s.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*
@@ -81,15 +81,15 @@ public class Query {
      * @param title The title to search for
      * @return ArrayList<IMovie> list of movies that matches the given title
      */
-    public static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String name) {
-        return movies.stream().filter(m -> m.getTitle().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
+    public static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String title) {
+        return movies.stream().filter(m -> m.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*
      * This method isn't in use yet.
      */
-    public static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, String name) {
-        return media.stream().filter(m -> m.getTitle().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
+    public static ArrayList<IMedia> searchTitle(ArrayList<IMedia> media, String title) {
+        return media.stream().filter(m -> m.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*

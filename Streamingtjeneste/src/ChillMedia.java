@@ -113,10 +113,6 @@ public class ChillMedia {
         }
     }
 
-    private ArrayList<IMovie> getPage(int page) {
-        return null;
-    }
-
     public ArrayList<IGenre> getGenres() {
         return genres;
     }

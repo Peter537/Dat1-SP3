@@ -14,8 +14,8 @@ public class User implements IUser {
     private String password;
     private String email;
     private int age;
-    private ArrayList<IMovie> myMovies = new ArrayList<>();
-    private ArrayList<IMovie> watchedMovies = new ArrayList<>();
+    private ArrayList<IMovie> myMovies;
+    private ArrayList<IMovie> watchedMovies;
 
     public User(int ID, String name, String password, String email, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
         if (ID != -1)
