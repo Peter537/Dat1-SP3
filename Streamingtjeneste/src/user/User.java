@@ -8,20 +8,23 @@ import java.util.ArrayList;
 import media.IMovie;
 
 public class User implements IUser {
+
     private static int idCounter = 0;
-    private int id;
-    private String name;
-    private String password;
-    private String email;
-    private int age;
-    private boolean isAdult;
+    private final int id;
+    private final String name;
+    private final String password;
+    private final String email;
+    private final int age;
+    private final boolean isAdult;
     private final ArrayList<IMovie> myMovies;
     private final ArrayList<IMovie> watchedMovies;
 
-    public User(int ID, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
-        if (ID != -1)
-            this.id = ID;
-        this.id = idCounter++;
+    public User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
+        if (id != -1) {
+            this.id = id;
+        } else {
+            this.id = idCounter++;
+        }
         this.name = name;
         this.email = email;
         this.password = password;
