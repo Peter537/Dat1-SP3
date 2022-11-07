@@ -14,19 +14,21 @@ public class User implements IUser {
     private String password;
     private String email;
     private int age;
-    private ArrayList<IMovie> myMovies;
-    private ArrayList<IMovie> watchedMovies;
+    private boolean isAdult;
+    private final ArrayList<IMovie> myMovies;
+    private final ArrayList<IMovie> watchedMovies;
 
-    public User(int ID, String name, String password, String email, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
+    public User(int ID, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
         if (ID != -1)
             this.id = ID;
         idCounter++;
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.age = age;
         this.myMovies = myMovies;
         this.watchedMovies = watchedMovies;
+        this.isAdult = age >= 18;
     }
 
     public int getId() {
@@ -47,6 +49,10 @@ public class User implements IUser {
 
     public int getAge() {
         return age;
+    }
+
+    public boolean isAdult() {
+        return isAdult;
     }
 
     public ArrayList<IMovie> getMyMovies() {
@@ -79,8 +85,17 @@ public class User implements IUser {
         }
     }
 
+    @Override
     public String toString() {
-        return "Name: " + name + " Email: " + email;
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", myMovies=" + myMovies +
+                ", watchedMovies=" + watchedMovies +
+                '}';
     }
 
     public void save(ArrayList<IUser> users) {

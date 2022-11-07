@@ -16,7 +16,28 @@ public class ChillMediaFlow {
         this.currentUser = chillMedia.getCurrentUser();
     }
 
-    public void searchMoviesByTitle() {
+    /*
+     * This method is used to determine what movies should be shown to the user
+     *
+     * @param number What to search for in the movies
+     * @return Nothing
+     */
+    public void searchMovies(int number) {
+        switch (number) {
+            case 1 -> searchMoviesByTitle();
+            case 2 -> searchMoviesByGenre();
+            case 3 -> searchMoviesByRating();
+            case 4 -> searchMyMovies();
+            case 5 -> searchMyWatchedMovies();
+        }
+    }
+
+    /*
+     * This method shows movies by the title they enter in the method
+     *
+     * @return Nothing
+     */
+    private void searchMoviesByTitle() {
         ArrayList<IMovie> movies;
         while (true) {
             String title = chillMedia.getTextIO().getUserInput("Enter a title to search for: ");
@@ -29,7 +50,12 @@ public class ChillMediaFlow {
         searchMovies(movies);
     }
 
-    public void searchMoviesByGenre() {
+    /*
+     * This method shows movies by the genre they enter
+     *
+     * @return Nothing
+     */
+    private void searchMoviesByGenre() {
         ArrayList<IMovie> movies;
         while (true) {
             String genre = chillMedia.getTextIO().getUserInput("Enter a genre to search for: ");
@@ -42,7 +68,12 @@ public class ChillMediaFlow {
         searchMovies(movies);
     }
 
-    public void searchMoviesByRating() {
+    /*
+     * This method shows movies by the minimum rating they enter
+     *
+     * @return Nothing
+     */
+    private void searchMoviesByRating() {
         ArrayList<IMovie> movies;
         while (true) {
             float minimumRating;
@@ -62,7 +93,12 @@ public class ChillMediaFlow {
         searchMovies(movies);
     }
 
-    public void searchMyMovies() {
+    /*
+     * This method shows movies the user has added to their list
+     *
+     * @return Nothing
+     */
+    private void searchMyMovies() {
         ArrayList<IMovie> movies = currentUser.getMyMovies();
         if (movies.size() == 0) {
             chillMedia.getTextIO().println("No movies found.");
@@ -71,7 +107,12 @@ public class ChillMediaFlow {
         searchMovies(movies);
     }
 
-    public void searchMyWatchedMovies() {
+    /*
+     * This method shows the movies the user has watched
+     *
+     * @return Nothing
+     */
+    private void searchMyWatchedMovies() {
         ArrayList<IMovie> movies = currentUser.getWatchedMovies();
         if (movies.size() == 0) {
             chillMedia.getTextIO().println("No movies found.");
@@ -80,8 +121,13 @@ public class ChillMediaFlow {
         searchMovies(movies);
     }
 
-
-    public void searchMovies(ArrayList<IMovie> movies) {
+    /*
+     * This method shows the movies the user has added to the list to search through
+     *
+     * @param movies The list of movies to show
+     * @return Nothing
+     */
+    private void searchMovies(ArrayList<IMovie> movies) {
         int page = 1;
         int pageSize = 10;
         int maxPage = Math.round((float) movies.size() / (float) pageSize);
@@ -92,7 +138,7 @@ public class ChillMediaFlow {
         boolean b = true;
         while (b) {
             chillMedia.getTextIO().println("Page " + page + " of " + maxPage);
-            chillMedia.getTextIO().println("Series:" + movies.size());
+            chillMedia.getTextIO().println("Movies: " + movies.size());
             int choice = chooseMovie(movies, page, pageSize);
             if (choice < 0) {
                 switch (choice) {
@@ -140,9 +186,26 @@ public class ChillMediaFlow {
     }
 
 
+    /*
+     * This method is used to determine what series should be shown to the user
+     *
+     * @param number What to search for in the series
+     * @return Nothing
+     */
+    public void searchSeries(int i) {
+        switch (i) {
+            case 1 -> searchSeriesByTitle();
+            case 2 -> searchSeriesByGenre();
+            case 3 -> searchSeriesByRating();
+        }
+    }
 
-
-    public void searchSeriesByTitle() {
+    /*
+     * This method shows series by the title they enter
+     *
+     * @return Nothing
+     */
+    private void searchSeriesByTitle() {
         ArrayList<ISeries> series;
         while (true) {
             String title = chillMedia.getTextIO().getUserInput("Enter a title to search for: ");
@@ -155,7 +218,12 @@ public class ChillMediaFlow {
         searchSeries(series);
     }
 
-    public void searchSeriesByGenre() {
+    /*
+     * This method shows series by the genre they enter
+     *
+     * @return Nothing
+     */
+    private void searchSeriesByGenre() {
         ArrayList<ISeries> series;
         while (true) {
             String genre = chillMedia.getTextIO().getUserInput("Enter a genre to search for: ");
@@ -168,7 +236,12 @@ public class ChillMediaFlow {
         searchSeries(series);
     }
 
-    public void searchSeriesByRating() {
+    /*
+     * This method shows series by the minimum rating they enter
+     *
+     * @return Nothing
+     */
+    private void searchSeriesByRating() {
         ArrayList<ISeries> series;
         while (true) {
             float minimumRating;
@@ -188,7 +261,13 @@ public class ChillMediaFlow {
         searchSeries(series);
     }
 
-    public void searchSeries(ArrayList<ISeries> seriesList) {
+    /*
+     * This method shows the series the user has added to the list to search through
+     *
+     * @param seriesList The list of series to show
+     * @return Nothing
+     */
+    private void searchSeries(ArrayList<ISeries> seriesList) {
         int page = 1;
         int pageSize = 10;
         int maxPage = Math.round((float) seriesList.size() / (float) pageSize);
@@ -199,7 +278,7 @@ public class ChillMediaFlow {
         boolean b = true;
         while (b) {
             chillMedia.getTextIO().println("Page " + page + " of " + maxPage);
-            chillMedia.getTextIO().println("Series:" + seriesList.size());
+            chillMedia.getTextIO().println("Series: " + seriesList.size());
             int choice = chooseSeries(seriesList, page, pageSize);
             if (choice < 0) {
                 switch (choice + 1) {
@@ -235,15 +314,39 @@ public class ChillMediaFlow {
         chillMedia.getTextIO().getUserInput("Press enter to continue...");
     }
 
-    public int chooseSeries(ArrayList<ISeries> series, int page, int pageSize) {
+    /*
+     * This method converts the series to media and the calls the chooseMedia method
+     *
+     * @param series The series to convert
+     * @param page The page to show
+     * @param pageSize The amount of movies to show per page
+     * @return The index of the movie the user selected
+     */
+    private int chooseSeries(ArrayList<ISeries> series, int page, int pageSize) {
         return chooseMedia(new ArrayList<>(series), page, pageSize);
     }
 
-    public int chooseMovie(ArrayList<IMovie> movies, int page, int pageSize) {
+    /*
+     * This method converts the movies to media and then calls the chooseMedia method
+     *
+     * @param movies The movies to convert
+     * @param page The page to show
+     * @param pageSize The amount of movies to show per page
+     * @return The index of the movie the user selected
+     */
+    private int chooseMovie(ArrayList<IMovie> movies, int page, int pageSize) {
         return chooseMedia(new ArrayList<>(movies), page, pageSize);
     }
 
-    public int chooseMedia(ArrayList<IMedia> media, int page, int pageSize) {
+    /*
+     * This method is used to choose a media from a list
+     *
+     * @param mediaList The list of media to choose from
+     * @param page The page to show
+     * @param pageSize The amount of media to show per page
+     * @return The index of the media chosen
+     */
+    private int chooseMedia(ArrayList<IMedia> media, int page, int pageSize) {
         while (true) {
             try {
                 ArrayList<IMedia> shownMedia = new ArrayList<>();
@@ -264,7 +367,15 @@ public class ChillMediaFlow {
         }
     }
 
-    public void addMovieToMyMovies(IMovie movie) {
+    /*
+     * This method adds a movie to the users movie list
+     * If the movie isn't on the list already, it will be added and the user will be notified
+     * If the movie is already on the list, the user will be notified
+     *
+     * @param movie The movie to add
+     * @return Nothing
+     */
+    private void addMovieToMyMovies(IMovie movie) {
         if (currentUser.addMyMovie(movie)) {
             chillMedia.getTextIO().println("Added " + movie.getTitle() + " to your movies.");
         } else {
@@ -272,7 +383,15 @@ public class ChillMediaFlow {
         }
     }
 
-    public void removeMovieFromMyMovies(IMovie movie) {
+    /*
+     * This method removes a movie from the users movie list
+     * If the movie is on the list, it will be removed and the user will be notified
+     * If the movie isn't on the list, the user will be notified
+     *
+     * @param movie The movie to remove
+     * @return Nothing
+     */
+    private void removeMovieFromMyMovies(IMovie movie) {
         if (currentUser.removeMyMovie(movie)) {
             chillMedia.getTextIO().println("Removed " + movie.getTitle() + " from your movies.");
         } else {
@@ -280,16 +399,33 @@ public class ChillMediaFlow {
         }
     }
 
-    public void watchMovie(IMovie movie) {
+    /*
+     * This method watches a movie for the user and adds it to their watched movies list
+     *
+     * @param movie The movie to watch
+     * @return Nothing
+     */
+    private void watchMovie(IMovie movie) {
         currentUser.addWatchedMovie(movie);
         chillMedia.getTextIO().println("You are now watching " + movie.getTitle() + ".");
     }
 
-    public void watchSeries(ISeries series) {
+    /*
+     * This method adds a series to the users series list
+     *
+     * @param series The series to watch
+     * @return Nothing
+     */
+    private void watchSeries(ISeries series) {
         chillMedia.getTextIO().println("You are now watching " + series.getTitle() + ".");
     }
 
-    public int selectMovieOptions() {
+    /*
+     * This method shows the options a user has to make when they have selected a movie
+     *
+     * @return The option the user selected
+     */
+    private int selectMovieOptions() {
         String[] movieOptions = new String[]{
                 "Exit",
                 "Watch movie",
@@ -306,7 +442,12 @@ public class ChillMediaFlow {
         }
     }
 
-    public int selectSeriesOptions() {
+    /*
+     * This method shows the options a user has to make when they have selected a series
+     *
+     * @return The option the user selected
+     */
+    private int selectSeriesOptions() {
         String[] seriesOptions = new String[]{
                 "Exit",
                 "Watch series",

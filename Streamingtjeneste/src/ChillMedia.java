@@ -27,7 +27,7 @@ public class ChillMedia {
         load();
         //LogIn logIn = new LogIn(this); // SKAL IKKE VÆRE UDKOMMENTERET
         //this.currentUser = logIn.getCurrentUser(); // SKAL IKKE VÆRE UDKOMMENTERET
-        this.currentUser = new User(1, "Test", "password", "test@gmail.com", 19, new ArrayList<>(), new ArrayList<>()); // SKAL FJERNES
+        this.currentUser = new User(1, "Test", "test@gmail.com", "password", 19, new ArrayList<>(), new ArrayList<>()); // SKAL FJERNES
         this.textIO = new TextIO();
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
@@ -36,9 +36,9 @@ public class ChillMedia {
         FileIO fileIO = new FileIO();
         this.genres.addAll(List.of(MovieGenre.values()));
         this.genres.addAll(List.of(SeriesGenre.values()));
-        //this.movies.addAll(fileIO.loadMovies()); // SKAL IKKE VÆRE UDKOMMENTERET
+        this.movies.addAll(fileIO.loadMovies());
         this.series.addAll(fileIO.loadSeries());
-        //this.users.addAll(fileIO.loadUsers()); // SKAL IKKE VÆRE UDKOMMENTERET
+        this.users.addAll(fileIO.loadUsers());
     }
 
     public void run() {
@@ -75,17 +75,17 @@ public class ChillMedia {
 
         while (true) {
             String input = textIO.getUserInput("Would you like to see?", options);
-            switch (input) {
-                case "0" -> {
-                    textIO.println("Goodbye!");
-                    return;
+            if (input.equals("0")) {
+                return;
+            }
+            try {
+                int number = Integer.parseInt(input);
+                if (number < 1 || number > options.length) {
+                    throw new NumberFormatException();
                 }
-                case "1" -> chillMediaFlow.searchMoviesByTitle();
-                case "2" -> chillMediaFlow.searchMoviesByGenre();
-                case "3" -> chillMediaFlow.searchMoviesByRating();
-                case "4" -> chillMediaFlow.searchMyMovies();
-                case "5" -> chillMediaFlow.searchMyWatchedMovies();
-                default -> textIO.println("Invalid input!");
+                chillMediaFlow.searchMovies(number);
+            } catch (NumberFormatException e) {
+                textIO.println("Invalid input!");
             }
         }
     }
@@ -100,15 +100,17 @@ public class ChillMedia {
 
         while (true) {
             String input = textIO.getUserInput("Would you like to see?", options);
-            switch (input) {
-                case "0" -> {
-                    textIO.println("Goodbye!");
-                    return;
+            if (input.equals("0")) {
+                return;
+            }
+            try {
+                int number = Integer.parseInt(input);
+                if (number < 1 || number > options.length) {
+                    throw new NumberFormatException();
                 }
-                case "1" -> chillMediaFlow.searchSeriesByTitle();
-                case "2" -> chillMediaFlow.searchSeriesByGenre();
-                case "3" -> chillMediaFlow.searchSeriesByRating();
-                default -> textIO.println("Invalid input!");
+                chillMediaFlow.searchSeries(number);
+            } catch (NumberFormatException e) {
+                textIO.println("Invalid input!");
             }
         }
     }
@@ -135,9 +137,5 @@ public class ChillMedia {
 
     public IUser getCurrentUser() {
         return currentUser;
-    }
-
-    public void setCurrentUser(IUser currentUser) {
-        this.currentUser = currentUser;
     }
 }

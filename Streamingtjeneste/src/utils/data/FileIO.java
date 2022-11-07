@@ -29,13 +29,13 @@ public class FileIO implements IDataIO {
                 String line = readUsers.nextLine();
                 String[] values = line.split(";");
 
-                int ID = Integer.parseInt(values[0]);
+                int ID = Integer.parseInt(values[0].trim());
                 String userName = values[1];
                 String password = values[2];
                 String email = values[3];
-                int age = Integer.parseInt(values[4]);
+                int age = Integer.parseInt(values[4].trim());
 
-                users.add(new User(ID, userName, password, email, age, new ArrayList<>(), new ArrayList<>()));
+                users.add(new User(ID, userName, email, password, age, new ArrayList<>(), new ArrayList<>()));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class FileIO implements IDataIO {
 
                 String movieTitles = values[0];
 
-                int year = Integer.parseInt(values[1]);
+                int year = Integer.parseInt(values[1].trim());
 
                 ArrayList<IGenre> movieGenres = new ArrayList<>();
                 String[] genreTitles = values[2].trim().split(",");
@@ -74,7 +74,7 @@ public class FileIO implements IDataIO {
                     }
                 }
 
-                float rating = Float.parseFloat(values[3]);
+                float rating = Float.parseFloat(values[3].replace(',', '.').trim());
                 movieData.add(new Movie(movieTitles, rating, movieGenres, year));
             }
 
