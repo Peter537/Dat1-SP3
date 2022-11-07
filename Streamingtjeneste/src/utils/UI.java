@@ -30,7 +30,7 @@ public class UI {
         series.sort(Comparator.comparing(IMedia::getTitle));
 
         data.movieList.setListData(movies.toArray());
-        data.serieList.setListData(fileIO.loadSeries().toArray());
+        data.serieList.setListData(series.toArray());
     }
 
     public void getData(UI data) {
