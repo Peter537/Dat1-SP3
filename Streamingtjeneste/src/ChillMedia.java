@@ -8,6 +8,7 @@ import user.User;
 import utils.TextIO;
 import utils.data.FileIO;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class ChillMedia {
     private final ArrayList<IMovie> movies = new ArrayList<>();
     private final ArrayList<ISeries> series = new ArrayList<>();
     private final ArrayList<IUser> users = new ArrayList<>();
+    private JList labelList;
+    private JPanel panel1;
 
     public ChillMedia() {
         load();
@@ -61,6 +64,8 @@ public class ChillMedia {
                 default -> textIO.println("Invalid input!");
             }
         }
+
+
     }
 
     private void listMovies() {
