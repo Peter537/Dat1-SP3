@@ -36,8 +36,8 @@ public class FileIO implements IDataIO {
 
                 int ID = Integer.parseInt(values[0].trim());
                 String userName = values[1];
-                String password = values[2];
-                String email = values[3];
+                String email = values[2];
+                String password = values[3];
                 int age = Integer.parseInt(values[4].trim());
 
                 users.add(new User(ID, userName, email, password, age, new ArrayList<>(), new ArrayList<>()));
