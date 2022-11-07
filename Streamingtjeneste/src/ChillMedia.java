@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ChillMedia {
 
-    private IUser currentUser;
+    private final IUser currentUser;
 
     private final TextIO textIO;
     private final ChillMediaFlow chillMediaFlow;
