@@ -1,8 +1,7 @@
-
 public class Main {
 
     public static void main(String[] args) {
-        ChillMedia chillMedia = new ChillMedia();
-        chillMedia.run();
+        ChillMedia cm = new ChillMedia();
+        cm.run();
     }
 }

@@ -11,8 +11,7 @@ public interface IUser {
     int getAge();
     ArrayList<IMovie> getMyMovies();
     ArrayList<IMovie> getWatchedMovies();
-    void addMovie(IMovie movie);
-    void removeMovie(IMovie movie);
+    boolean addMyMovie(IMovie movie);
+    boolean removeMyMovie(IMovie movie);
     void addWatchedMovie(IMovie movie);
-    void save(ArrayList<IUser> users);
 }

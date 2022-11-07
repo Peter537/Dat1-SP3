@@ -14,15 +14,21 @@ public class User implements IUser {
     private String password;
     private String email;
     private int age;
-    private final ArrayList<IMovie> myMovies = new ArrayList<>();
-    private final ArrayList<IMovie> watchedMovies = new ArrayList<>();
+    private boolean isAdult;
+    private final ArrayList<IMovie> myMovies;
+    private final ArrayList<IMovie> watchedMovies;
 
-    public User(String name, String password, String email, int age) {
+    public User(int ID, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
+        if (ID != -1)
+            this.id = ID;
         this.id = idCounter++;
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.age = age;
+        this.myMovies = myMovies;
+        this.watchedMovies = watchedMovies;
+        this.isAdult = age >= 18;
     }
 
     public int getId() {
@@ -45,6 +51,10 @@ public class User implements IUser {
         return age;
     }
 
+    public boolean isAdult() {
+        return isAdult;
+    }
+
     public ArrayList<IMovie> getMyMovies() {
         return myMovies;
     }
@@ -53,31 +63,38 @@ public class User implements IUser {
         return watchedMovies;
     }
 
-    public void addMovie(IMovie movie) {
-        myMovies.add(movie);
+    public boolean addMyMovie(IMovie movie) {
+        if (!myMovies.contains(movie)) {
+            myMovies.add(movie);
+            return true;
+        }
+        return false;
     }
 
-    public void removeMovie(IMovie movie) {
-        myMovies.remove(movie);
+    public boolean removeMyMovie(IMovie movie) {
+        if (myMovies.contains(movie)) {
+            myMovies.remove(movie);
+            return true;
+        }
+        return false;
     }
 
     public void addWatchedMovie(IMovie movie) {
-        watchedMovies.add(movie);
+        if (!watchedMovies.contains(movie)) {
+            watchedMovies.add(movie);
+        }
     }
 
-    public void save(ArrayList<IUser> users) {
-
-        try {
-            FileWriter writer = new FileWriter("Data/user.csv");
-
-            for (IUser user : users) {
-                String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                writer.write(user.getId() + "," + user.getName() + "," + user.getEmail() + "," + user.getPassword() + "," + user.getAge() + "," + myMovies + "," + watchedMovies +"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", myMovies=" + myMovies +
+                ", watchedMovies=" + watchedMovies +
+                '}';
     }
 }
