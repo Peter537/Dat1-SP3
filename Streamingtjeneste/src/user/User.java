@@ -1,9 +1,5 @@
 package user;
 
-import user.IUser;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import media.IMovie;
 
@@ -34,70 +30,70 @@ public class User implements IUser {
         this.isAdult = age >= 18;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public boolean isAdult() {
-        return isAdult;
+        return this.isAdult;
     }
 
     public ArrayList<IMovie> getMyMovies() {
-        return myMovies;
+        return this.myMovies;
     }
 
     public ArrayList<IMovie> getWatchedMovies() {
-        return watchedMovies;
+        return this.watchedMovies;
     }
 
     public boolean addMyMovie(IMovie movie) {
-        if (!myMovies.contains(movie)) {
-            myMovies.add(movie);
+        if (!getMyMovies().contains(movie)) {
+            getMyMovies().add(movie);
             return true;
         }
         return false;
     }
 
     public boolean removeMyMovie(IMovie movie) {
-        if (myMovies.contains(movie)) {
-            myMovies.remove(movie);
+        if (getMyMovies().contains(movie)) {
+            getMyMovies().remove(movie);
             return true;
         }
         return false;
     }
 
     public void addWatchedMovie(IMovie movie) {
-        if (!watchedMovies.contains(movie)) {
-            watchedMovies.add(movie);
+        if (!getWatchedMovies().contains(movie)) {
+            getWatchedMovies().add(movie);
         }
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", myMovies=" + myMovies +
-                ", watchedMovies=" + watchedMovies +
+                "id=" + getID() +
+                ", name='" + getName() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", age=" + getAge() +
+                ", myMovies=" + getMyMovies() +
+                ", watchedMovies=" + getWatchedMovies() +
                 '}';
     }
 }

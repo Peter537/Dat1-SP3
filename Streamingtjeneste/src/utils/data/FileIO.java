@@ -172,7 +172,7 @@ public class FileIO implements IDataIO {
             for (IUser user : users) {
                 String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
                 String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                writer.write(user.getId() + ";" + user.getName() + ";" + user.getEmail() + ";" + user.getPassword() + ";" + user.getAge() + ";" + myMovies + ";" + watchedMovies +"\n");
+                writer.write(user.getID() + ";" + user.getName() + ";" + user.getEmail() + ";" + user.getPassword() + ";" + user.getAge() + ";" + myMovies + ";" + watchedMovies +"\n");
             }
             writer.close();
         } catch (IOException e) {

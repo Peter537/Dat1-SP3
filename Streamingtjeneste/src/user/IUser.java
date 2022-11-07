@@ -5,7 +5,7 @@ import media.IMovie;
 
 public interface IUser {
 
-    int getId();
+    int getID();
 
     String getName();
 
