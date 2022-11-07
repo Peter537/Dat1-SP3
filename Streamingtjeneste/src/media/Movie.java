@@ -5,6 +5,7 @@ import genre.IGenre;
 import java.util.ArrayList;
 
 public class Movie extends AWatchable implements IMovie {
+
     private final int year;
 
     public Movie(String title, float rating, ArrayList<IGenre> genres, int year) {
@@ -16,7 +17,13 @@ public class Movie extends AWatchable implements IMovie {
         return this.year;
     }
 
+    @Override
     public String toString() {
-        return "Movie: " + this.getTitle() + " (" + this.getYear() + ")";
+        return "Movie{" +
+                "title='" + getTitle() + '\'' +
+                ", rating=" + getRating() +
+                ", genres=" + getGenres() +
+                ", year=" + getYear() +
+                '}';
     }
 }

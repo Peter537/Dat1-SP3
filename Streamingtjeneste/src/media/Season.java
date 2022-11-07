@@ -1,12 +1,28 @@
 package media;
 
-public class Season extends ASeason {
+public class Season {
+
+    private final int seasonNumber;
+    private final int episodeCount;
+
     public Season(int seasonNumber, int episodeCount) {
-        super(seasonNumber, episodeCount);
+        this.seasonNumber = seasonNumber;
+        this.episodeCount = episodeCount;
+    }
+
+    public int getSeasonNumber() {
+        return seasonNumber;
+    }
+
+    public int getEpisodeCount() {
+        return episodeCount;
     }
 
     @Override
     public String toString() {
-        return "Season " + getSeasonNumber() + " (" + getEpisodeCount() + " episodes)";
+        return "Season{" +
+                "seasonNumber=" + getSeasonNumber() +
+                ", episodeCount=" + getEpisodeCount() +
+                '}';
     }
 }

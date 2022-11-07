@@ -5,19 +5,16 @@ import genre.IGenre;
 import java.util.ArrayList;
 
 public class Series extends AWatchable implements ISeries {
-    private int startYear;
-    private int endYear;
-    private ArrayList<Season> seasons;
+
+    private final int startYear;
+    private final int endYear;
+    private final ArrayList<Season> seasons;
 
     public Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons) {
         super(title, rating, genres);
         this.startYear = startYear;
         this.endYear = endYear;
         this.seasons = seasons;
-    }
-
-    public Series() {
-        super("", 0, new ArrayList<>());
     }
 
     public int getStartYear() {
@@ -34,13 +31,13 @@ public class Series extends AWatchable implements ISeries {
 
     @Override
     public String toString() {
-        return getTitle() + " (" + getStartYear() + "-" + ((endYear == -1) ? "ongoing" : getEndYear()) + ")";
-        /*
-        if (endYear == -1) {
-            return getTitle() + " (" + startYear + " - ongoing)";
-        } else {
-            return getTitle() + " (" + startYear + " - " + endYear + ")";
-        }
-         */
+        return "Series{" +
+                "title='" + getTitle() + '\'' +
+                ", rating=" + getRating() +
+                ", genres=" + getGenres() +
+                ", startYear=" + getStartYear() +
+                ", endYear=" + ((endYear == -1) ? "ongoing" : getEndYear()) +
+                ", seasons=" + getSeasons() +
+                '}';
     }
 }

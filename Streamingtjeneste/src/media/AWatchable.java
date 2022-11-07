@@ -5,6 +5,7 @@ import genre.IGenre;
 import java.util.ArrayList;
 
 public abstract class AWatchable implements IMedia {
+
     private final String title;
     private final float rating;
     private final ArrayList<IGenre> genres;
