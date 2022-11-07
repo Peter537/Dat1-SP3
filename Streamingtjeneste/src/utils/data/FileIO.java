@@ -17,6 +17,11 @@ public class FileIO implements IDataIO {
 
     public FileIO() { }
 
+    /*
+     * This method loads all users from the file "Data/user.csv" and returns them as an ArrayList.
+     *
+     * @return ArrayList<IUser> list of users
+     */
     @Override
     public ArrayList<IUser> loadUsers() {
         File file = new File("Data/user.csv");
@@ -43,6 +48,11 @@ public class FileIO implements IDataIO {
         return users;
     }
 
+    /*
+     * This method loads all movies from the file "Data/film.csv" and returns them as an ArrayList.
+     *
+     * @return ArrayList<IMovie> list of movies
+     */
     @Override
     public ArrayList<IMovie> loadMovies() {
         File file = new File("Data/film.csv");
@@ -85,6 +95,11 @@ public class FileIO implements IDataIO {
         return movieData;
     }
 
+    /*
+     * This method loads all series from the file "Data/series.csv" and returns them as an ArrayList.
+     *
+     * @return ArrayList<ISeries> list of series
+     */
     @Override
     public ArrayList<ISeries> loadSeries() {
         File file = new File("Data/serier.csv");
