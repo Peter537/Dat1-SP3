@@ -87,14 +87,40 @@ public class User implements IUser {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", myMovies=" + myMovies +
-                ", watchedMovies=" + watchedMovies +
+        return "{" +
+                "id:" + id +
+                ", name:'" + name + '\'' +
+                ", password:'" + password + '\'' +
+                ", email:'" + email + '\'' +
+                ", age:" + age +
+                ", myMovies:" + myMovies +
+                ", watchedMovies:" + watchedMovies +
                 '}';
     }
+
+    public String toJSONString() {
+        return "{" +
+                "id:" + id +
+                ", \"name\":'" + name + '\'' +
+                ", \"password\":'" + password + '\'' +
+                ", \"email\":'" + email + '\'' +
+                ", \"age\":" + age +
+                ", \"myMovies\":" + myMovies +
+                ", \"watchedMovies\":" + watchedMovies +
+                '}';
+    }
+
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", password='" + password + '\'' +
+//                ", email='" + email + '\'' +
+//                ", age=" + age +
+//                ", isAdult=" + isAdult +
+//                ", myMovies=" + myMovies +
+//                ", watchedMovies=" + watchedMovies +
+//                '}';
+//    }
 }

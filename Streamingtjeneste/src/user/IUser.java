@@ -14,4 +14,6 @@ public interface IUser {
     boolean addMyMovie(IMovie movie);
     boolean removeMyMovie(IMovie movie);
     void addWatchedMovie(IMovie movie);
+
+    String toJSONString();
 }
