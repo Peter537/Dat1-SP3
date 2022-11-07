@@ -356,7 +356,7 @@ public class ChillMediaFlow {
                     }
                     shownMedia.add(media.get(i));
                 }
-                String indexChoice = chillMedia.getTextIO().getUserInputFromMedia("What do you want to see?", page, shownMedia);
+                String indexChoice = chillMedia.getTextIO().getUserInputFromMedia("What do you want to see?", page, pageSize, shownMedia);
                 int index = Integer.parseInt(indexChoice) - 1;
                 if (index >= -3 && index < media.size()) {
                     return index;
