@@ -1,10 +1,11 @@
-package utils.data;
+package Magnus;
 
 import genre.IGenre;
 import genre.SeriesGenre;
 import media.*;
 import user.IUser;
 import user.User;
+import utils.data.IDataIO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,18 +15,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class FileIO implements IDataIO {
+public class TEST_FileIO {
 
-    public FileIO() { }
+    public TEST_FileIO() { }
 
     /*
      * This method loads all users from the file "Data/user.csv" and returns them as an ArrayList.
      *
      * @return ArrayList<IUser> list of users
      */
-    @Override
     public ArrayList<IUser> loadUsers() {
-        File file = new File("Data/user.csv");
+        File file = new File("Unit Testing/Magnus/TestUser.csv");
         ArrayList<IUser> users = new ArrayList<>();
 
         try {
@@ -37,8 +37,8 @@ public class FileIO implements IDataIO {
 
                 int ID = Integer.parseInt(values[0].trim());
                 String userName = values[1];
-                String password = values[2];
-                String email = values[3];
+                String email = values[2];
+                String password = values[3];
                 int age = Integer.parseInt(values[4].trim());
 
                 users.add(new User(ID, userName, email, password, age, new ArrayList<>(), new ArrayList<>()));
@@ -54,7 +54,6 @@ public class FileIO implements IDataIO {
      *
      * @return ArrayList<IMovie> list of movies
      */
-    @Override
     public ArrayList<IMovie> loadMovies() {
         File file = new File("Data/film.csv");
         ArrayList<IMovie> movieData = new ArrayList<>();
@@ -101,7 +100,6 @@ public class FileIO implements IDataIO {
      *
      * @return ArrayList<ISeries> list of series
      */
-    @Override
     public ArrayList<ISeries> loadSeries() {
         File file = new File("Data/serier.csv");
         ArrayList<ISeries> seriesData = new ArrayList<>();

@@ -1,3 +1,5 @@
+package Magnus;
+
 import org.junit.jupiter.api.Test;
 import user.IUser;
 import user.User;
@@ -10,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class User_Test {
     @Test
     void testNewUser() {
-        FileIO fileIO = new FileIO();
+        TEST_FileIO fileIO = new TEST_FileIO();
         ArrayList<IUser> users = fileIO.loadUsers();
-        IUser user = new User(-1, "user1", "testmail", "password1", 21, new ArrayList<>(), new ArrayList<>());
+        for (int i = 0; i < 8; i++) {
+            IUser user = new User(-1, "user" + i, "testmail", "password1", 21, new ArrayList<>(), new ArrayList<>());
 
-        user.save(users);
-
-        assertEquals("user1", user.getName());
+            fileIO.save(users, user);
+        }
     }
 
 }

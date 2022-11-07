@@ -14,5 +14,4 @@ public interface IUser {
     boolean addMyMovie(IMovie movie);
     boolean removeMyMovie(IMovie movie);
     void addWatchedMovie(IMovie movie);
-    void save(ArrayList<IUser> users);
 }

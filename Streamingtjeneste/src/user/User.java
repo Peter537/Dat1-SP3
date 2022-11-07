@@ -21,7 +21,7 @@ public class User implements IUser {
     public User(int ID, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
         if (ID != -1)
             this.id = ID;
-        idCounter++;
+        this.id = idCounter++;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -96,21 +96,5 @@ public class User implements IUser {
                 ", myMovies=" + myMovies +
                 ", watchedMovies=" + watchedMovies +
                 '}';
-    }
-
-    public void save(ArrayList<IUser> users) {
-
-        try {
-            FileWriter writer = new FileWriter("Data/user.csv");
-
-            for (IUser user : users) {
-                String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                writer.write(user.getId() + "," + user.getName() + "," + user.getEmail() + "," + user.getPassword() + "," + user.getAge() + "," + myMovies + "," + watchedMovies +"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
     }
 }
