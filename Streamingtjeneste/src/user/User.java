@@ -19,8 +19,9 @@ public class User implements IUser {
         if (id != -1) {
             this.id = id;
         } else {
-            this.id = idCounter++;
+            this.id = idCounter;
         }
+        idCounter++;
         this.name = name;
         this.email = email;
         this.password = password;
