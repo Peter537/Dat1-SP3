@@ -41,6 +41,22 @@ public class TextIO {
      * This method receives a message and displays it to the user and displays some options to the user.
      *
      * @param msg The message to print to the user
+     * @param startIndex The index to start at
+     * @param options The options to display to the user
+     * @return String The input from the user
+     */
+    public String getUserInput(String msg, int startIndex, String[] options) {
+        println(msg);
+        for (int i = 0; i < options.length; i++) {
+            println((i + startIndex) + ". " + options[i]);
+        }
+        return scanner.nextLine();
+    }
+
+    /*
+     * This method receives a message and displays it to the user and displays some options to the user.
+     *
+     * @param msg The message to print to the user
      * @param page The page that the user is on
      * @param pageSize The size of the page
      * @param media The list of media to display to the user

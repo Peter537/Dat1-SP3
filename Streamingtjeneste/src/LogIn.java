@@ -13,6 +13,7 @@ public class LogIn {
 
     public LogIn(ChillMedia cm) {
         this.cm = cm;
+        this.currentUser = null;
         this.users = cm.getUsers();
         this.textIO = cm.getTextIO();
     }
@@ -27,16 +28,17 @@ public class LogIn {
         };
         // direct user to signIn() or signUp() depending on their answer
         while (true) {
-            String input = textIO.getUserInput(msg, options);
+            String input = textIO.getUserInput(msg, 1, options);
             if (input.equals("0")) {
                 signIn();
             } else if (input.equals("1")) {
                 signUp();
             }
+            if (currentUser != null) {
+                return;
+            }
         }
     }
-
-
 
     private void signUp() {
         // promts user to write email, and checks if the email is unique. If the email is not unique, the user has to write a different email.
@@ -59,7 +61,7 @@ public class LogIn {
         }
 
         // promts user for a password, this does not have to be unique
-        msg = "Write password, press 0 to go back";
+        msg = "Write password, press 0 to go back: ";
         String password = textIO.getUserInput(msg);
         if (password.equals("0")) {
             logIn();
@@ -124,6 +126,7 @@ public class LogIn {
             signIn();
         }
 
+        System.out.println("1");
         currentUser = user;
     }
 
@@ -138,7 +141,10 @@ public class LogIn {
 
     private boolean checkEmailInList(String email) {
         for (IUser p : users) {
-            if (p.getEmail().equals(email)) {
+            System.out.println(p.getEmail());
+            System.out.println(email);
+            System.out.println(p.getEmail().equalsIgnoreCase(email));
+            if (p.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }
         }
