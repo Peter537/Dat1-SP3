@@ -36,12 +36,12 @@ public class FileIO implements IDataIO {
                 String[] values = line.split(";");
 
                 int id = Integer.parseInt(values[0].trim());
-                String userName = values[1];
+                String name = values[1];
                 String email = values[2];
                 String password = values[3];
                 int age = Integer.parseInt(values[4].trim());
 
-                users.add(new User(id, userName, email, password, age, new ArrayList<>(), new ArrayList<>()));
+                users.add(new User(id, name, email, password, age, new ArrayList<>(), new ArrayList<>()));
             }
         } catch (IOException e) {
             e.printStackTrace();
