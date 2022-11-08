@@ -30,69 +30,76 @@ public class FileIO implements IDataIO {
      */
     @Override
     public ArrayList<IUser> loadUsers() {
-        File file = new File("Data/user.csv");
-        ArrayList<IUser> users = new ArrayList<>();
-
-        try {
-            Scanner readUsers = new Scanner(file);
-
-            while (readUsers.hasNextLine()) {
-                String line = readUsers.nextLine();
-                String[] values = line.split(";");
-
-                int id = Integer.parseInt(values[0].trim());
-                String name = values[1];
-                String email = values[2].trim();
-                String password = values[3].trim();
-                int age = Integer.parseInt(values[4].trim());
-
-                users.add(new User(id, name, email, password, age, new ArrayList<>(), new ArrayList<>()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return users;
+//        File file = new File("Data/user.csv");
+//        ArrayList<IUser> users = new ArrayList<>();
+//
+//        try {
+//            Scanner readUsers = new Scanner(file);
+//
+//            while (readUsers.hasNextLine()) {
+//                String line = readUsers.nextLine();
+//                String[] values = line.split(";");
+//
+//                int id = Integer.parseInt(values[0].trim());
+//                String name = values[1];
+//                String email = values[2].trim();
+//                String password = values[3].trim();
+//                int age = Integer.parseInt(values[4].trim());
+//
+//                users.add(new User(id, name, email, password, age, new ArrayList<>(), new ArrayList<>()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return loadUserFromJson();
     }
 
-    public ArrayList<IUser> loadUserFromJson() throws IOException, ParseException {
+    public ArrayList<IUser> loadUserFromJson() {
         ArrayList<IUser> users = new ArrayList<>();
         if (movies == null) {
             loadMovies();
         }
 
-        String file = "Data/userJson.json";
-        JSONParser parser = new JSONParser();
-        JSONArray a = (JSONArray) parser.parse(new FileReader(file));
 
-        for (Object o : a) {
-            JSONObject user = (JSONObject) o;
-            String userName = (String) user.get("Name");
-            String email = (String) user.get("Email");
-            String password = (String) user.get("Password");
-            int age = Integer.parseInt(String.valueOf(user.get("Age")));
-            int ID = Integer.parseInt(String.valueOf(user.get("ID")));
+        try {
+            String file = "Data/userJson.json";
+            JSONParser parser = new JSONParser();
+            JSONArray a = (JSONArray) parser.parse(new FileReader(file));
 
-            ArrayList<String> myMoviesString = (ArrayList<String>) user.get("WatchList");
-            ArrayList<IMovie> myMovies = new ArrayList<>();
-            ArrayList<String> myWatchedMoviesString = (ArrayList<String>) user.get("SeenList");
-            ArrayList<IMovie> myWatchedMovies = new ArrayList<>();
+            for (Object o : a) {
+                JSONObject user = (JSONObject) o;
+                String userName = (String) user.get("Name");
+                String email = (String) user.get("Email");
+                String password = (String) user.get("Password");
+                int age = Integer.parseInt(String.valueOf(user.get("Age")));
+                int ID = Integer.parseInt(String.valueOf(user.get("ID")));
 
-            for (String s : myMoviesString) {
-                myMovies.add(searchMovieTitleSingle(movies, s));
+                ArrayList<String> myMoviesString = (ArrayList<String>) user.get("WatchList");
+                ArrayList<IMovie> myMovies = new ArrayList<>();
+                ArrayList<String> myWatchedMoviesString = (ArrayList<String>) user.get("SeenList");
+                ArrayList<IMovie> myWatchedMovies = new ArrayList<>();
+
+                for (String s : myMoviesString) {
+                    myMovies.add(searchMovieTitleSingle(movies, s));
+                }
+
+                for (String s : myWatchedMoviesString) {
+                    myWatchedMovies.add(searchMovieTitleSingle(movies, s));
+                }
+
+                IUser u = new User(ID, userName, email, password, age, myMovies, myWatchedMovies);
+                users.add(u);
+                System.out.println(user.get("Name"));
             }
-
-            for (String s : myWatchedMoviesString) {
-                myWatchedMovies.add(searchMovieTitleSingle(movies, s));
-            }
-
-            IUser u = new User(ID, userName, email, password, age, myMovies, myWatchedMovies);
-            users.add(u);
-            System.out.println(user.get("Name"));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            //TODO Add error to an error list
         }
         return users;
     }
 
-    public void saveAsJson(ArrayList<IUser> users, IUser user) throws IOException {
+    public void saveAsJson(ArrayList<IUser> users, IUser user) {
         users.add(user);
 
         JSONArray userArray = new JSONArray();
@@ -109,10 +116,15 @@ public class FileIO implements IDataIO {
 
             userArray.add(userObject);
         }
-
-        FileWriter file = new FileWriter("Unit Testing/Magnus/userAsJson.json");
-        file.write(userArray.toString());
-        file.close();
+        try {
+            FileWriter file = new FileWriter("Unit Testing/Magnus/userAsJson.json");
+            file.write(userArray.toString());
+            file.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            //TODO Add error to an error list
+        }
     }
 
     /*
@@ -230,21 +242,22 @@ public class FileIO implements IDataIO {
 
     public void save(ArrayList<IUser> users, IUser currentUser) {
 
-        try {
-            FileWriter writer = new FileWriter("Unit Testing/Magnus/TestUser.csv");
-
-            if (!users.contains(currentUser)) {
-                users.add(currentUser);
-            }
-
-            for (IUser user : users) {
-                String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                writer.write(user.getID() + ";" + user.getName() + ";" + user.getEmail() + ";" + user.getPassword() + ";" + user.getAge() + ";" + myMovies + ";" + watchedMovies +"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+//        try {
+//            FileWriter writer = new FileWriter("Unit Testing/Magnus/TestUser.csv");
+//
+//            if (!users.contains(currentUser)) {
+//                users.add(currentUser);
+//            }
+//
+//            for (IUser user : users) {
+//                String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
+//                String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
+//                writer.write(user.getID() + ";" + user.getName() + ";" + user.getEmail() + ";" + user.getPassword() + ";" + user.getAge() + ";" + myMovies + ";" + watchedMovies +"\n");
+//            }
+//            writer.close();
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
+        saveAsJson(users, currentUser);
     }
 }
