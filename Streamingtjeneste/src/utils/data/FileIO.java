@@ -3,13 +3,14 @@ package utils.data;
 import genre.IGenre;
 import genre.SeriesGenre;
 import media.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import user.IUser;
 import user.User;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -47,6 +48,52 @@ public class FileIO implements IDataIO {
             e.printStackTrace();
         }
         return users;
+    }
+
+    public ArrayList<IUser> loadUserFromJson() throws IOException, ParseException {
+        ArrayList<IUser> users = new ArrayList<>();
+        String file = "Data/userJson.json";
+        JSONParser parser = new JSONParser();
+        JSONArray a = (JSONArray) parser.parse(new FileReader(file));
+
+        for (Object o : a) {
+            JSONObject user = (JSONObject) o;
+            String userName = (String) user.get("Name");
+            String email = (String) user.get("Email");
+            String password = (String) user.get("Password");
+            int age = Integer.parseInt(String.valueOf(user.get("Age")));
+            int ID = Integer.parseInt(String.valueOf(user.get("ID")));
+            ArrayList<IMovie> watchList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("WatchList");
+            ArrayList<IMovie> seenList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("SeenList");
+
+            IUser u = new User(ID, userName, email, password, age, watchList, seenList);
+            users.add(u);
+            System.out.println(user.get("Name"));
+        }
+        return users;
+    }
+
+    public void saveAsJson(ArrayList<IUser> users, IUser user) throws IOException {
+        users.add(user);
+
+        JSONArray userArray = new JSONArray();
+
+        for (IUser u : users) {
+            JSONObject userObject = new JSONObject();
+            userObject.put("ID", u.getID());
+            userObject.put("Name", u.getName());
+            userObject.put("Email", u.getEmail());
+            userObject.put("Password", u.getPassword());
+            userObject.put("Age", u.getAge());
+            userObject.put("WatchList", u.getMyMovies());
+            userObject.put("SeenList", u.getWatchedMovies());
+
+            userArray.add(userObject);
+        }
+
+        FileWriter file = new FileWriter("Unit Testing/Magnus/userAsJson.json");
+        file.write(userArray.toString());
+        file.close();
     }
 
     /*
