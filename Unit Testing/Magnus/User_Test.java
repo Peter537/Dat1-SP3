@@ -5,6 +5,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 import user.IUser;
 import user.User;
+import utils.Query;
 import utils.data.FileIO;
 
 import java.io.IOException;
@@ -18,15 +19,15 @@ class User_Test {
     void testNewUser() throws IOException, ParseException {
         FileIO fileIO = new FileIO();
         ArrayList<IUser> users = fileIO.loadUserFromJson();
+        ArrayList<IMovie> movies = fileIO.loadMovies();
+
+        IUser user = users.get(0);
 //        for (int i = 0; i < 8; i++) {
 //            IUser user = new User(-1, "user" + i, "testmail", "password1", 21, new ArrayList<>(), new ArrayList<>());
 //
 //            //fileIO.save(users, user);
 //        }
-        ArrayList<IMovie> movies = fileIO.loadMovies();
-        System.out.println(users.get(0).getMyMovies());
 
-        System.out.println(users.get(0).getMyMovies());
     }
 
 }

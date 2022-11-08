@@ -56,6 +56,10 @@ public class FileIO implements IDataIO {
 
     public ArrayList<IUser> loadUserFromJson() throws IOException, ParseException {
         ArrayList<IUser> users = new ArrayList<>();
+        if (movies == null) {
+            loadMovies();
+        }
+
         String file = "Data/userJson.json";
         JSONParser parser = new JSONParser();
         JSONArray a = (JSONArray) parser.parse(new FileReader(file));
@@ -77,10 +81,11 @@ public class FileIO implements IDataIO {
                 myMovies.add(searchMovieTitleSingle(movies, s));
             }
 
-            ArrayList<IMovie> watchList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("WatchList");
-            ArrayList<IMovie> seenList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("SeenList");
+            for (String s : myWatchedMoviesString) {
+                myWatchedMovies.add(searchMovieTitleSingle(movies, s));
+            }
 
-            IUser u = new User(ID, userName, email, password, age, watchList, seenList);
+            IUser u = new User(ID, userName, email, password, age, myMovies, myWatchedMovies);
             users.add(u);
             System.out.println(user.get("Name"));
         }
@@ -117,6 +122,8 @@ public class FileIO implements IDataIO {
      */
     @Override
     public ArrayList<IMovie> loadMovies() {
+        if (movies != null)
+            return movies;
         File file = new File("Data/film.csv");
         ArrayList<IMovie> movieData = new ArrayList<>();
 
