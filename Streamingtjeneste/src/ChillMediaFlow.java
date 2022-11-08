@@ -1,3 +1,5 @@
+import genre.MovieGenre;
+import genre.SeriesGenre;
 import media.IMedia;
 import media.IMovie;
 import media.ISeries;
@@ -5,6 +7,7 @@ import user.IUser;
 import utils.Query;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ChillMediaFlow {
 
@@ -59,11 +62,15 @@ public class ChillMediaFlow {
         ArrayList<IMovie> movies;
         while (true) {
             String genre = chillMedia.getTextIO().getUserInput("Enter a genre to search for: ");
-            movies = Query.searchMovieGenre(chillMedia.getMovies(), genre);
-            if (movies.size() > 0) {
-                break;
+            if (Arrays.stream(MovieGenre.values()).anyMatch(movieGenre -> movieGenre.name().equalsIgnoreCase(genre))) {
+                movies = Query.searchMovieGenre(chillMedia.getMovies(), genre);
+                if (movies.size() > 0) {
+                    break;
+                }
+                chillMedia.getTextIO().println("No movies found.");
+            } else {
+                chillMedia.getTextIO().println("The genre isn't there.");
             }
-            chillMedia.getTextIO().println("No movies found.");
         }
         searchMovies(movies);
     }
@@ -227,11 +234,15 @@ public class ChillMediaFlow {
         ArrayList<ISeries> series;
         while (true) {
             String genre = chillMedia.getTextIO().getUserInput("Enter a genre to search for: ");
-            series = Query.searchSeriesGenre(chillMedia.getSeries(), genre);
-            if (series.size() > 0) {
-                break;
+            if (Arrays.stream(SeriesGenre.values()).anyMatch(seriesGenre -> seriesGenre.name().equalsIgnoreCase(genre))) {
+                series = Query.searchSeriesGenre(chillMedia.getSeries(), genre);
+                if (series.size() > 0) {
+                    break;
+                }
+                chillMedia.getTextIO().println("No series found.");
+            } else {
+                chillMedia.getTextIO().println("The genre isn't there.");
             }
-            chillMedia.getTextIO().println("No series found.");
         }
         searchSeries(series);
     }
