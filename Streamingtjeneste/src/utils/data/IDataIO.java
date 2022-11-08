@@ -10,7 +10,7 @@ public interface IDataIO {
 
     ArrayList<IUser> loadUsers();
     ArrayList<IUser> loadUserFromJson();
-    void saveAsJson(ArrayList<IUser> users, IUser user);
+    void saveAsJson(ArrayList<IUser> users);
     ArrayList<IMovie> loadMovies();
     ArrayList<ISeries> loadSeries();
 }

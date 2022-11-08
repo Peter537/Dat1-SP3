@@ -1,6 +1,7 @@
 package utils.data;
 
 import genre.IGenre;
+import genre.MovieGenre;
 import genre.SeriesGenre;
 import media.*;
 import org.json.simple.JSONArray;
@@ -163,8 +164,8 @@ public class FileIO implements IDataIO {
                 for (String genre : genreTitles) {
                     try {
                         String genreName = genre.trim().toUpperCase().replaceAll("-", "_");
-                        if (Arrays.stream(SeriesGenre.values()).anyMatch(g -> g.name().equals(genreName))) {
-                            movieGenres.add(SeriesGenre.valueOf(genreName));
+                        if (Arrays.stream(MovieGenre.values()).anyMatch(g -> g.name().equals(genreName))) {
+                            movieGenres.add(MovieGenre.valueOf(genreName));
                         }
                     }
                     catch (Exception e){

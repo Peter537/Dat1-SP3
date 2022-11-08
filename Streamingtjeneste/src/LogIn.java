@@ -140,9 +140,6 @@ public class LogIn {
 
     private boolean checkEmailInList(String email) {
         for (IUser p : users) {
-            System.out.println(p.getEmail());
-            System.out.println(email);
-            System.out.println(p.getEmail().equalsIgnoreCase(email));
             if (p.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }
