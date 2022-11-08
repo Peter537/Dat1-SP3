@@ -25,8 +25,7 @@ public class ChillMedia {
     private final ArrayList<IMovie> movies = new ArrayList<>();
     private final ArrayList<ISeries> series = new ArrayList<>();
     private final ArrayList<IUser> users = new ArrayList<>();
-    private JList labelList;
-    private JPanel panel1;
+    public JFrame page;
 
     public ChillMedia() {
         load();
@@ -35,6 +34,7 @@ public class ChillMedia {
         this.currentUser = new User(1, "Test", "test@gmail.com", "password", 19, new ArrayList<>(), new ArrayList<>()); // SKAL FJERNES
         this.textIO = new TextIO();
         this.chillMediaFlow = new ChillMediaFlow(this);
+        page = new JFrame("Chill Media");
     }
 
     private void load() {

@@ -15,14 +15,14 @@ public class ChillMediaFlow {
 
     private final ChillMedia chillMedia;
     private final IUser currentUser;
-    private JFrame frame;
+
 
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
         this.currentUser = chillMedia.getCurrentUser();
-        frame = new JFrame("Chill Media");
+
         IUI ui = new UI();
-        ui.updatePane(ui, frame);
+        ui.updatePane(ui, chillMedia.page);
     }
 
     /*
@@ -34,7 +34,7 @@ public class ChillMediaFlow {
     public void searchMovies(int number) {
         IUI ui = new TEST();
 
-        ui.updatePane(ui, frame);
+        ui.updatePane(ui, chillMedia.page);
 
         switch (number) {
             case 1 -> searchMoviesByTitle();
