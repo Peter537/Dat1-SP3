@@ -1,4 +1,4 @@
 package utils.language;
 
-public class LanguageEnglish {
+public class LanguageEnglish  implements ILanguage {
 }
