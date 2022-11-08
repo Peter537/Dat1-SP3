@@ -29,9 +29,9 @@ public class LogIn {
         // direct user to signIn() or signUp() depending on their answer
         while (true) {
             String input = textIO.getUserInput(msg, 1, options);
-            if (input.equals("0")) {
+            if (input.equals("1")) {
                 signIn();
-            } else if (input.equals("1")) {
+            } else if (input.equals("2")) {
                 signUp();
             }
             if (currentUser != null) {
