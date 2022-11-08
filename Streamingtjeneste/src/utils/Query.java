@@ -82,7 +82,7 @@ public class Query {
      * @return ISeries The series that matches the given title
      */
     public static ISeries searchSeriesTitleSingle(ArrayList<ISeries> series, String title) {
-        return series.stream().filter(s -> s.getTitle().equalsIgnoreCase(title)).findFirst().orElse(null);
+        return series.stream().filter(s -> s.getTitle().equals(title)).findFirst().orElse(null);
     }
 
     /*
@@ -104,7 +104,7 @@ public class Query {
      * @return IMovie The movie that matches the given title
      */
     public static IMovie searchMovieTitleSingle(ArrayList<IMovie> movies, String title) {
-        return movies.stream().filter(m -> m.getTitle().equalsIgnoreCase(title)).findFirst().orElse(null);
+        return movies.stream().filter(m -> m.getTitle().equals(title)).findFirst().orElse(null);
     }
 
     /*

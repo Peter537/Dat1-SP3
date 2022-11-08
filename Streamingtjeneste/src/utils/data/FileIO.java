@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import user.IUser;
 import user.User;
+import utils.Query;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,13 +18,15 @@ import java.util.Scanner;
 
 public class FileIO implements IDataIO {
 
-    public FileIO() { }
+    public FileIO() {
+    }
 
     /*
      * This method loads all users from the file "Data/user.csv" and returns them as an ArrayList.
      *
      * @return ArrayList<IUser> list of users
      */
+    /*
     @Override
     public ArrayList<IUser> loadUsers() {
         File file = new File("Data/user.csv");
@@ -49,26 +52,30 @@ public class FileIO implements IDataIO {
         }
         return users;
     }
+    */
 
-    public ArrayList<IUser> loadUserFromJson() throws IOException, ParseException {
+    public ArrayList<IUser> loadUsers() {
         ArrayList<IUser> users = new ArrayList<>();
-        String file = "Data/userJson.json";
-        JSONParser parser = new JSONParser();
-        JSONArray a = (JSONArray) parser.parse(new FileReader(file));
+        try {
+            String file = "Data/userJson.json";
+            JSONParser parser = new JSONParser();
+            JSONArray a = (JSONArray) parser.parse(new FileReader(file));
 
-        for (Object o : a) {
-            JSONObject user = (JSONObject) o;
-            String userName = (String) user.get("Name");
-            String email = (String) user.get("Email");
-            String password = (String) user.get("Password");
-            int age = Integer.parseInt(String.valueOf(user.get("Age")));
-            int ID = Integer.parseInt(String.valueOf(user.get("ID")));
-            ArrayList<IMovie> watchList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("WatchList");
-            ArrayList<IMovie> seenList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("SeenList");
-
-            IUser u = new User(ID, userName, email, password, age, watchList, seenList);
-            users.add(u);
-            System.out.println(user.get("Name"));
+            for (Object o : a) {
+                JSONObject user = (JSONObject) o;
+                String userName = (String) user.get("Name");
+                String email = (String) user.get("Email");
+                String password = (String) user.get("Password");
+                int age = Integer.parseInt(String.valueOf(user.get("Age")));
+                int ID = Integer.parseInt(String.valueOf(user.get("ID")));
+                ArrayList<IMovie> watchList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("WatchList");
+                ArrayList<IMovie> seenList = user.get("SeenList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("SeenList");
+                IUser u = new User(ID, userName, email, password, age, watchList, seenList);
+                users.add(u);
+                System.out.println(user.get("Name"));
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
         return users;
     }
