@@ -21,6 +21,9 @@ import static utils.Query.searchMovieTitleSingle;
 public class FileIO implements IDataIO {
 
     private ArrayList<IMovie> movies;
+    private final String userPath = "Data/userJson.json";
+    private final String moviePath = "Data/film.csv";
+    private final String seriesPath = "Data/serier.csv";
     public FileIO() { }
 
     /*
@@ -60,11 +63,9 @@ public class FileIO implements IDataIO {
             loadMovies();
         }
 
-
         try {
-            String file = "Data/userJson.json";
             JSONParser parser = new JSONParser();
-            JSONArray a = (JSONArray) parser.parse(new FileReader(file));
+            JSONArray a = (JSONArray) parser.parse(new FileReader(userPath));
 
             for (Object o : a) {
                 JSONObject user = (JSONObject) o;
@@ -89,7 +90,6 @@ public class FileIO implements IDataIO {
 
                 IUser u = new User(ID, userName, email, password, age, myMovies, myWatchedMovies);
                 users.add(u);
-                System.out.println(user.get("Name"));
             }
         }
         catch (Exception e){
@@ -136,7 +136,7 @@ public class FileIO implements IDataIO {
     public ArrayList<IMovie> loadMovies() {
         if (movies != null)
             return movies;
-        File file = new File("Data/film.csv");
+        File file = new File(moviePath);
         ArrayList<IMovie> movieData = new ArrayList<>();
 
         try {
@@ -169,7 +169,7 @@ public class FileIO implements IDataIO {
                 movieData.add(new Movie(movieTitles, rating, movieGenres, year));
             }
 
-        } catch (FileNotFoundException e ) {
+        } catch (Exception e ) {
             System.out.println("No file was found");
         }
         movies = movieData;
@@ -183,7 +183,7 @@ public class FileIO implements IDataIO {
      */
     @Override
     public ArrayList<ISeries> loadSeries() {
-        File file = new File("Data/serier.csv");
+        File file = new File(seriesPath);
         ArrayList<ISeries> seriesData = new ArrayList<>();
 
         try {
