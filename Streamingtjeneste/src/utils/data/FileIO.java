@@ -13,10 +13,14 @@ import user.User;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
+
+import static utils.Query.searchMovieTitleSingle;
 
 public class FileIO implements IDataIO {
 
+    private ArrayList<IMovie> movies;
     public FileIO() { }
 
     /*
@@ -63,6 +67,16 @@ public class FileIO implements IDataIO {
             String password = (String) user.get("Password");
             int age = Integer.parseInt(String.valueOf(user.get("Age")));
             int ID = Integer.parseInt(String.valueOf(user.get("ID")));
+
+            ArrayList<String> myMoviesString = (ArrayList<String>) user.get("WatchList");
+            ArrayList<IMovie> myMovies = new ArrayList<>();
+            ArrayList<String> myWatchedMoviesString = (ArrayList<String>) user.get("SeenList");
+            ArrayList<IMovie> myWatchedMovies = new ArrayList<>();
+
+            for (String s : myMoviesString) {
+                myMovies.add(searchMovieTitleSingle(movies, s));
+            }
+
             ArrayList<IMovie> watchList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("WatchList");
             ArrayList<IMovie> seenList = user.get("WatchList") == null ? new ArrayList<>() : (ArrayList<IMovie>) user.get("SeenList");
 
@@ -139,7 +153,7 @@ public class FileIO implements IDataIO {
         } catch (FileNotFoundException e ) {
             System.out.println("No file was found");
         }
-
+        movies = movieData;
         return movieData;
     }
 
