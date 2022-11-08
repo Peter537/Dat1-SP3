@@ -134,7 +134,8 @@ public class LogIn {
             }
         }
 
-        // NOT DONE, needs to check if password matches
+        // NOT DONE, needs to check if password matches ( Or does it? That
+        // should probably only be done in sign UP (which is already made)
         msg = "Write your password, press 0 to go back: ";
         String password = textIO.getUserInput(msg);
         if (password.equals("0")) {
