@@ -42,36 +42,40 @@ public class LogIn {
 
     private void signUp() {
         // promts user to write email, and checks if the email is unique. If the email is not unique, the user has to write a different email.
-        String msg = "Write email address, press 0 to go back: ";
+        String msg = "You are signing up. Write email address, press 0 to go back: ";
         String email = textIO.getUserInput(msg);
         if (email.equals("0")) {
             logIn();
+            return;
         }
 
         if (checkEmailInList(email)) {
             textIO.println("Email already in use, please try again");
             signUp();
+            return;
         }
 
         // promts user for a name, this does not have to be unique
-        msg = "Write name, press 0 to go back: ";
+        msg = "You are signing up. Write name, press 0 to go back: ";
         String name = textIO.getUserInput(msg);
         if (name.equals("0")) {
             logIn();
+            return;
         }
 
         // promts user for a password, this does not have to be unique
-        msg = "Write password, press 0 to go back: ";
+        msg = "You are signing up. Write password, press 0 to go back: ";
         String password = textIO.getUserInput(msg);
         if (password.equals("0")) {
             logIn();
+            return;
         }
 
         // promts user for their age, this does not have to be unique. The age is converted into an integer.
         int age;
         while (true) {
             try {
-                msg = "Write your age, press 0 to go back: ";
+                msg = "You are signing up. Write your age, press 0 to go back: ";
                 String sAge = textIO.getUserInput(msg);
                 if (sAge.equals("0")) {
                     logIn();
@@ -91,13 +95,14 @@ public class LogIn {
 
     private void signIn() {
         // promts user for email and checks if it exists in the list
-        String msg = "Write email address, press 0 to go back: ";
+        String msg = "You are signing in. Write email address, press 0 to go back: ";
         String email = textIO.getUserInput(msg);
         if (email.equals("0")) {
             logIn();
+            return;
         }
 
-        if (!checkEmailInList(email)) {
+        else if (!checkEmailInList(email)) {
             textIO.println("Email not found, please try again");
             msg = "Do you want to sign up?";
             String[] options = new String[]{
