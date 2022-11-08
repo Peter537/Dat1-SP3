@@ -1,16 +1,12 @@
-import utils.UI;
+import utils.UIForms.IUI;
+import utils.UIForms.UI;
 
 import javax.swing.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("UI");
-        UI ui = new UI();
-        frame.setContentPane(ui.panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+
 
         ChillMedia cm = new ChillMedia();
         cm.run();

@@ -3,17 +3,26 @@ import media.IMovie;
 import media.ISeries;
 import user.IUser;
 import utils.Query;
+import utils.UIForms.IUI;
+import utils.UIForms.TEST;
+import utils.UIForms.UI;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ChillMediaFlow {
 
     private final ChillMedia chillMedia;
     private final IUser currentUser;
+    private JFrame frame;
 
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
         this.currentUser = chillMedia.getCurrentUser();
+        frame = new JFrame("Chill Media");
+        IUI ui = new UI();
+        ui.updatePane(ui, frame);
     }
 
     /*
@@ -23,6 +32,10 @@ public class ChillMediaFlow {
      * @return Nothing
      */
     public void searchMovies(int number) {
+        IUI ui = new TEST();
+
+        ui.updatePane(ui, frame);
+
         switch (number) {
             case 1 -> searchMoviesByTitle();
             case 2 -> searchMoviesByGenre();

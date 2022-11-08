@@ -1,4 +1,4 @@
-package utils;
+package utils.UIForms;
 
 import media.IMedia;
 import media.IMovie;
@@ -6,12 +6,11 @@ import media.ISeries;
 import utils.data.FileIO;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 //import java.awt.*;
 
-public class UI {
+public class UI implements IUI {
     private JList movieList;
     public JPanel panel;
     private JTabbedPane tabbedPane1;
@@ -39,5 +38,16 @@ public class UI {
 
     public boolean isModified(UI data) {
         return false;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public void updatePane(IUI ui, JFrame frame) {
+        frame.setContentPane(ui.getPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }
