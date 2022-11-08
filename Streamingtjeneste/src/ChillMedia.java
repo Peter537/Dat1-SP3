@@ -16,6 +16,7 @@ public class ChillMedia {
     private final IUser currentUser;
 
     private final TextIO textIO;
+    private final FileIO fileIO;
     private final ChillMediaFlow chillMediaFlow;
 
     private final ArrayList<IGenre> genres = new ArrayList<>();
@@ -24,12 +25,15 @@ public class ChillMedia {
     private final ArrayList<IUser> users = new ArrayList<>();
 
     public ChillMedia() {
+        this.fileIO = new FileIO();
         load();
         this.textIO = new TextIO();
         LogIn logIn = new LogIn(this); // SKAL IKKE VÆRE UDKOMMENTERET
         logIn.logIn();
         this.currentUser = logIn.getCurrentUser(); // SKAL IKKE VÆRE UDKOMMENTERET
-        //this.currentUser = new User(1, "Test", "test@gmail.com", "password", 19, new ArrayList<>(), new ArrayList<>()); // SKAL FJERNES
+        if (!users.contains(currentUser)) {
+            users.add(currentUser);
+        }
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
@@ -39,7 +43,6 @@ public class ChillMedia {
      * @return Nothing.
      */
     private void load() {
-        FileIO fileIO = new FileIO();
         this.getGenres().addAll(List.of(MovieGenre.values()));
         this.getGenres().addAll(List.of(SeriesGenre.values()));
         this.getMovies().addAll(fileIO.loadMovies());
@@ -61,18 +64,20 @@ public class ChillMedia {
                 "Search for a movie",
                 "Search for a series",
         };
-        while (true) {
+        boolean run = true;
+        while (run) {
             String input = getTextIO().getUserInput("Would you like to see?", options);
             switch (input) {
                 case "0" -> {
                     getTextIO().println("Goodbye!");
-                    return;
+                    run = false;
                 }
                 case "1" -> listMovies();
                 case "2" -> listSeries();
                 default -> getTextIO().println("Invalid input!");
             }
         }
+        fileIO.save(users);
     }
 
     /*

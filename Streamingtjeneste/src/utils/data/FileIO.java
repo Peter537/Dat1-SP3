@@ -6,14 +6,12 @@ import media.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import user.IUser;
 import user.User;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
 import static utils.Query.searchMovieTitleSingle;
@@ -24,6 +22,7 @@ public class FileIO implements IDataIO {
     private final String userPath = "Data/userJson.json";
     private final String moviePath = "Data/film.csv";
     private final String seriesPath = "Data/serier.csv";
+
     public FileIO() { }
 
     /*
@@ -99,9 +98,7 @@ public class FileIO implements IDataIO {
         return users;
     }
 
-    public void saveAsJson(ArrayList<IUser> users, IUser user) {
-        users.add(user);
-
+    public void saveAsJson(ArrayList<IUser> users) {
         JSONArray userArray = new JSONArray();
 
         for (IUser u : users) {
@@ -111,13 +108,22 @@ public class FileIO implements IDataIO {
             userObject.put("Email", u.getEmail());
             userObject.put("Password", u.getPassword());
             userObject.put("Age", u.getAge());
-            userObject.put("WatchList", u.getMyMovies());
-            userObject.put("SeenList", u.getWatchedMovies());
+            ArrayList<String> myMovies = new ArrayList<>();
+            ArrayList<String> watchedMovies = new ArrayList<>();
+            for (IMovie m : u.getMyMovies()) {
+                myMovies.add(m.getTitle());
+            }
+            for (IMovie m : u.getWatchedMovies()) {
+                watchedMovies.add(m.getTitle());
+            }
+
+            userObject.put("WatchList", myMovies);
+            userObject.put("SeenList", watchedMovies);
 
             userArray.add(userObject);
         }
         try {
-            FileWriter file = new FileWriter("Unit Testing/Magnus/userAsJson.json");
+            FileWriter file = new FileWriter("Data/userJson.json");
             file.write(userArray.toString());
             file.close();
         }
@@ -134,8 +140,9 @@ public class FileIO implements IDataIO {
      */
     @Override
     public ArrayList<IMovie> loadMovies() {
-        if (movies != null)
+        if (movies != null) {
             return movies;
+        }
         File file = new File(moviePath);
         ArrayList<IMovie> movieData = new ArrayList<>();
 
@@ -240,7 +247,7 @@ public class FileIO implements IDataIO {
         return seriesData;
     }
 
-    public void save(ArrayList<IUser> users, IUser currentUser) {
+    public void save(ArrayList<IUser> users) {
 
 //        try {
 //            FileWriter writer = new FileWriter("Unit Testing/Magnus/TestUser.csv");
@@ -258,6 +265,6 @@ public class FileIO implements IDataIO {
 //        } catch (IOException e) {
 //            System.out.println(e);
 //        }
-        saveAsJson(users, currentUser);
+        saveAsJson(users);
     }
 }

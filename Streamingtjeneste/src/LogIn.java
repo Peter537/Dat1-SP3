@@ -71,7 +71,7 @@ public class LogIn {
         int age;
         while (true) {
             try {
-                msg = "Write your age, press 0 to go back";
+                msg = "Write your age, press 0 to go back: ";
                 String sAge = textIO.getUserInput(msg);
                 if (sAge.equals("0")) {
                     logIn();
@@ -130,7 +130,7 @@ public class LogIn {
     }
 
     private void createUser(String name, String password, String email, int age) {
-        currentUser = new User(-1, name, password, email, age, new ArrayList<>(), new ArrayList<>());
+        currentUser = new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>());
         // Here we need to add current user to arraylist and save them.
     }
 
