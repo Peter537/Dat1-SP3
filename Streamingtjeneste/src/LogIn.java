@@ -71,6 +71,21 @@ public class LogIn {
             return;
         }
 
+        //will check if you can confirm the same password
+
+        msg = "You are signing up. Confirm password, press 0 to go back: ";
+        String confirmPassword = "";
+        do {
+            confirmPassword = textIO.getUserInput(msg);
+            if (confirmPassword.equals("0")) {
+                logIn();
+                return;
+            }
+            if (confirmPassword.equals(password)) {
+                break;
+            }
+        }while (!confirmPassword.equals((password)));
+
         // promts user for their age, this does not have to be unique. The age is converted into an integer.
         int age;
         while (true) {
@@ -112,8 +127,10 @@ public class LogIn {
             String input = textIO.getUserInput(msg, options);
             if (input.equals("0")) {
                 signUp();
+                return;
             } else if (input.equals("1")) {
                 signIn();
+                return;
             }
         }
 
@@ -122,13 +139,16 @@ public class LogIn {
         String password = textIO.getUserInput(msg);
         if (password.equals("0")) {
             logIn();
+            return;
         }
+
 
         // checks if the password matches the password in the userprofile
         IUser user = getUser(email, password);
         if (user == null) {
             textIO.println("Password does not match, please try again");
             signIn();
+            return;
         }
 
         currentUser = user;
