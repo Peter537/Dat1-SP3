@@ -126,7 +126,6 @@ public class LogIn {
             signIn();
         }
 
-        System.out.println("1");
         currentUser = user;
     }
 
