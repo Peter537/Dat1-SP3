@@ -8,7 +8,6 @@ class Main {
     + static void main(String[] args)
 }
 
-' Main klassen
 class ChillMedia {
     - IUser currentUser
     - final TextIO textIO
