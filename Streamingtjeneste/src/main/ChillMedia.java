@@ -69,7 +69,7 @@ public class ChillMedia {
         };
         boolean run = true;
         while (run) {
-            String input = getTextIO().getUserInput("Would you like to see?", options);
+            String input = getTextIO().getUserInput("What would you like to do?", options);
             switch (input) {
                 case "0" -> {
                     getTextIO().println("Goodbye!");
