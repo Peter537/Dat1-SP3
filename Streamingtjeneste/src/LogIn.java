@@ -1,6 +1,8 @@
 import user.IUser;
 import user.User;
 import utils.TextIO;
+import utils.UIForms.IUI;
+import utils.UIForms.UI;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,9 @@ public class LogIn {
         this.currentUser = null;
         this.users = cm.getUsers();
         this.textIO = cm.getTextIO();
+
+//        IUI ui = new UI();
+//        ui.updatePane(ui, cm.page);
     }
 
     public void logIn() {

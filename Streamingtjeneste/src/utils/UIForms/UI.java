@@ -6,15 +6,18 @@ import media.ISeries;
 import utils.data.FileIO;
 
 import javax.swing.*;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 //import java.awt.*;
 
-public class UI implements IUI {
+public class UI extends AUI {
     private JList movieList;
     public JPanel panel;
     private JTabbedPane tabbedPane1;
     private JList serieList;
+    private JLabel label1;
 
     public UI() {
         setData(this);
@@ -30,6 +33,12 @@ public class UI implements IUI {
 
         data.movieList.setListData(movies.toArray());
         data.serieList.setListData(series.toArray());
+
+        Image image = new ImageIcon("Data/filmplakater/12 Angry Men.jpg").getImage();
+
+        Icon icon = new ImageIcon(image);
+
+        data.label1.setIcon(icon);
     }
 
     public void getData(UI data) {
@@ -40,14 +49,5 @@ public class UI implements IUI {
         return false;
     }
 
-    public JPanel getPanel() {
-        return panel;
-    }
 
-    public void updatePane(IUI ui, JFrame frame) {
-        frame.setContentPane(ui.getPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 }

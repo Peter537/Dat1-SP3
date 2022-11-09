@@ -6,6 +6,9 @@ import media.ISeries;
 import user.IUser;
 import user.User;
 import utils.TextIO;
+import utils.UIForms.AUI;
+import utils.UIForms.ChooseList;
+import utils.UIForms.IUI;
 import utils.data.FileIO;
 
 import javax.swing.*;
@@ -27,6 +30,7 @@ public class ChillMedia {
     public JFrame page;
 
     public ChillMedia() {
+        page = new JFrame("Chill Media");
         this.fileIO = new FileIO();
         load();
         this.textIO = new TextIO();
@@ -36,7 +40,7 @@ public class ChillMedia {
         if (!users.contains(currentUser)) {
             users.add(currentUser);
         }
-        page = new JFrame("Chill Media");
+
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
@@ -70,6 +74,10 @@ public class ChillMedia {
         boolean run = true;
         while (run) {
             String input = getTextIO().getUserInput("Would you like to see?", options);
+            IUI choose = new ChooseList();
+
+            choose.updatePane(choose, page);
+
             switch (input) {
                 case "0" -> {
                     getTextIO().println("Goodbye!");

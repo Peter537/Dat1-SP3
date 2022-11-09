@@ -19,9 +19,6 @@ public class ChillMediaFlow {
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
         this.currentUser = chillMedia.getCurrentUser();
-
-        IUI ui = new UI();
-        ui.updatePane(ui, chillMedia.page);
     }
 
     /*
