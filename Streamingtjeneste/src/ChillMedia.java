@@ -60,7 +60,7 @@ public class ChillMedia {
         getTextIO().println("Welcome to ChillMedia!");
         getTextIO().println("");
         String[] options = new String[] {
-                "Exit",
+                "Log out",
                 "Search for a movie",
                 "Search for a series",
         };

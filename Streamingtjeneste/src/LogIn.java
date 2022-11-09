@@ -72,15 +72,15 @@ public class LogIn {
         //will check if you can confirm the same password
         msg = "You are signing up. Confirm password, press 0 to go back: ";
         String confirmPassword;
-        boolean confirmed = true;
-        while (confirmed) {
+        boolean notConfirmed = true;
+        while (notConfirmed) {
             confirmPassword = textIO.getUserInput(msg);
             if (confirmPassword.equals("0")) {
                 logIn();
                 return;
             }
             if (confirmPassword.equals(password)) {
-                confirmed = false;
+                notConfirmed = false;
             } else {
                 msg = "Passwords do not match, please try again or press 0 to go back: ";
             }
