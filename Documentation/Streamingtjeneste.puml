@@ -179,10 +179,6 @@ class Season extends ASeason {
     + accessors methods()
 }
 
-class LanguageDanish implements ILanguage { }
-
-class LanguageEnglish implements ILanguage { }
-
 ' *****************
 ' ABSTRACT CLASS
 ' *****************
@@ -236,8 +232,6 @@ interface IDataIO {
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
 }
-
-interface ILanguage { }
 
 interface IGenre { }
 
@@ -300,9 +294,10 @@ Main *-- ChillMedia
 ChillMedia *-- IMedia
 ChillMedia *-- TextIO
 ChillMedia *-- IDataIO
-ChillMedia *-- ILanguage
 ChillMedia *-- IUser
 ChillMedia *-- LogIn
 ChillMedia *-- ChillMediaFlow
+
+Series *-- ASeason
 
 @enduml
