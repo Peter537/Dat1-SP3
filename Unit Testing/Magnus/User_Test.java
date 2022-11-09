@@ -18,7 +18,7 @@ class User_Test {
     @Test
     void testNewUser() throws IOException, ParseException {
         FileIO fileIO = new FileIO();
-        ArrayList<IUser> users = fileIO.loadUserFromJson();
+        ArrayList<IUser> users = fileIO.loadUsers();
         ArrayList<IMovie> movies = fileIO.loadMovies();
 
         IUser user = users.get(0);

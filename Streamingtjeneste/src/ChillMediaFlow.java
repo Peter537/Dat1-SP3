@@ -27,11 +27,12 @@ public class ChillMediaFlow {
      */
     public void searchMovies(int number) {
         switch (number) {
-            case 1 -> searchMoviesByTitle();
-            case 2 -> searchMoviesByGenre();
-            case 3 -> searchMoviesByRating();
-            case 4 -> searchMyMovies();
-            case 5 -> searchMyWatchedMovies();
+            case 1 -> searchMovies(chillMedia.getMovies());
+            case 2 -> searchMoviesByTitle();
+            case 3 -> searchMoviesByGenre();
+            case 4 -> searchMoviesByRating();
+            case 5 -> searchMyMovies();
+            case 6 -> searchMyWatchedMovies();
         }
     }
 
@@ -69,7 +70,10 @@ public class ChillMediaFlow {
                 }
                 chillMedia.getTextIO().println("No movies found.");
             } else {
-                chillMedia.getTextIO().println("The genre isn't there.");
+                chillMedia.getTextIO().println("The genre isn't there, you can choose from: ");
+                for (MovieGenre movieGenre : MovieGenre.values()) {
+                    chillMedia.getTextIO().println(" - " + movieGenre.name());
+                }
             }
         }
         searchMovies(movies);
@@ -201,9 +205,10 @@ public class ChillMediaFlow {
      */
     public void searchSeries(int i) {
         switch (i) {
-            case 1 -> searchSeriesByTitle();
-            case 2 -> searchSeriesByGenre();
-            case 3 -> searchSeriesByRating();
+            case 1 -> searchSeries(chillMedia.getSeries());
+            case 2 -> searchSeriesByTitle();
+            case 3 -> searchSeriesByGenre();
+            case 4 -> searchSeriesByRating();
         }
     }
 
@@ -242,6 +247,10 @@ public class ChillMediaFlow {
                 chillMedia.getTextIO().println("No series found.");
             } else {
                 chillMedia.getTextIO().println("The genre isn't there.");
+                chillMedia.getTextIO().println("The genre isn't there, you can choose from: ");
+                for (SeriesGenre seriesGenre : SeriesGenre.values()) {
+                    chillMedia.getTextIO().println(" - " +seriesGenre.name());
+                }
             }
         }
         searchSeries(series);

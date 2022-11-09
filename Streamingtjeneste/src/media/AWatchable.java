@@ -17,14 +17,14 @@ public abstract class AWatchable implements IMedia {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public float getRating() {
-        return rating;
+        return this.rating;
     }
 
     public ArrayList<IGenre> getGenres() {
-        return genres;
+        return this.genres;
     }
 }

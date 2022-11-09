@@ -8,8 +8,8 @@ public class User implements IUser {
     private static int idCounter = 0;
     private final int id;
     private final String name;
-    private final String password;
     private final String email;
+    private final String password;
     private final int age;
     private final boolean isAdult;
     private final ArrayList<IMovie> myMovies;

@@ -28,9 +28,9 @@ public class ChillMedia {
         this.fileIO = new FileIO();
         load();
         this.textIO = new TextIO();
-        LogIn logIn = new LogIn(this); // SKAL IKKE VÆRE UDKOMMENTERET
+        LogIn logIn = new LogIn(this);
         logIn.logIn();
-        this.currentUser = logIn.getCurrentUser(); // SKAL IKKE VÆRE UDKOMMENTERET
+        this.currentUser = logIn.getCurrentUser();
         if (!users.contains(currentUser)) {
             users.add(currentUser);
         }
@@ -88,6 +88,7 @@ public class ChillMedia {
     private void listMovies() {
         String[] options = new String[] {
                 "Exit",
+                "Search all movies",
                 "Search by title",
                 "Search by genre",
                 "Search by rating",
@@ -120,6 +121,7 @@ public class ChillMedia {
     private void listSeries() {
         String[] options = new String[] {
                 "Exit",
+                "Search all series",
                 "Search by title",
                 "Search by genre",
                 "Search by rating",
