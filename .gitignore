@@ -27,3 +27,6 @@ hs_err_pid*
 
 # Shelf
 /shelf/
+
+# Ignore Output
+/out/
