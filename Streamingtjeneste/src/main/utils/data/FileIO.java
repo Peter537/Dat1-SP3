@@ -20,11 +20,9 @@ import static main.utils.Query.searchMovieTitleSingle;
 public class FileIO implements IDataIO {
 
     private ArrayList<IMovie> movies;
-    private final String userPathJson = "Data/userJson.json";
-    private final String userPathCSV = "Data/user.csv";
+    private final String userPath = "Data/userJson.json";
     private final String moviePath = "Data/film.csv";
     private final String seriesPath = "Data/serier.csv";
-    private String userSaveType = "json"; // evt. enum? UserSaveType.JSON, UserSaveType.CSV
 
     public FileIO() { }
 
@@ -35,13 +33,7 @@ public class FileIO implements IDataIO {
      */
     @Override
     public ArrayList<IUser> loadUsers() {
-        if (userSaveType.equalsIgnoreCase("csv")) {
-            return loadUsersFromCSV();
-        } else if (userSaveType.equalsIgnoreCase("json")) {
-            return loadUsersFromJson();
-        } else {
-            return null;
-        }
+        return loadUsersFromJson();
     }
 
     private ArrayList<IUser> loadUsersFromJson() {
@@ -52,7 +44,7 @@ public class FileIO implements IDataIO {
 
         try {
             JSONParser parser = new JSONParser();
-            JSONArray array = (JSONArray) parser.parse(new FileReader(userPathJson));
+            JSONArray array = (JSONArray) parser.parse(new FileReader(userPath));
 
             for (Object object : array) {
                 JSONObject user = (JSONObject) object;
@@ -79,31 +71,6 @@ public class FileIO implements IDataIO {
                 users.add(u);
             }
         } catch (Exception e){
-            e.printStackTrace();
-        }
-        return users;
-    }
-
-    private ArrayList<IUser> loadUsersFromCSV() {
-        File file = new File(userPathCSV);
-        ArrayList<IUser> users = new ArrayList<>();
-
-        try {
-            Scanner readUsers = new Scanner(file);
-
-            while (readUsers.hasNextLine()) {
-                String line = readUsers.nextLine();
-                String[] values = line.split(";");
-
-                int id = Integer.parseInt(values[0].trim());
-                String name = values[1];
-                String email = values[2].trim();
-                String password = values[3].trim();
-                int age = Integer.parseInt(values[4].trim());
-
-                users.add(new User(id, name, email, password, age, new ArrayList<>(), new ArrayList<>()));
-            }
-        } catch (IOException e) {
             e.printStackTrace();
         }
         return users;
@@ -214,25 +181,7 @@ public class FileIO implements IDataIO {
     }
 
     public void save(ArrayList<IUser> users) {
-        if (userSaveType.equalsIgnoreCase("csv")) {
-            saveAsCSV(users);
-        } else if (userSaveType.equalsIgnoreCase("json")) {
-            saveAsJson(users);
-        }
-    }
-
-    private void saveAsCSV(ArrayList<IUser> users) {
-        try {
-            FileWriter writer = new FileWriter(userPathCSV);
-            for (IUser user : users) {
-                String myMovies = user.getMyMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                String watchedMovies = user.getWatchedMovies().toString().replaceAll("\\[", "").replaceAll("\\]", "");
-                writer.write(user.getID() + ";" + user.getName() + ";" + user.getEmail() + ";" + user.getPassword() + ";" + user.getAge() + ";" + myMovies + ";" + watchedMovies +"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveAsJson(users);
     }
 
     private void saveAsJson(ArrayList<IUser> users) {
@@ -260,7 +209,7 @@ public class FileIO implements IDataIO {
             userArray.add(userObject);
         }
         try {
-            FileWriter file = new FileWriter(userPathJson);
+            FileWriter file = new FileWriter(userPath);
             file.write(userArray.toString());
             file.close();
         } catch (Exception e) {
