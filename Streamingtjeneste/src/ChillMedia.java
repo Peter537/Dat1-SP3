@@ -16,9 +16,10 @@ import java.util.List;
 
 public class ChillMedia {
 
-    private IUser currentUser;
+    private final IUser currentUser;
 
     private final TextIO textIO;
+    private final FileIO fileIO;
     private final ChillMediaFlow chillMediaFlow;
 
     private final ArrayList<IGenre> genres = new ArrayList<>();
@@ -28,48 +29,67 @@ public class ChillMedia {
     public JFrame page;
 
     public ChillMedia() {
+        this.fileIO = new FileIO();
         load();
-        //LogIn logIn = new LogIn(this); // SKAL IKKE VÆRE UDKOMMENTERET
-        //this.currentUser = logIn.getCurrentUser(); // SKAL IKKE VÆRE UDKOMMENTERET
-        this.currentUser = new User(1, "Test", "test@gmail.com", "password", 19, new ArrayList<>(), new ArrayList<>()); // SKAL FJERNES
         this.textIO = new TextIO();
+        LogIn logIn = new LogIn(this); // SKAL IKKE VÆRE UDKOMMENTERET
+        logIn.logIn();
+        this.currentUser = logIn.getCurrentUser(); // SKAL IKKE VÆRE UDKOMMENTERET
+        if (!users.contains(currentUser)) {
+            users.add(currentUser);
+        }
         this.chillMediaFlow = new ChillMediaFlow(this);
         page = new JFrame("Chill Media");
     }
 
+    /*
+     * This method gets the data from FileIO and puts it into the ArrayLists.
+     *
+     * @return Nothing.
+     */
     private void load() {
-        FileIO fileIO = new FileIO();
-        this.genres.addAll(List.of(MovieGenre.values()));
-        this.genres.addAll(List.of(SeriesGenre.values()));
-        this.movies.addAll(fileIO.loadMovies());
-        this.series.addAll(fileIO.loadSeries());
-        this.users.addAll(fileIO.loadUsers());
+        this.getGenres().addAll(List.of(MovieGenre.values()));
+        this.getGenres().addAll(List.of(SeriesGenre.values()));
+        this.getMovies().addAll(fileIO.loadMovies());
+        this.getSeries().addAll(fileIO.loadSeries());
+        this.getUsers().addAll(fileIO.loadUsers());
     }
 
+    /*
+     * This method starts the program.
+     * The program asks the user to choose between the different options, and executes the methods behind the option.
+     *
+     * @return Nothing.
+     */
     public void run() {
-        textIO.println("Welcome to ChillMedia!");
-        textIO.println("");
+        getTextIO().println("Welcome to ChillMedia!");
+        getTextIO().println("");
         String[] options = new String[] {
                 "Exit",
                 "Search for a movie",
                 "Search for a series",
         };
-        while (true) {
-            String input = textIO.getUserInput("Would you like to see?", options);
+        boolean run = true;
+        while (run) {
+            String input = getTextIO().getUserInput("Would you like to see?", options);
             switch (input) {
                 case "0" -> {
-                    textIO.println("Goodbye!");
-                    return;
+                    getTextIO().println("Goodbye!");
+                    run = false;
                 }
                 case "1" -> listMovies();
                 case "2" -> listSeries();
-                default -> textIO.println("Invalid input!");
+                default -> getTextIO().println("Invalid input!");
             }
         }
-
-
+        fileIO.save(users);
     }
 
+    /*
+     * This method prompts the user for options to search for a movie.
+     *
+     * @return Nothing.
+     */
     private void listMovies() {
         String[] options = new String[] {
                 "Exit",
@@ -81,7 +101,7 @@ public class ChillMedia {
         };
 
         while (true) {
-            String input = textIO.getUserInput("Would you like to see?", options);
+            String input = getTextIO().getUserInput("Would you like to see?", options);
             if (input.equals("0")) {
                 return;
             }
@@ -90,13 +110,18 @@ public class ChillMedia {
                 if (number < 1 || number > options.length) {
                     throw new NumberFormatException();
                 }
-                chillMediaFlow.searchMovies(number);
+                getChillMediaFlow().searchMovies(number);
             } catch (NumberFormatException e) {
-                textIO.println("Invalid input!");
+                getTextIO().println("Invalid input!");
             }
         }
     }
 
+    /*
+     * This method prompts the user for options to search for a series.
+     *
+     * @return Nothing.
+     */
     private void listSeries() {
         String[] options = new String[] {
                 "Exit",
@@ -106,7 +131,7 @@ public class ChillMedia {
         };
 
         while (true) {
-            String input = textIO.getUserInput("Would you like to see?", options);
+            String input = getTextIO().getUserInput("Would you like to see?", options);
             if (input.equals("0")) {
                 return;
             }
@@ -115,34 +140,38 @@ public class ChillMedia {
                 if (number < 1 || number > options.length) {
                     throw new NumberFormatException();
                 }
-                chillMediaFlow.searchSeries(number);
+                getChillMediaFlow().searchSeries(number);
             } catch (NumberFormatException e) {
-                textIO.println("Invalid input!");
+                getTextIO().println("Invalid input!");
             }
         }
     }
 
     public ArrayList<IGenre> getGenres() {
-        return genres;
+        return this.genres;
     }
 
     public ArrayList<IMovie> getMovies() {
-        return movies;
+        return this.movies;
     }
 
     public ArrayList<ISeries> getSeries() {
-        return series;
+        return this.series;
     }
 
     public ArrayList<IUser> getUsers() {
-        return users;
+        return this.users;
     }
 
     public TextIO getTextIO() {
-        return textIO;
+        return this.textIO;
+    }
+
+    public ChillMediaFlow getChillMediaFlow() {
+        return chillMediaFlow;
     }
 
     public IUser getCurrentUser() {
-        return currentUser;
+        return this.currentUser;
     }
 }

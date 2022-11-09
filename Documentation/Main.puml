@@ -1,11 +1,52 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+Main -> Main : main()
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+Main -> ChillMedia : new()
+Main -> ChillMedia : run()
+
+alt movie
+    ChillMedia -> ChillMedia : listMovies()
+    ChillMedia -> ChillMediaFlow : searchMovies(number)
+    alt by title
+        ChillMediaFlow -> ChillMediaFlow : searchMoviesByTitle()
+    else by genre
+        ChillMediaFlow -> ChillMediaFlow : searchMoviesByGenre()
+    else by rating
+        ChillMediaFlow -> ChillMediaFlow : searchMoviesByRating()
+    else by my movies
+        ChillMediaFlow -> ChillMediaFlow : searchMyMovies()
+    else by my watched movies
+        ChillMediaFlow -> ChillMediaFlow : searchMyWatchedMovies()
+    end
+    ChillMediaFlow -> ChillMediaFlow : searchMovies(movies)
+    ChillMediaFlow -> ChillMediaFlow : chooseMovie(movie, page, pageSize)
+    ChillMediaFlow -> ChillMediaFlow : selectMovieOptions()
+    alt watch movie
+        ChillMediaFlow -> ChillMediaFlow : watchMovie(movie)
+    else add to my movies
+        ChillMediaFlow -> ChillMediaFlow : addMovieToMyMovies(movie)
+    else remove from my movies
+        ChillMediaFlow -> ChillMediaFlow : removeMovieFromMyMovies(movie)
+    end
+else series
+    ChillMedia -> ChillMedia : listSeries()
+    ChillMedia -> ChillMediaFlow : searchSeries(number)
+    alt by title
+        ChillMediaFlow -> ChillMediaFlow : searchSeriesByTitle()
+    else by genre
+        ChillMediaFlow -> ChillMediaFlow : searchSeriesByGenre()
+    else by rating
+        ChillMediaFlow -> ChillMediaFlow : searchSeriesByRating()
+    end
+    ChillMediaFlow -> ChillMediaFlow : searchSeries(series)
+    ChillMediaFlow -> ChillMediaFlow : chooseSeries(series, page, pageSize)
+    ChillMediaFlow -> ChillMediaFlow : selectSeriesOptions()
+    alt watch series
+        ChillMediaFlow -> ChillMediaFlow : watchSeries(series)
+    end
+end
+
 @enduml

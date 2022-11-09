@@ -75,6 +75,17 @@ public class Query {
     }
 
     /*
+     * This method returns a single title that matches the given title.
+     *
+     * @param series The list of series to search through.
+     * @param title The title to search for
+     * @return ISeries The series that matches the given title
+     */
+    public static ISeries searchSeriesTitleSingle(ArrayList<ISeries> series, String title) {
+        return series.stream().filter(s -> s.getTitle().equals(title)).findFirst().orElse(null);
+    }
+
+    /*
      * This method returns a list of all movies that matches the given title.
      *
      * @param movies The list of movies to search through.
@@ -83,6 +94,17 @@ public class Query {
      */
     public static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String title) {
         return movies.stream().filter(m -> m.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /*
+     * This method returns a single title that matches the given title.
+     *
+     * @param movies The list of movies to search through.
+     * @param title The title to search for
+     * @return IMovie The movie that matches the given title
+     */
+    public static IMovie searchMovieTitleSingle(ArrayList<IMovie> movies, String title) {
+        return movies.stream().filter(m -> m.getTitle().equals(title)).findFirst().orElse(null);
     }
 
     /*

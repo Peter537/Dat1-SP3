@@ -1,27 +1,27 @@
 package user;
 
-import user.IUser;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import media.IMovie;
 
 public class User implements IUser {
+
     private static int idCounter = 0;
-    private int id;
-    private String name;
-    private String password;
-    private String email;
-    private int age;
-    private boolean isAdult;
+    private final int id;
+    private final String name;
+    private final String password;
+    private final String email;
+    private final int age;
+    private final boolean isAdult;
     private final ArrayList<IMovie> myMovies;
     private final ArrayList<IMovie> watchedMovies;
 
-    public User(int ID, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
-        if (ID != -1)
-            this.id = ID;
-        this.id = idCounter++;
+    public User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
+        if (id != -1) {
+            this.id = id;
+        } else {
+            this.id = idCounter;
+        }
+        idCounter++;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -31,96 +31,70 @@ public class User implements IUser {
         this.isAdult = age >= 18;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public boolean isAdult() {
-        return isAdult;
+        return this.isAdult;
     }
 
     public ArrayList<IMovie> getMyMovies() {
-        return myMovies;
+        return this.myMovies;
     }
 
     public ArrayList<IMovie> getWatchedMovies() {
-        return watchedMovies;
+        return this.watchedMovies;
     }
 
     public boolean addMyMovie(IMovie movie) {
-        if (!myMovies.contains(movie)) {
-            myMovies.add(movie);
+        if (!getMyMovies().contains(movie)) {
+            getMyMovies().add(movie);
             return true;
         }
         return false;
     }
 
     public boolean removeMyMovie(IMovie movie) {
-        if (myMovies.contains(movie)) {
-            myMovies.remove(movie);
+        if (getMyMovies().contains(movie)) {
+            getMyMovies().remove(movie);
             return true;
         }
         return false;
     }
 
     public void addWatchedMovie(IMovie movie) {
-        if (!watchedMovies.contains(movie)) {
-            watchedMovies.add(movie);
+        if (!getWatchedMovies().contains(movie)) {
+            getWatchedMovies().add(movie);
         }
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "id:" + id +
-                ", name:'" + name + '\'' +
-                ", password:'" + password + '\'' +
-                ", email:'" + email + '\'' +
-                ", age:" + age +
-                ", myMovies:" + myMovies +
-                ", watchedMovies:" + watchedMovies +
+        return "User{" +
+                "id=" + getID() +
+                ", name='" + getName() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", age=" + getAge() +
+                ", myMovies=" + getMyMovies() +
+                ", watchedMovies=" + getWatchedMovies() +
                 '}';
     }
-
-    public String toJSONString() {
-        return "{" +
-                "id:" + id +
-                ", \"name\":'" + name + '\'' +
-                ", \"password\":'" + password + '\'' +
-                ", \"email\":'" + email + '\'' +
-                ", \"age\":" + age +
-                ", \"myMovies\":" + myMovies +
-                ", \"watchedMovies\":" + watchedMovies +
-                '}';
-    }
-
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", password='" + password + '\'' +
-//                ", email='" + email + '\'' +
-//                ", age=" + age +
-//                ", isAdult=" + isAdult +
-//                ", myMovies=" + myMovies +
-//                ", watchedMovies=" + watchedMovies +
-//                '}';
-//    }
 }

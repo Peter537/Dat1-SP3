@@ -35,17 +35,19 @@ class ChillMediaFlow {
 
     + ChillMediaFlow(ChillMedia chillMedia)
 
-    + void searchMoviesByTitle()
-    + void searchMoviesByGenre()
-    + void searchMoviesByRating()
-    + void searchMyMovies()
-    + void searchMyWatchedMovies()
-    + void searchMovies(ArrayList<IMovie> movies)
+    + void searchMovies(int number)
+    - void searchMoviesByTitle()
+    - void searchMoviesByGenre()
+    - void searchMoviesByRating()
+    - void searchMyMovies()
+    - void searchMyWatchedMovies()
+    - void searchMovies(ArrayList<IMovie> movies)
 
-    + void searchSeriesByTitle()
-    + void searchSeriesByGenre()
-    + void searchSeriesByRating()
-    + void searchSeries(ArrayList<ISeries> seriesList)
+    + void searchSeries(int number)
+    - void searchSeriesByTitle()
+    - void searchSeriesByGenre()
+    - void searchSeriesByRating()
+    - void searchSeries(ArrayList<ISeries> seriesList)
 
     + int chooseSeries(ArrayList<ISeries> series, int page, int pageSize)
     + int chooseMovie(ArrayList<IMovie> movies, int page, int pageSize)
@@ -61,13 +63,19 @@ class ChillMediaFlow {
 class LogIn {
     - IUser currentUser
     - final ChillMedia cm
+    - final TextIO textIO
+    - final ArrayList<IUser> users
 
     + LogIn(ChillMedia cm)
 
+    + void logIn()
     - void signUp()
     - void signIn()
-    - void createUser()
-    + IUser getCurrentUser()
+    - void createUser(String name, String password, String email, int age)
+    - boolean checkEmailInList(String email)
+    - IUser getUser(String email, String password)
+
+    + accessors methods()
 }
 
 class Query {
@@ -80,7 +88,9 @@ class Query {
     + static ArrayList<IMovie> searchGenre(ArrayList<IMedia> movies, IGenre genre)
 
     + static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String title)
+    + static ISeries searchSeriesTitleSingle(ArrayList<ISeries> series, String title)
     + static ArrayList<IMovie> searchMovieTitle(ArrayList<IMovie> movies, String title)
+    + static IMovie searchMovieTitleSingle(ArrayList<IMovie> movies, String title)
     + static ArrayList<IMedia> searchTitle(ArrayList<IMedia> medias, String title)
 
     + static ArrayList<ISeries> searchSeriesRating(ArrayList<ISeries> series, float minimumRating)
@@ -94,36 +104,43 @@ class TextIO {
     + TextIO()
 
     + String getUserInput(String message)
-    + String getUserInput(String message, String[] optionsList)
-    + String getUserInput(String message, int startIndex, String[] optionsList)
-    + String getUserInputFromMedia(String message, int page, ArrayList<IMedia> media)
-    + int getUserInput(String msg, ArrayList<String> arr)
+    + String getUserInput(String message, String[] options)
+    + String getUserInput(String message, int startIndex, String[] options)
+    + String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media)
 
     + void println(String message)
     + void print(String message)
 }
 
 class FileIO implements IDataIO {
+    - ArrayList<IMovie> movies;
+    - final String userPath;
+    - final String moviePath;
+    - final String seriesPath;
+
     + ArrayList<IUser> loadUsers()
+    + ArrayList<IUser> loadUserFromJson()
+    + void saveAsJson(ArrayList<IUser> users, IUser user)
+
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
 }
 
 class User implements IUser {
     - static int idCounter
-    - int id
-    - String name
-    - String password
-    - String email
-    - int age
-    - ArrayList<IMovie> myMovies
-    - ArrayList<IMovie> watchedMovies
+    - final int id
+    - final String name
+    - final String password
+    - final String email
+    - final int age
+    - final boolean isAdult
+    - final ArrayList<IMovie> myMovies
+    - final ArrayList<IMovie> watchedMovies
 
     + User(int ID, String name, String password, String email, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies)
     + boolean addMyMovie(IMovie movie)
     + boolean removeMyMovie(IMovie movie)
     + void addWatchedMovie(IMovie movie)
-    + void save(ArrayList<IUser> users)
 
     + accessors methods()
 }
@@ -142,13 +159,14 @@ class Series extends AWatchable implements ISeries {
     - ArrayList<Season> seasons
 
     + Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons)
-    + Series()
 
     + accessors methods()
 }
 
 class Season extends ASeason {
     + Season(int seasonNumber, int episodeCount)
+
+    + accessors methods()
 }
 
 class LanguageDanish implements ILanguage {
@@ -167,16 +185,6 @@ abstract class AWatchable implements IMedia {
     - final ArrayList<IGenre> genres
 
     + AWatchable(String title, float rating, ArrayList<IGenre> genres)
-
-    + accessors methods()
-}
-
-
-abstract class ASeason extends Series {
-    - int seasonNumber
-    - int episodeCount
-
-    + ASeason(int seasonNumber, int episodeCount)
 
     + accessors methods()
 }
@@ -207,16 +215,18 @@ interface IUser {
     + String getEmail()
     + String getPassword()
     + int getAge()
+    + boolean isAdult()
     + ArrayList<IMovie> getMyMovies()
     + ArrayList<IMovie> getWatchedMovies()
     + boolean addMyMovie(IMovie movie)
     + boolean removeMyMovie(IMovie movie)
     + void addWatchedMovie(IMovie movie)
-    + void save(ArrayList<IUser> users)
 }
 
 interface IDataIO {
     + ArrayList<IUser> loadUsers()
+    + ArrayList<IUser> loadUserFromJson()
+    + void saveAsJson(ArrayList<IUser> users, IUser user)
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
 }

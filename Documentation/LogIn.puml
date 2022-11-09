@@ -1,11 +1,17 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+ChillMedia -> LogIn : new()
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+LogIn -> LogIn : LogIn()
+
+alt login successful
+    LogIn -> LogIn : signIn()
+else login failed
+    LogIn -> LogIn : signUp()
+end
+
+LogIn -> ChillMedia : getCurrentUser()
+
 @enduml

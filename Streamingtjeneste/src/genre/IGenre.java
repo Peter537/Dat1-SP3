@@ -1,5 +1,3 @@
 package genre;
 
-public interface IGenre {
-
-}
+public interface IGenre { }

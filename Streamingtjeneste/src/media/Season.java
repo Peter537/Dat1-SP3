@@ -11,11 +11,11 @@ public class Season {
     }
 
     public int getSeasonNumber() {
-        return seasonNumber;
+        return this.seasonNumber;
     }
 
     public int getEpisodeCount() {
-        return episodeCount;
+        return this.episodeCount;
     }
 
     @Override
