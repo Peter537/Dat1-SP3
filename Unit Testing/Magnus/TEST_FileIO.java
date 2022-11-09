@@ -1,11 +1,10 @@
 package Magnus;
 
-import genre.IGenre;
-import genre.SeriesGenre;
-import media.*;
-import user.IUser;
-import user.User;
-import utils.data.IDataIO;
+import main.genre.IGenre;
+import main.genre.SeriesGenre;
+import main.media.*;
+import main.user.IUser;
+import main.user.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,18 +1,13 @@
 package Magnus;
 
-import media.IMovie;
+import main.media.IMovie;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
-import user.IUser;
-import user.User;
-import utils.Query;
-import utils.data.FileIO;
+import main.user.IUser;
+import main.utils.data.FileIO;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class User_Test {
     @Test
