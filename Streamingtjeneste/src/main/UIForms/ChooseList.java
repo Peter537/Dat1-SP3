@@ -9,18 +9,17 @@ import java.awt.event.MouseAdapter;
 public class ChooseList extends AUI {
 
     private JPanel panel;
-    private JButton seriesButton;
     private JButton movieButton;
+    private JButton seriesButton;
     private JLabel icon;
 
-    public ChooseList(JFrame page) {
-        super(page);
+    public ChooseList() {
         setData(this);
         movieButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 super.mouseClicked(e);
-                IUI ui = new UI(ChillMedia.page);
+                IUI ui = new UI();
                 updatePane(ui);
             }
         });

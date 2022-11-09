@@ -475,7 +475,4 @@ public class ChillMediaFlow {
             chillMedia.getTextIO().println("Invalid input!");
         }
     }
-
-    public void setPage(IUI ui) {
-    }
 }

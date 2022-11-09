@@ -18,9 +18,12 @@ public class UI extends AUI {
     private JList serieList;
     private JLabel label1;
 
-    public UI(JFrame page) {
-        super(page);
+    public UI() {
         setData(this);
+    }
+
+    public JPanel getPanel() {
+        return panel;
     }
 
     public void setData(UI data) {

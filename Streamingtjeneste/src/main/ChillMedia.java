@@ -75,7 +75,7 @@ public class ChillMedia {
         };
         boolean run = true;
         while (run) {
-            IUI choose = new ChooseList(page);
+            IUI choose = new ChooseList();
             choose.updatePane(choose);
             String input = getTextIO().getUserInput("Would you like to see?", options);
             switch (input) {
