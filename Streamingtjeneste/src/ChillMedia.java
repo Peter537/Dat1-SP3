@@ -8,6 +8,7 @@ import user.User;
 import utils.TextIO;
 import utils.data.FileIO;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ChillMedia {
     private final ArrayList<IMovie> movies = new ArrayList<>();
     private final ArrayList<ISeries> series = new ArrayList<>();
     private final ArrayList<IUser> users = new ArrayList<>();
+    public JFrame page;
 
     public ChillMedia() {
         this.fileIO = new FileIO();
@@ -34,6 +36,7 @@ public class ChillMedia {
         if (!users.contains(currentUser)) {
             users.add(currentUser);
         }
+        page = new JFrame("Chill Media");
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 

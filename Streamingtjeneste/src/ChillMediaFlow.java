@@ -5,6 +5,8 @@ import media.IMovie;
 import media.ISeries;
 import user.IUser;
 import utils.Query;
+import utils.UIForms.IUI;
+import utils.UIForms.UI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,9 @@ public class ChillMediaFlow {
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
         this.currentUser = chillMedia.getCurrentUser();
+
+        IUI ui = new UI();
+        ui.updatePane(ui, chillMedia.page);
     }
 
     /*
