@@ -19,7 +19,7 @@ import static main.utils.Query.searchMovieTitleSingle;
 
 public class FileIO implements IDataIO {
 
-    private ArrayList<IMovie> movies;
+    public static ArrayList<IMovie> movies;
     private final String userPath = "Data/userJson.json";
     private final String moviePath = "Data/film.csv";
     private final String seriesPath = "Data/serier.csv";

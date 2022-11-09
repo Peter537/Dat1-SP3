@@ -19,7 +19,7 @@ public class ChooseList extends AUI {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 super.mouseClicked(e);
-                IUI ui = new UI();
+                IUI ui = new Movies();
                 updatePane(ui);
             }
         });
