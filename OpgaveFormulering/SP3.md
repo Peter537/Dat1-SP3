@@ -6,6 +6,9 @@ I SP3 skal I lave en objektorienteret analyse af et domæne, og ud fra analysen 
 
 
 2 Domænet
+
+
+
 I projektet skal I udvikle et softwaresystem til brug for streamingtjenester som Netflix, HBO, Viaplay etc.
 
 
@@ -23,39 +26,45 @@ Vi laver i første omgang ikke nogen grafisk brugergrænseflade til systemet, me
 
 
 3. Funktionelle krav
-   Der er følgende krav til systemet:
 
 
 
-Der skal være en startmenu, hvor brugeren kan vælge mellem at
-Oprette sig som bruger
-Logge sig ind som bruger
-Der skal være en hovedmenu (i tekst), hvor brugeren kan vælge mellem at
-Søge efter en bestemt film
-Søge efter alle film i en kategori
-Se sin liste over sete film
-Se sin liste over gemte film
-Når brugeren får præsenteret en liste over alle film i en kategori, alle sete film eller alle gemte film, skal brugeren kunne vælge én af filmene
-Når brugeren har valgt en film, skal det være muligt at vælge mellem at afspille filmen (dette gøres naturligvis ikke ”rigtigt” men blot ved at der udskrives ”Titanic afspilles nu..” eller noget lignende), gemme filmen i sin liste over film, han eller hun ønsker at se senere eller slette filmen fra listen over film, han eller hun vil se senere. Vælger brugeren at afspille filmen, skal den gemmes i hans eller hendes liste over afspillede film.
-Brugernes login-oplysninger (brugernavn og password) skal gemmes i en fil, så de kan indlæses når programmet startes op igen.
-Der skal være fornuftig håndtering af fejl. Hvis der opstår fejl i programmet skal de håndteres passende steder og brugeren skal informeres, hvis det er relevant. Overvej hvem fejlen skal kommunikeres til. En IOException (som kan opstå, når man læser ind fra en fil) vil fx gøre, at programmet fra brugerens synspunkt ikke virker. Hvordan formidler vi til brugeren, at der er opstået en fejl?
+Der er følgende krav til systemet:
+
+
+
+Der skal være en startmenu, hvor brugeren kan vælge mellem at <br>
+Oprette sig som bruger <br>
+Logge sig ind som bruger <br>
+Der skal være en hovedmenu (i tekst), hvor brugeren kan vælge mellem at <br>
+Søge efter en bestemt film <br>
+Søge efter alle film i en kategori <br>
+Se sin liste over sete film <br>
+Se sin liste over gemte film <br>
+Når brugeren får præsenteret en liste over alle film i en kategori, alle sete film eller alle gemte film, skal brugeren kunne vælge én af filmene <br>
+Når brugeren har valgt en film, skal det være muligt at vælge mellem at afspille filmen (dette gøres naturligvis ikke ”rigtigt” men blot ved at der udskrives ”Titanic afspilles nu..” eller noget lignende), gemme filmen i sin liste over film, han eller hun ønsker at se senere eller slette filmen fra listen over film, han eller hun vil se senere. Vælger brugeren at afspille filmen, skal den gemmes i hans eller hendes liste over afspillede film. <br>
+Brugernes login-oplysninger (brugernavn og password) skal gemmes i en fil, så de kan indlæses når programmet startes op igen. <br>
+Der skal være fornuftig håndtering af fejl. Hvis der opstår fejl i programmet skal de håndteres passende steder og brugeren skal informeres, hvis det er relevant. Overvej hvem fejlen skal kommunikeres til. En IOException (som kan opstå, når man læser ind fra en fil) vil fx gøre, at programmet fra brugerens synspunkt ikke virker. Hvordan formidler vi til brugeren, at der er opstået en fejl? <br>
 
 
 Der kan tænkes en masse ekstra features ind, som fx (ikke prioriteret rækkefølge)
 
 
 
-En bruger vil gerne søge efter film, der har rating større end 8,5
-En bruger vil gerne søge efter film fra 80’erne
-Der skal kunne tilføjes og fjernes kategorier på en nem måde, fx ”Christmas” eller ”Halloween”
-Der skal kunne tilføjes film, serier, sæsoner og episoder hvis brugeren er administrator
-Data om brugere skrives ned i en fil, når programmet lukkes.
-En bruger kan være klassificeret som ”barn” og må således kun se film i kategorien ”Family”
-Der skal kunne tilføjes nye typer medier, som fx e-bøger, lydbøger eller spil
-I kan lave en grafisk brugergrænseflade med Processing eller med Java Swing eller Java FX
+En bruger vil gerne søge efter film, der har rating større end 8,5 <br>
+En bruger vil gerne søge efter film fra 80’erne <br>
+Der skal kunne tilføjes og fjernes kategorier på en nem måde, fx ”Christmas” eller ”Halloween” <br>
+Der skal kunne tilføjes film, serier, sæsoner og episoder hvis brugeren er administrator <br>
+Data om brugere skrives ned i en fil, når programmet lukkes. <br>
+En bruger kan være klassificeret som ”barn” og må således kun se film i kategorien ”Family” <br>
+Der skal kunne tilføjes nye typer medier, som fx e-bøger, lydbøger eller spil <br>
+I kan lave en grafisk brugergrænseflade med Processing eller med Java Swing eller Java FX <br>
 
 4. Data
-   I skal i løsningen hente data om film og serier fra .txt-filer, som I får udleveret. Start med at lave en funktion, som kan indlæse data fra filerne og fylde nogle ArrayLists med film, serier, episoder, etc.
+
+
+
+I skal i løsningen hente data om film og serier fra .txt-filer, som I får udleveret. Start med at lave en funktion, som kan indlæse data fra filerne og fylde nogle ArrayLists med film, serier, episoder, etc.
 
 
 
@@ -63,10 +72,16 @@ Der er også zip-filer med billeder, som I kan bruge hvis I vælger at lave graf
 
 
 5 Aflevering
+
+
+
 Opgaven skal afleveres senest fredag d. 11.11 kl. 23.59. Dette gøres ved at placere koden i et git repository og og aflevere linket i PeerGrade. Opgaven kan afleveres som gruppe.
 
 
 6 Gode Råd
+
+
+
 Prioritering
 
 Løs hellere nogle delproblemer godt end alle overfladisk. Det er meget bedre udtrykkeligt at beslutte, at et specielt delproblem (fx. “brugeren skal kunne se sin liste over film”) slet ikke håndteres i systemet (og skrive det på en mangelliste!), end at programmere en uigennemtænkt, uafprøvet løsning til delproblemet. Sådan en delløsning kan komplicere den samlede softwareløsning, reducere dens brugbarhed og vanskeliggøre videreudvikling.
@@ -98,6 +113,9 @@ Fx kan man starte med kun at have film og kun at have én bruger.
 
 
 7 Gruppearbejde
+
+
+
 En del af udfordringen er at I skal samarbejde i en gruppe. Det er derfor ikke muligt at arbejde solo med denne opgave. Før I starter arbejdet bør I snakke om i gruppen hvordan I vil arbejde, hvor ofte og hvor længe. Sørg for at organisere arbejdet så det bliver ligeligt fordelt, eller sådan at hver opgave passer til den enkeltes evner og interesser. Sørg for at jeres klassediagram hele tiden er i en tilstand hvor det fungerer som aftale for hvad der bliver kodet.
 
 Vi ser hellere at alle i gruppen kan bevare overblik over koden end at enkelte gruppemedlemmer får implementeret af en masse features.
