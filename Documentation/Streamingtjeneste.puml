@@ -115,19 +115,15 @@ class TextIO {
 
 class FileIO implements IDataIO {
     - ArrayList<IMovie> movies
-    - final String userPathJson
-    - final String userPathCSV
+    - final String userPath
     - final String moviePath
     - final String seriesPath
-    - String userSaveType
 
     + ArrayList<IUser> loadUsers()
     - ArrayList<IUser> loadUsersFromJson()
-    - ArrayList<IUser> loadUsersFromCSV()
 
     + void save(ArrayList<IUser> users)
     - void saveAsJson(ArrayList<IUser> users)
-    - void saveAsCSV(ArrayList<IUser> users)
 
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
