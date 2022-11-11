@@ -13,4 +13,6 @@ public interface IDataIO {
     ArrayList<IMovie> loadMovies();
 
     ArrayList<ISeries> loadSeries();
+    
+    void save(ArrayList<IUser> users);
 }

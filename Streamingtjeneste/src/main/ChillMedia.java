@@ -10,6 +10,7 @@ import main.utils.ChillMediaFlow;
 import main.utils.LogIn;
 import main.utils.TextIO;
 import main.utils.data.FileIO;
+import main.utils.data.IDataIO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class ChillMedia {
     private final IUser currentUser;
 
     private final TextIO textIO;
-    private final FileIO fileIO;
+    private final IDataIO dataIO;
     private final ChillMediaFlow chillMediaFlow;
 
     private final ArrayList<IGenre> genres = new ArrayList<>();
@@ -28,7 +29,7 @@ public class ChillMedia {
     private final ArrayList<IUser> users = new ArrayList<>();
 
     public ChillMedia() {
-        this.fileIO = new FileIO();
+        this.dataIO = new FileIO();
         load();
         this.textIO = new TextIO();
         LogIn logIn = new LogIn(this);
@@ -48,9 +49,9 @@ public class ChillMedia {
     private void load() {
         this.getGenres().addAll(List.of(MovieGenre.values()));
         this.getGenres().addAll(List.of(SeriesGenre.values()));
-        this.getMovies().addAll(fileIO.loadMovies());
-        this.getSeries().addAll(fileIO.loadSeries());
-        this.getUsers().addAll(fileIO.loadUsers());
+        this.getMovies().addAll(dataIO.loadMovies());
+        this.getSeries().addAll(dataIO.loadSeries());
+        this.getUsers().addAll(dataIO.loadUsers());
     }
 
     /*
@@ -80,7 +81,7 @@ public class ChillMedia {
                 default -> getTextIO().println("Invalid input!");
             }
         }
-        fileIO.save(users);
+        dataIO.save(users);
     }
 
     /*
