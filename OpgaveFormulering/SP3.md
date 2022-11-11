@@ -1,4 +1,7 @@
 1 Opgaven
+
+
+
 I SP3 skal I lave en objektorienteret analyse af et domæne, og ud fra analysen lave et objektorienteret design af jeres løsning. Derefter skal I implementere løsningen i Java. I jeres løsning skal I anvende basale Java-konstruktioner som klasser, metoder, interfaces, løkker, betingelser, ArrayLists mv.
 
 
