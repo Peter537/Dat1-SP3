@@ -166,7 +166,7 @@ class Series extends AWatchable implements ISeries {
     + accessors methods()
 }
 
-class Season extends ASeason {
+class Season {
     - final int seasonNumber
     - final int episodeCount
 
@@ -294,6 +294,6 @@ ChillMedia *-- IUser
 ChillMedia *-- LogIn
 ChillMedia *-- ChillMediaFlow
 
-Series *-- ASeason
+Series *-- Season
 
 @enduml
