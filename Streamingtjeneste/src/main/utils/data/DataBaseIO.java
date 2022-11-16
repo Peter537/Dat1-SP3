@@ -44,17 +44,13 @@ public class DataBaseIO implements IDataIO {
     }
 
     private String getPassword() {
-        String password = "";
-
         File file = new File("Data/dbpass.csv");
-
         try {
             Scanner scanner = new Scanner(file);
-            password = scanner.nextLine();
+            return scanner.nextLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return password;
+        return "";
     }
 }
