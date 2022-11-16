@@ -30,4 +30,12 @@ public class DataBaseIO implements IDataIO {
     public void save(ArrayList<IUser> users) {
 
     }
+
+    private String getPassword() {
+        String password = "";
+
+
+
+        return password;
+    }
 }

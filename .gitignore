@@ -30,3 +30,6 @@ hs_err_pid*
 
 # Ignore Output
 /out/
+
+# Ignore database password
+/Data/dbpass.csv
