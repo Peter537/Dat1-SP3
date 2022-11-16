@@ -1,4 +1,4 @@
-1 Opgaven
+1. Opgaven
 
 
 
@@ -9,7 +9,7 @@ let kan skifte mellem de to.
 
 
 
-2 Refaktorering af gammel kode
+2. Refaktorering af gammel kode
 
 
 
@@ -34,7 +34,7 @@ fyldt databasen op med data om film og serier.
 
 
 
-4 Aflevering
+4. Aflevering
 
 
 

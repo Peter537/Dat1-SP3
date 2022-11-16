@@ -1,11 +1,11 @@
-1 Opgaven
+1. Opgaven
 
 
 
 I SP3 skal I lave en objektorienteret analyse af et domæne, og ud fra analysen lave et objektorienteret design af jeres løsning. Derefter skal I implementere løsningen i Java. I jeres løsning skal I anvende basale Java-konstruktioner som klasser, metoder, interfaces, løkker, betingelser, ArrayLists mv.
 
 
-2 Domænet
+2. Domænet
 
 
 
@@ -71,14 +71,14 @@ I skal i løsningen hente data om film og serier fra .txt-filer, som I får udle
 Der er også zip-filer med billeder, som I kan bruge hvis I vælger at lave grafisk brugergrænseflade.
 
 
-5 Aflevering
+5. Aflevering
 
 
 
 Opgaven skal afleveres senest fredag d. 11.11 kl. 23.59. Dette gøres ved at placere koden i et git repository og og aflevere linket i PeerGrade. Opgaven kan afleveres som gruppe.
 
 
-6 Gode Råd
+6. Gode Råd
 
 
 
@@ -112,7 +112,7 @@ Fx kan man starte med kun at have film og kun at have én bruger.
 
 
 
-7 Gruppearbejde
+7. Gruppearbejde
 
 
 
