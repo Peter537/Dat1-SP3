@@ -3,13 +3,17 @@ package main.utils.data;
 import main.media.IMovie;
 import main.media.ISeries;
 import main.user.IUser;
+import main.utils.data.dbutil.MySQL;
 
 import java.util.ArrayList;
 
 public class DataBaseIO implements IDataIO {
-    private ArrayList<IMovie> movies;
-    private ArrayList<ISeries> series;
-    private ArrayList<IUser> users;
+    MySQL mySQL;
+
+    public DataBaseIO() {
+        mySQL = new MySQL();
+        mySQL.openConnection("localhost", "ChillMedia", "root", "12321");
+    }
 
     public ArrayList<IUser> loadUsers() {
         return null;

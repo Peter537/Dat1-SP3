@@ -1,3 +1,5 @@
+package main.utils.data.dbutil;
+
 public class SQLStatements {
     public static String allCountries() {
         return "SELECT * FROM country";

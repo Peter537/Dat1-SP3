@@ -1,3 +1,5 @@
+package main.utils.data.dbutil;
+
 import java.sql.*;
 
 public class MySQL {
