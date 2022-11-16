@@ -5,14 +5,16 @@ import main.media.ISeries;
 import main.user.IUser;
 import main.utils.data.dbutil.MySQL;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DataBaseIO implements IDataIO {
     MySQL mySQL;
 
     public DataBaseIO() {
         mySQL = new MySQL();
-        mySQL.openConnection("localhost", "ChillMedia", "root", "12321");
+        mySQL.openConnection("localhost", "chillmedia", "root", getPassword());
     }
 
     public ArrayList<IUser> loadUsers() {
@@ -34,7 +36,14 @@ public class DataBaseIO implements IDataIO {
     private String getPassword() {
         String password = "";
 
+        File file = new File("Data/dbpass.csv");
 
+        try {
+            Scanner scanner = new Scanner(file);
+            password = scanner.nextLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return password;
     }
