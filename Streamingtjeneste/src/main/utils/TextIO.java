@@ -9,8 +9,6 @@ public class TextIO {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public TextIO() { }
-    
     /*
      * This method receives a message and displays it to the user and returns the input.
      *
@@ -21,6 +19,13 @@ public class TextIO {
         print(msg);
         return scanner.nextLine();
     }
+
+    /*
+    public static String getUserInput(String msg){
+        print(msg);
+        return scanner.nextLine();
+    }
+     */
 
     /*
      * This method receives a message and displays it to the user and displays some options to the user.
@@ -38,6 +43,16 @@ public class TextIO {
     }
 
     /*
+    public static String getUserInput(String msg, String[] options) {
+        println(msg);
+        for (int i = 0; i < options.length; i++) {
+            println((i) + ". " + options[i]);
+        }
+        return scanner.nextLine();
+    }
+     */
+
+    /*
      * This method receives a message and displays it to the user and displays some options to the user.
      *
      * @param msg The message to print to the user
@@ -52,6 +67,16 @@ public class TextIO {
         }
         return scanner.nextLine();
     }
+
+    /*
+    public static String getUserInput(String msg, int startIndex, String[] options) {
+        println(msg);
+        for (int i = 0; i < options.length; i++) {
+            println((i + startIndex) + ". " + options[i]);
+        }
+        return scanner.nextLine();
+    }
+     */
 
     /*
      * This method receives a message and displays it to the user and displays some options to the user.
@@ -74,6 +99,19 @@ public class TextIO {
     }
 
     /*
+    public static String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media) {
+        println(msg);
+        println("-2 - Previous page");
+        println("-1 - Next page");
+        println("0 - Exit");
+        for (int i = 0; i < media.size(); i++) {
+            println((i + 1 + ((page - 1) * pageSize)) + " - " + media.get(i).getTitle());
+        }
+        return scanner.nextLine();
+    }
+     */
+
+    /*
      * This method receives a message and displays it on a new line
      *
      * @param msg The message to print to the user
@@ -84,6 +122,12 @@ public class TextIO {
     }
 
     /*
+    public static void println(String msg) {
+        System.out.println(msg);
+    }
+     */
+
+    /*
      * This method receives a message and displays it on the same line
      *
      * @param msg The message to print to the user
@@ -91,5 +135,17 @@ public class TextIO {
      */
     public void print(String msg) {
         System.out.print(msg);
+    }
+
+    /*
+    public static void print(String msg) {
+        System.out.print(msg);
+    }
+     */
+
+    public static void clearConsole() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
     }
 }
