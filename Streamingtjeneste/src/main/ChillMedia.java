@@ -13,7 +13,7 @@ import main.utils.data.SessionCache;
 
 public class ChillMedia {
 
-    private final IUser currentUser;
+    private final IUser currentUser; // add to SessionCache
 
     private final IDataIO dataIO;
     private final ChillMediaFlow chillMediaFlow;
