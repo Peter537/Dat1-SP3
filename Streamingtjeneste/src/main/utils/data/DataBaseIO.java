@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataBaseIO implements IDataIO {
-    MySQL mySQL;
+
+    private final MySQL mySQL;
 
     public DataBaseIO() {
         mySQL = new MySQL();
@@ -36,6 +37,10 @@ public class DataBaseIO implements IDataIO {
 
     public void save(ArrayList<IUser> users) {
 
+    }
+
+    public MySQL getMySQL() {
+        return mySQL;
     }
 
     private String getPassword() {

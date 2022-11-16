@@ -7,9 +7,10 @@ import main.user.IUser;
 import java.util.ArrayList;
 
 public class SessionCache {
-    ArrayList<IMovie> movies;
-    ArrayList<ISeries> series;
-    ArrayList<IUser> users;
+
+    private final ArrayList<IMovie> movies;
+    private final ArrayList<ISeries> series;
+    private final ArrayList<IUser> users;
 
     public SessionCache(ArrayList<IMovie> movie, ArrayList<ISeries> series, ArrayList<IUser> users) {
         this.movies = movie;
