@@ -36,6 +36,18 @@ public class FileIO implements IDataIO {
         return loadUsersFromJson();
     }
 
+    public IUser loadUser(String email, String password) {
+        /* TODO: Skal finde ud af om det er bedre at bruge en for loop eller en stream her
+        ArrayList<IUser> users = loadUsers();
+        for (IUser user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+         */
+        return null;
+    }
+
     private ArrayList<IUser> loadUsersFromJson() {
         ArrayList<IUser> users = new ArrayList<>();
         if (movies == null) {
@@ -178,6 +190,10 @@ public class FileIO implements IDataIO {
             e.printStackTrace();
         }
         return seriesData;
+    }
+
+    public void save(IUser user) {
+        // TODO: Skal laves
     }
 
     public void save(ArrayList<IUser> users) {

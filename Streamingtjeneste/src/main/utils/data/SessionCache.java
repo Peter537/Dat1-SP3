@@ -8,15 +8,11 @@ import java.util.ArrayList;
 
 public class SessionCache {
 
-    private final ArrayList<IMovie> movies;
-    private final ArrayList<ISeries> series;
-    private final ArrayList<IUser> users;
+    private final ArrayList<IMovie> movies = new ArrayList<>();
+    private final ArrayList<ISeries> series = new ArrayList<>();
+    private IUser user;
 
-    public SessionCache() {
-        this.movies = new ArrayList<>();
-        this.series = new ArrayList<>();
-        this.users = new ArrayList<>();
-    }
+    public SessionCache() { }
 
     public void setMovies(ArrayList<IMovie> movies) {
         this.movies.clear();
@@ -28,9 +24,8 @@ public class SessionCache {
         this.series.addAll(series);
     }
 
-    public void setUsers(ArrayList<IUser> users) {
-        this.users.clear();
-        this.users.addAll(users);
+    public void setUser(IUser user) {
+        this.user = user;
     }
 
     public boolean addMovie(IMovie movie) {
@@ -49,14 +44,6 @@ public class SessionCache {
         return false;
     }
 
-    public boolean addUser(IUser user) {
-        if (!this.users.contains(user)) {
-            this.users.add(user);
-            return true;
-        }
-        return false;
-    }
-
     public ArrayList<IMovie> getMovies() {
         return movies;
     }
@@ -65,7 +52,7 @@ public class SessionCache {
         return series;
     }
 
-    public ArrayList<IUser> getUsers() {
-        return users;
+    public IUser getUser() {
+        return user;
     }
 }

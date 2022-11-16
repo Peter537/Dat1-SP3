@@ -8,11 +8,15 @@ import java.util.ArrayList;
 
 public interface IDataIO {
 
-    ArrayList<IUser> loadUsers();
+    ArrayList<IUser> loadUsers(); // TODO: Not sure om denne skal være privat
+
+    IUser loadUser(String email, String password);
 
     ArrayList<IMovie> loadMovies();
 
     ArrayList<ISeries> loadSeries();
 
-    void save(ArrayList<IUser> users);
+    void save(ArrayList<IUser> users); // TODO: Slettes
+
+    void save(IUser user);
 }

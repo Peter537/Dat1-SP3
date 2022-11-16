@@ -25,6 +25,10 @@ public class DataBaseIO implements IDataIO {
         return null;
     }
 
+    public IUser loadUser(String email, String password) {
+        return null;
+    }
+
     public ArrayList<IMovie> loadMovies() {
         ResultSet movieData = mySQL.executeQuery(SQLStatements.getAllMovies());
         return null;
@@ -33,6 +37,10 @@ public class DataBaseIO implements IDataIO {
     public ArrayList<ISeries> loadSeries() {
         ResultSet seriesData = mySQL.executeQuery(SQLStatements.getAllSeries());
         return null;
+    }
+
+    public void save(IUser user) {
+
     }
 
     public void save(ArrayList<IUser> users) {

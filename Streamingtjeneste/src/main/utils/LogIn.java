@@ -13,7 +13,7 @@ public class LogIn {
 
     public LogIn(ChillMedia cm) {
         this.currentUser = null;
-        this.users = cm.getSessionCache().getUsers();
+        this.users = cm.getDataIO().loadUsers();
     }
 
     public void logIn() {

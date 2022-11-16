@@ -1,8 +1,5 @@
 package main;
 
-import main.genre.IGenre;
-import main.genre.MovieGenre;
-import main.genre.SeriesGenre;
 import main.user.IUser;
 import main.utils.ChillMediaFlow;
 import main.utils.LogIn;
@@ -12,8 +9,6 @@ import main.utils.data.IDataIO;
 import main.utils.data.SessionCache;
 
 public class ChillMedia {
-
-    private final IUser currentUser; // add to SessionCache
 
     private final IDataIO dataIO;
     private final ChillMediaFlow chillMediaFlow;
@@ -30,8 +25,8 @@ public class ChillMedia {
         load();
         LogIn logIn = new LogIn(this);
         logIn.logIn();
-        this.currentUser = logIn.getCurrentUser();
-        getSessionCache().addUser(currentUser);
+        IUser currentUser = logIn.getCurrentUser();
+        getSessionCache().setUser(currentUser);
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
@@ -43,15 +38,9 @@ public class ChillMedia {
     private void load() {
         getSessionCache().setMovies(dataIO.loadMovies());
         getSessionCache().setSeries(dataIO.loadSeries());
-        getSessionCache().setUsers(dataIO.loadUsers());
 
         //this.getGenres().addAll(List.of(MovieGenre.values()));
         //this.getGenres().addAll(List.of(SeriesGenre.values()));
-        /*
-        this.getMovies().addAll(dataIO.loadMovies());
-        this.getSeries().addAll(dataIO.loadSeries());
-        this.getUsers().addAll(dataIO.loadUsers());
-        */
     }
 
     /*
@@ -81,7 +70,7 @@ public class ChillMedia {
                 default -> TextIO.println("Invalid input!");
             }
         }
-        dataIO.save(getSessionCache().getUsers());
+        dataIO.save(getSessionCache().getUser());
     }
 
     /*
@@ -154,15 +143,15 @@ public class ChillMedia {
     }
     */
 
+    public IDataIO getDataIO() {
+        return this.dataIO;
+    }
+
     public SessionCache getSessionCache() {
         return sessionCache;
     }
 
     public ChillMediaFlow getChillMediaFlow() {
         return chillMediaFlow;
-    }
-
-    public IUser getCurrentUser() {
-        return this.currentUser;
     }
 }
