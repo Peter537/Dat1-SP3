@@ -3,41 +3,35 @@ package main;
 import main.genre.IGenre;
 import main.genre.MovieGenre;
 import main.genre.SeriesGenre;
-import main.media.IMovie;
-import main.media.ISeries;
 import main.user.IUser;
 import main.utils.ChillMediaFlow;
 import main.utils.LogIn;
 import main.utils.TextIO;
 import main.utils.data.FileIO;
 import main.utils.data.IDataIO;
-
-import java.util.ArrayList;
-import java.util.List;
+import main.utils.data.SessionCache;
 
 public class ChillMedia {
 
     private final IUser currentUser;
 
-    private final TextIO textIO;
     private final IDataIO dataIO;
     private final ChillMediaFlow chillMediaFlow;
+    private final SessionCache sessionCache;
 
-    private final ArrayList<IGenre> genres = new ArrayList<>();
-    private final ArrayList<IMovie> movies = new ArrayList<>();
-    private final ArrayList<ISeries> series = new ArrayList<>();
-    private final ArrayList<IUser> users = new ArrayList<>();
+    //private final ArrayList<IGenre> genres = new ArrayList<>(); // fjernes
+
+    // TODO:
+    //  - Fjerne LogIn stuff fra Konstruktøren og ned i run() metoden
 
     public ChillMedia() {
+        this.sessionCache = new SessionCache();
         this.dataIO = new FileIO();
         load();
-        this.textIO = new TextIO();
         LogIn logIn = new LogIn(this);
         logIn.logIn();
         this.currentUser = logIn.getCurrentUser();
-        if (!users.contains(currentUser)) {
-            users.add(currentUser);
-        }
+        getSessionCache().addUser(currentUser);
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
@@ -47,11 +41,17 @@ public class ChillMedia {
      * @return Nothing.
      */
     private void load() {
-        this.getGenres().addAll(List.of(MovieGenre.values()));
-        this.getGenres().addAll(List.of(SeriesGenre.values()));
+        getSessionCache().setMovies(dataIO.loadMovies());
+        getSessionCache().setSeries(dataIO.loadSeries());
+        getSessionCache().setUsers(dataIO.loadUsers());
+
+        //this.getGenres().addAll(List.of(MovieGenre.values()));
+        //this.getGenres().addAll(List.of(SeriesGenre.values()));
+        /*
         this.getMovies().addAll(dataIO.loadMovies());
         this.getSeries().addAll(dataIO.loadSeries());
         this.getUsers().addAll(dataIO.loadUsers());
+        */
     }
 
     /*
@@ -61,8 +61,8 @@ public class ChillMedia {
      * @return Nothing.
      */
     public void run() {
-        getTextIO().println("Welcome to ChillMedia!");
-        getTextIO().println("");
+        TextIO.println("Welcome to ChillMedia!");
+        TextIO.println("");
         String[] options = new String[] {
                 "Log out",
                 "Search for a movie",
@@ -70,18 +70,18 @@ public class ChillMedia {
         };
         boolean run = true;
         while (run) {
-            String input = getTextIO().getUserInput("What would you like to do?", options);
+            String input = TextIO.getUserInput("What would you like to do?", options);
             switch (input) {
                 case "0" -> {
-                    getTextIO().println("Goodbye!");
+                    TextIO.println("Goodbye!");
                     run = false;
                 }
                 case "1" -> listMovies();
                 case "2" -> listSeries();
-                default -> getTextIO().println("Invalid input!");
+                default -> TextIO.println("Invalid input!");
             }
         }
-        dataIO.save(users);
+        dataIO.save(getSessionCache().getUsers());
     }
 
     /*
@@ -101,7 +101,7 @@ public class ChillMedia {
         };
 
         while (true) {
-            String input = getTextIO().getUserInput("Would you like to see?", options);
+            String input = TextIO.getUserInput("Would you like to see?", options);
             if (input.equals("0")) {
                 return;
             }
@@ -112,7 +112,7 @@ public class ChillMedia {
                 }
                 getChillMediaFlow().searchMovies(number);
             } catch (NumberFormatException e) {
-                getTextIO().println("Invalid input!");
+                TextIO.println("Invalid input!");
             }
         }
     }
@@ -132,7 +132,7 @@ public class ChillMedia {
         };
 
         while (true) {
-            String input = getTextIO().getUserInput("Would you like to see?", options);
+            String input = TextIO.getUserInput("Would you like to see?", options);
             if (input.equals("0")) {
                 return;
             }
@@ -143,29 +143,19 @@ public class ChillMedia {
                 }
                 getChillMediaFlow().searchSeries(number);
             } catch (NumberFormatException e) {
-                getTextIO().println("Invalid input!");
+                TextIO.println("Invalid input!");
             }
         }
     }
 
+    /*
     public ArrayList<IGenre> getGenres() {
         return this.genres;
     }
+    */
 
-    public ArrayList<IMovie> getMovies() {
-        return this.movies;
-    }
-
-    public ArrayList<ISeries> getSeries() {
-        return this.series;
-    }
-
-    public ArrayList<IUser> getUsers() {
-        return this.users;
-    }
-
-    public TextIO getTextIO() {
-        return this.textIO;
+    public SessionCache getSessionCache() {
+        return sessionCache;
     }
 
     public ChillMediaFlow getChillMediaFlow() {
