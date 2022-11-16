@@ -4,8 +4,10 @@ import main.media.IMovie;
 import main.media.ISeries;
 import main.user.IUser;
 import main.utils.data.dbutil.MySQL;
+import main.utils.data.dbutil.SQLStatements;
 
 import java.io.File;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,14 +20,17 @@ public class DataBaseIO implements IDataIO {
     }
 
     public ArrayList<IUser> loadUsers() {
+        ResultSet userdata = mySQL.executeQuery(SQLStatements.getAllUsers());
         return null;
     }
 
     public ArrayList<IMovie> loadMovies() {
+        ResultSet movieData = mySQL.executeQuery(SQLStatements.getAllMovies());
         return null;
     }
 
     public ArrayList<ISeries> loadSeries() {
+        ResultSet seriesData = mySQL.executeQuery(SQLStatements.getAllSeries());
         return null;
     }
 

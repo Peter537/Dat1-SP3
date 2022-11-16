@@ -1,11 +1,19 @@
 package main.utils.data.dbutil;
 
 public class SQLStatements {
-    public static String allCountries() {
-        return "SELECT * FROM country";
+    public static String getAllMovies() {
+        return "SELECT * FROM chillmedia.movie";
     }
 
-    public static String setACountry(String code, String name, String continent, String region, int surfaceArea, int population, String localName, String governmentForm, int code2) {
-        return "INSERT INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES ('" + code + "', '" + name + "', '" + continent + "', '" + region + "', " + surfaceArea + ", " + population + ", '" + localName + "', '" + governmentForm + "', " + code2 + ")";
+    public static String getAllSeries() {
+        return "SELECT * FROM chillmedia.series";
+    }
+
+    public static String getAllUsers() {
+        return "SELECT * FROM chillmedia.user";
+    }
+
+    public static String getUser(String username) {
+        return "SELECT * FROM chillmedia.user WHERE username = '" + username + "'";
     }
 }
