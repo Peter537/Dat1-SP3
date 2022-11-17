@@ -11,7 +11,6 @@ public class User implements IUser {
     private final String email;
     private final String password;
     private final int age;
-    private final boolean isAdult;
     private final ArrayList<IMovie> myMovies;
     private final ArrayList<IMovie> watchedMovies;
 
@@ -28,7 +27,6 @@ public class User implements IUser {
         this.age = age;
         this.myMovies = myMovies;
         this.watchedMovies = watchedMovies;
-        this.isAdult = age >= 18;
     }
 
     @Override
@@ -58,7 +56,7 @@ public class User implements IUser {
 
     @Override
     public boolean isAdult() {
-        return this.isAdult;
+        return getAge() >= 18;
     }
 
     @Override
@@ -72,7 +70,7 @@ public class User implements IUser {
     }
 
     @Override
-    public boolean addMyMovie(IMovie movie) {
+    public boolean addToMyMovies(IMovie movie) {
         if (!getMyMovies().contains(movie)) {
             getMyMovies().add(movie);
             return true;
@@ -81,7 +79,7 @@ public class User implements IUser {
     }
 
     @Override
-    public boolean removeMyMovie(IMovie movie) {
+    public boolean removeFromMyMovies(IMovie movie) {
         if (getMyMovies().contains(movie)) {
             getMyMovies().remove(movie);
             return true;
