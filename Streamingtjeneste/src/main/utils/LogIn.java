@@ -3,13 +3,16 @@ package main.utils;
 import main.ChillMedia;
 import main.user.IUser;
 import main.user.User;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class LogIn {
 
     private IUser currentUser;
+
     private final ArrayList<IUser> users;
+
 
     public LogIn(ChillMedia cm) {
         this.currentUser = null;
@@ -17,16 +20,12 @@ public class LogIn {
     }
 
     public void logIn() {
-        // Create message for TextIO
-        String msg = "Do you want to sign in, or create a new user?";
-        // Create options for TextIO
         String[] options = new String[]{
                 "Sign in",
                 "Sign up"
         };
-        // direct user to signIn() or signUp() depending on their answer
         while (true) {
-            String input = TextIO.getUserInput(msg, 1, options);
+            String input = TextIO.getUserInput("Do you want to sign in, or create a new user?", 1, options);
             if (input.equals("1")) {
                 signIn();
             } else if (input.equals("2")) {
@@ -38,10 +37,10 @@ public class LogIn {
         }
     }
 
+
     private void signUp() {
         // promts user to write email, and checks if the email is unique. If the email is not unique, the user has to write a different email.
-        String msg = "You are signing up. Write email address, press 0 to go back: ";
-        String email = TextIO.getUserInput(msg);
+        String email = TextIO.getUserInput("You are signing up. Write email address, press 0 to go back: ");
         if (email.equals("0")) {
             logIn();
             return;
@@ -53,64 +52,32 @@ public class LogIn {
             return;
         }
 
-        // promts user for a name, this does not have to be unique
-        msg = "You are signing up. Write name, press 0 to go back: ";
-        String name = TextIO.getUserInput(msg);
+        String name = TextIO.getUserInput("You are signing up. Write name, press 0 to go back: ");
         if (name.equals("0")) {
             logIn();
             return;
         }
 
-        // promts user for a password, this does not have to be unique
-        msg = "You are signing up. Write password, press 0 to go back: ";
-        String password = TextIO.getUserInput(msg);
+        // promts user for a password, this does not have to be unique;
+        String password = TextIO.getUserInput("You are signing up. Write password, press 0 to go back: ");
         if (password.equals("0")) {
             logIn();
             return;
         }
 
-        //will check if you can confirm the same password
-        msg = "You are signing up. Confirm password, press 0 to go back: ";
-        String confirmPassword;
-        boolean notConfirmed = true;
-        while (notConfirmed) {
-            confirmPassword = TextIO.getUserInput(msg);
-            if (confirmPassword.equals("0")) {
-                logIn();
-                return;
-            }
-            if (confirmPassword.equals(password)) {
-                notConfirmed = false;
-            } else {
-                msg = "Passwords do not match, please try again or press 0 to go back: ";
-            }
-        }
+        confirmPassword (password);
 
-        // promts user for their age, this does not have to be unique. The age is converted into an integer.
-        int age;
-        while (true) {
-            try {
-                msg = "You are signing up. Write your age, press 0 to go back: ";
-                String sAge = TextIO.getUserInput(msg);
-                if (sAge.equals("0")) {
-                    logIn();
-                }
-                age = Integer.parseInt(sAge);
-                break;
-            } catch (NumberFormatException e) {
-                TextIO.println("Please write a number");
-            }
-        }
+        int age = getAge ();
 
-        // A new userprofile is created with the field values the user has given.
         createUser(name, password, email, age);
+
     }
 
 
     private void signIn() {
-        // promts user for email and checks if it exists in the list
-        String msg = "You are signing in. Write email address, press 0 to go back: ";
-        String email = TextIO.getUserInput(msg);
+
+        // prompts user for email and checks if it exists in the list
+        String email = TextIO.getUserInput("You are signing in. Write email address, press 0 to go back: ");
         if (email.equals("0")) {
             logIn();
             return;
@@ -118,12 +85,11 @@ public class LogIn {
 
         if (!checkEmailInList(email)) {
             TextIO.println("Email not found, please try again");
-            msg = "Do you want to sign up?";
             String[] options = new String[]{
                     "Yes",
                     "No"
             };
-            String input = TextIO.getUserInput(msg, 1, options);
+            String input = TextIO.getUserInput("Do you want to sign up?", 1, options);
             if (input.equals("1")) {
                 signUp();
                 return;
@@ -133,25 +99,59 @@ public class LogIn {
             }
         }
 
-        // NOT DONE, needs to check if password matches ( Or does it? That
-        // should probably only be done in sign UP (which is already made)
-        msg = "Write your password, press 0 to go back: ";
-        String password = TextIO.getUserInput(msg);
+        String password = TextIO.getUserInput("Write your password, press 0 to go back: ");
         if (password.equals("0")) {
             logIn();
             return;
         }
 
-
-        // checks if the password matches the password in the userprofile
         IUser user = getUser(email, password);
         if (user == null) {
             TextIO.println("Password does not match, please try again");
             signIn();
             return;
         }
-
         currentUser = user;
+    }
+
+    public void confirmPassword(String password) {
+        String confirmPW;
+        //below msg string is there because it needs to change statement if given prompt is not valid
+        String msg = "You are signing up. Confirm password, press 0 to go back: ";
+        boolean notConfirmed = true;
+        while (notConfirmed) {
+            confirmPW = TextIO.getUserInput(msg);
+
+            if (confirmPW.equals("0")) {
+                logIn();
+                return;
+            }
+
+            if (confirmPW.equals(password)) {
+                notConfirmed = false;
+            } else {
+                msg = "Passwords do not match, please try again or press 0 to go back: ";
+            }
+        }
+    }
+
+    public int getAge() {
+        String userAge;
+        while (true) {
+            try {
+                userAge = TextIO.getUserInput("You are signing up. Write your age, press 0 to go back: ");
+                if (userAge.equals("0")) {
+                    logIn();
+                    break;
+                }
+                Integer.parseInt(userAge);
+                return Integer.parseInt(userAge);
+
+            } catch (NumberFormatException e) {
+                TextIO.println("Please write a number.");
+            }
+        }
+        return Integer.parseInt(userAge);
     }
 
     private void createUser(String name, String email, String password, int age) {
