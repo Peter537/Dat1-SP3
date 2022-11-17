@@ -17,14 +17,17 @@ public class Series extends AWatchable implements ISeries {
         this.seasons = seasons;
     }
 
+    @Override
     public int getStartYear() {
         return this.startYear;
     }
 
+    @Override
     public int getEndYear() {
         return this.endYear;
     }
 
+    @Override
     public ArrayList<Season> getSeasons() {
         return this.seasons;
     }

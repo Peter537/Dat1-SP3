@@ -31,38 +31,47 @@ public class User implements IUser {
         this.isAdult = age >= 18;
     }
 
+    @Override
     public int getID() {
         return this.id;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public String getEmail() {
         return this.email;
     }
 
+    @Override
     public String getPassword() {
         return this.password;
     }
 
+    @Override
     public int getAge() {
         return this.age;
     }
 
+    @Override
     public boolean isAdult() {
         return this.isAdult;
     }
 
+    @Override
     public ArrayList<IMovie> getMyMovies() {
         return this.myMovies;
     }
 
+    @Override
     public ArrayList<IMovie> getWatchedMovies() {
         return this.watchedMovies;
     }
 
+    @Override
     public boolean addMyMovie(IMovie movie) {
         if (!getMyMovies().contains(movie)) {
             getMyMovies().add(movie);
@@ -71,6 +80,7 @@ public class User implements IUser {
         return false;
     }
 
+    @Override
     public boolean removeMyMovie(IMovie movie) {
         if (getMyMovies().contains(movie)) {
             getMyMovies().remove(movie);
@@ -79,6 +89,7 @@ public class User implements IUser {
         return false;
     }
 
+    @Override
     public void addWatchedMovie(IMovie movie) {
         if (!getWatchedMovies().contains(movie)) {
             getWatchedMovies().add(movie);
