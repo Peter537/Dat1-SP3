@@ -15,13 +15,13 @@ public class SessionCache {
     public SessionCache() { }
 
     public void setMovies(ArrayList<IMovie> movies) {
-        this.movies.clear();
-        this.movies.addAll(movies);
+        getMovies().clear();
+        getMovies().addAll(movies);
     }
 
     public void setSeries(ArrayList<ISeries> series) {
-        this.series.clear();
-        this.series.addAll(series);
+        getSeries().clear();
+        getSeries().addAll(series);
     }
 
     public void setUser(IUser user) {
@@ -29,16 +29,16 @@ public class SessionCache {
     }
 
     public boolean addMovie(IMovie movie) {
-        if (!this.movies.contains(movie)) {
-            this.movies.add(movie);
+        if (!getMovies().contains(movie)) {
+            getMovies().add(movie);
             return true;
         }
         return false;
     }
 
     public boolean addSeries(ISeries series) {
-        if (!this.series.contains(series)) {
-            this.series.add(series);
+        if (!getSeries().contains(series)) {
+            getSeries().add(series);
             return true;
         }
         return false;
