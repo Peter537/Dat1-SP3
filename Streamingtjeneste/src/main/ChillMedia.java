@@ -70,7 +70,7 @@ public class ChillMedia {
                 default -> TextIO.println("Invalid input!");
             }
         }
-        getDataIO().save(getSessionCache().getUser());
+        getDataIO().saveUser(getSessionCache().getUser());
     }
 
     /*

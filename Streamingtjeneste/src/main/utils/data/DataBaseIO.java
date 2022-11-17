@@ -39,11 +39,11 @@ public class DataBaseIO implements IDataIO {
         return null;
     }
 
-    public void save(IUser user) {
+    public void saveUser(IUser user) {
 
     }
 
-    public void save(ArrayList<IUser> users) {
+    public void saveUser(ArrayList<IUser> users) {
 
     }
 

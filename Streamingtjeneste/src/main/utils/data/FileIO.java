@@ -192,11 +192,11 @@ public class FileIO implements IDataIO {
         return seriesData;
     }
 
-    public void save(IUser user) {
+    public void saveUser(IUser user) {
         // TODO: Skal laves
     }
 
-    public void save(ArrayList<IUser> users) {
+    public void saveUser(ArrayList<IUser> users) {
         saveAsJson(users);
     }
 

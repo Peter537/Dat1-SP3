@@ -16,7 +16,7 @@ public interface IDataIO {
 
     ArrayList<ISeries> loadSeries();
 
-    void save(ArrayList<IUser> users); // TODO: Slettes
+    void saveUser(ArrayList<IUser> users); // TODO: Slettes
 
-    void save(IUser user);
+    void saveUser(IUser user);
 }
