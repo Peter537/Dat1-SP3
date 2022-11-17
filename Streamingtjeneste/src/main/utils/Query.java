@@ -78,8 +78,16 @@ public class Query {
         return media.stream().filter(m -> m.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public static ArrayList<IMedia> searchGenre(ArrayList<IMedia> media, String genre) {
+        return searchGenre(media, Genre.valueOf(genre.toUpperCase()));
+    }
+
     public static ArrayList<IMedia> searchGenreAgeRestricted(ArrayList<IMedia> media, IGenre genre) {
         return media.stream().filter(m -> m.getGenres().contains(genre) && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static ArrayList<IMedia> searchGenreAgeRestricted(ArrayList<IMedia> media, String genre) {
+        return searchGenreAgeRestricted(media, Genre.valueOf(genre.toUpperCase()));
     }
 
     /*
