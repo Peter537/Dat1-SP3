@@ -13,13 +13,17 @@ public class SQLStatements {
         return "SELECT * FROM chillmedia.user";
     }
 
-    public static String getUser(String username) {
+    public static String getUserFromUserName(String username) {
         return "SELECT * FROM chillmedia.user WHERE username = '" + username + "'";
     }
     public static String getUserFromEmail(String email)
     {
         return  "SELECT * FROM chillmedia.user WHERE email = '" + email + "'";
     }
+
+
+
+
 
     public static String getMovieFromName (String name)
     {
