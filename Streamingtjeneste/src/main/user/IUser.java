@@ -21,9 +21,9 @@ public interface IUser {
 
     ArrayList<IMovie> getWatchedMovies();
 
-    boolean addMyMovie(IMovie movie);
+    boolean addToMyMovies(IMovie movie);
 
-    boolean removeMyMovie(IMovie movie);
+    boolean removeFromMyMovies(IMovie movie);
 
     void addWatchedMovie(IMovie movie);
 }
