@@ -10,7 +10,7 @@ public class MySQL {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             //Example: "jdbc:mysql://localhost:/world", "root", "12321"
-            connection = DriverManager.getConnection("jdbc:mysql://" + url + "?autoReconnect=true&useSSL=false", name, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + url + "?autoReconnect=true&useSSL=false", name, password);
             return true;
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -22,7 +22,7 @@ public class MySQL {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             //Example: "jdbc:mysql://localhost:/world", "root", "12321"
-            connection = DriverManager.getConnection("jdbc:mysql://" + IP + ":/" + Schema + "?autoReconnect=true&useSSL=false", name, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + IP + ":/" + Schema + "?autoReconnect=true&useSSL=false", name, password);
             return true;
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class MySQL {
 
     public boolean closeConnection() {
         try {
-            connection.close();
+            getConnection().close();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
