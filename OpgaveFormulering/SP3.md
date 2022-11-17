@@ -39,7 +39,7 @@ Der kan tænkes en masse ekstra features ind, som fx (ikke prioriteret rækkefø
 - En bruger kan være klassificeret som ”barn” og må således kun se film i kategorien ”Family” <br>
 - Der skal kunne tilføjes nye typer medier, som fx e-bøger, lydbøger eller spil <br>
 - I kan lave en grafisk brugergrænseflade med Processing eller med Java Swing eller Java FX <br>
-<br>
+<br><br>
 ### **4. Data** <br>
 
 I skal i løsningen hente data om film og serier fra .txt-filer, som I får udleveret. Start med at lave en funktion, som kan indlæse data fra filerne og fylde nogle ArrayLists med film, serier, episoder, etc.<br>
