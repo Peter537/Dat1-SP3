@@ -45,14 +45,14 @@ public class SessionCache {
     }
 
     public ArrayList<IMovie> getMovies() {
-        return movies;
+        return this.movies;
     }
 
     public ArrayList<ISeries> getSeries() {
-        return series;
+        return this.series;
     }
 
     public IUser getUser() {
-        return user;
+        return this.user;
     }
 }
