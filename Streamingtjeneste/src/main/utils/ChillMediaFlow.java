@@ -18,7 +18,7 @@ public class ChillMediaFlow {
 
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
-        this.currentUser = chillMedia.getCurrentUser();
+        this.currentUser = chillMedia.getSessionCache().getUser();
     }
 
     /*
