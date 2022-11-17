@@ -1,20 +1,20 @@
 ### **1. Opgaven** <br>
 
-I SP3 skal I lave en objektorienteret analyse af et domæne, og ud fra analysen lave et objektorienteret design af jeres løsning. Derefter skal I implementere løsningen i Java. I jeres løsning skal I anvende basale Java-konstruktioner som klasser, metoder, interfaces, løkker, betingelser, ArrayLists mv.
-
+I SP3 skal I lave en objektorienteret analyse af et domæne, og ud fra analysen lave et objektorienteret design af jeres løsning. Derefter skal I implementere løsningen i Java. I jeres løsning skal I anvende basale Java-konstruktioner som klasser, metoder, interfaces, løkker, betingelser, ArrayLists mv.<br>
+<br>
 ### **2. Domænet** <br>
 
-I projektet skal I udvikle et softwaresystem til brug for streamingtjenester som Netflix, HBO, Viaplay etc.
+I projektet skal I udvikle et softwaresystem til brug for streamingtjenester som Netflix, HBO, Viaplay etc.<br>
 
-I systemet er der medier, der kan afspilles. Medier kan være film eller serie-episoder. Både film og serier er inddelt i kategorier som fx crime, war, drama, family, romance og sci-fi. Serier består desuden af sæsoner og episoder. Alle medier har et udgivelsesår og en rating.
+I systemet er der medier, der kan afspilles. Medier kan være film eller serie-episoder. Både film og serier er inddelt i kategorier som fx crime, war, drama, family, romance og sci-fi. Serier består desuden af sæsoner og episoder. Alle medier har et udgivelsesår og en rating.<br>
 
-I systemet er der også brugere, som har lister over de film, de har set og de film, de gerne vil se.
+I systemet er der også brugere, som har lister over de film, de har set og de film, de gerne vil se.<br>
 
-Vi laver i første omgang ikke nogen grafisk brugergrænseflade til systemet, men laver det rent tekstbaseret.
-
+Vi laver i første omgang ikke nogen grafisk brugergrænseflade til systemet, men laver det rent tekstbaseret.<br>
+<br>
 ### **3. Funktionelle krav** <br>
 
-Der er følgende krav til systemet:
+Der er følgende krav til systemet:<br>
 
 - Der skal være en startmenu, hvor brugeren kan vælge mellem at <br>
 - Oprette sig som bruger <br>
@@ -29,7 +29,7 @@ Der er følgende krav til systemet:
 - Brugernes login-oplysninger (brugernavn og password) skal gemmes i en fil, så de kan indlæses når programmet startes op igen. <br>
 - Der skal være fornuftig håndtering af fejl. Hvis der opstår fejl i programmet skal de håndteres passende steder og brugeren skal informeres, hvis det er relevant. Overvej hvem fejlen skal kommunikeres til. En IOException (som kan opstå, når man læser ind fra en fil) vil fx gøre, at programmet fra brugerens synspunkt ikke virker. Hvordan formidler vi til brugeren, at der er opstået en fejl? <br>
 
-Der kan tænkes en masse ekstra features ind, som fx (ikke prioriteret rækkefølge)
+Der kan tænkes en masse ekstra features ind, som fx (ikke prioriteret rækkefølge)<br>
 
 - En bruger vil gerne søge efter film, der har rating større end 8,5 <br>
 - En bruger vil gerne søge efter film fra 80’erne <br>
@@ -39,41 +39,41 @@ Der kan tænkes en masse ekstra features ind, som fx (ikke prioriteret rækkefø
 - En bruger kan være klassificeret som ”barn” og må således kun se film i kategorien ”Family” <br>
 - Der skal kunne tilføjes nye typer medier, som fx e-bøger, lydbøger eller spil <br>
 - I kan lave en grafisk brugergrænseflade med Processing eller med Java Swing eller Java FX <br>
-
+<br>
 ### **4. Data** <br>
 
-I skal i løsningen hente data om film og serier fra .txt-filer, som I får udleveret. Start med at lave en funktion, som kan indlæse data fra filerne og fylde nogle ArrayLists med film, serier, episoder, etc.
+I skal i løsningen hente data om film og serier fra .txt-filer, som I får udleveret. Start med at lave en funktion, som kan indlæse data fra filerne og fylde nogle ArrayLists med film, serier, episoder, etc.<br>
 
-Der er også zip-filer med billeder, som I kan bruge hvis I vælger at lave grafisk brugergrænseflade.
-
+Der er også zip-filer med billeder, som I kan bruge hvis I vælger at lave grafisk brugergrænseflade.<br>
+<br>
 ### **5. Aflevering** <br>
 
-Opgaven skal afleveres senest fredag d. 11.11 kl. 23.59. Dette gøres ved at placere koden i et git repository og og aflevere linket i PeerGrade. Opgaven kan afleveres som gruppe.
-
+Opgaven skal afleveres senest fredag d. 11.11 kl. 23.59. Dette gøres ved at placere koden i et git repository og og aflevere linket i PeerGrade. Opgaven kan afleveres som gruppe.<br>
+<br>
 ### **6. Gode Råd** <br>
 
-**Prioritering**
+**Prioritering**<br>
 
-Løs hellere nogle delproblemer godt end alle overfladisk. Det er meget bedre udtrykkeligt at beslutte, at et specielt delproblem (fx. “brugeren skal kunne se sin liste over film”) slet ikke håndteres i systemet (og skrive det på en mangelliste!), end at programmere en uigennemtænkt, uafprøvet løsning til delproblemet. Sådan en delløsning kan komplicere den samlede softwareløsning, reducere dens brugbarhed og vanskeliggøre videreudvikling.
+Løs hellere nogle delproblemer godt end alle overfladisk. Det er meget bedre udtrykkeligt at beslutte, at et specielt delproblem (fx. “brugeren skal kunne se sin liste over film”) slet ikke håndteres i systemet (og skrive det på en mangelliste!), end at programmere en uigennemtænkt, uafprøvet løsning til delproblemet. Sådan en delløsning kan komplicere den samlede softwareløsning, reducere dens brugbarhed og vanskeliggøre videreudvikling.<br>
 
-**Divide and Conquer**
+**Divide and Conquer**<br>
 
-Lad være med at lave alt på én gang.
+Lad være med at lave alt på én gang.<br>
 
-Forsøg at se på hvert delproblem for sig, og løs hvert delproblem før I starter på noget nyt
+Forsøg at se på hvert delproblem for sig, og løs hvert delproblem før I starter på noget nyt<br>
 
-·      Eksempel: Lav funktionalitet, som kan fylde ArrayLists med film, serier og brugere
+- Eksempel: Lav funktionalitet, som kan fylde ArrayLists med film, serier og brugere<br>
 
-·      Eksempel: Lav funktionalitet, som tillader brugeren at oprette sig som bruger
+- Eksempel: Lav funktionalitet, som tillader brugeren at oprette sig som bruger<br>
 
-Start simpelt
+**Start simpelt**<br>
 
-Hvis noget virker meget uoverskueligt, så Solve a Simpler Problem First. Lav en løsning der er åbenlyst utilstrækkelig, men dog et skridt i den rigtige retning. Derefter er I meget klogere, og kan tage et nyt
+Hvis noget virker meget uoverskueligt, så Solve a Simpler Problem First. Lav en løsning der er åbenlyst utilstrækkelig, men dog et skridt i den rigtige retning. Derefter er I meget klogere, og kan tage et nyt<br>
 
-Fx kan man starte med kun at have film og kun at have én bruger.
-
+Fx kan man starte med kun at have film og kun at have én bruger.<br>
+<br>
 ### **7. Gruppearbejde** <br>
 
-En del af udfordringen er at I skal samarbejde i en gruppe. Det er derfor ikke muligt at arbejde solo med denne opgave. Før I starter arbejdet bør I snakke om i gruppen hvordan I vil arbejde, hvor ofte og hvor længe. Sørg for at organisere arbejdet så det bliver ligeligt fordelt, eller sådan at hver opgave passer til den enkeltes evner og interesser. Sørg for at jeres klassediagram hele tiden er i en tilstand hvor det fungerer som aftale for hvad der bliver kodet.
+En del af udfordringen er at I skal samarbejde i en gruppe. Det er derfor ikke muligt at arbejde solo med denne opgave. Før I starter arbejdet bør I snakke om i gruppen hvordan I vil arbejde, hvor ofte og hvor længe. Sørg for at organisere arbejdet så det bliver ligeligt fordelt, eller sådan at hver opgave passer til den enkeltes evner og interesser. Sørg for at jeres klassediagram hele tiden er i en tilstand hvor det fungerer som aftale for hvad der bliver kodet.<br>
 
-**Vi ser hellere at alle i gruppen kan bevare overblik over koden end at enkelte gruppemedlemmer får implementeret af en masse features.**
+**Vi ser hellere at alle i gruppen kan bevare overblik over koden end at enkelte gruppemedlemmer får implementeret af en masse features.**<br>
