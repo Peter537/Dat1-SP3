@@ -13,20 +13,13 @@ public class ChillMedia {
     private final IDataIO dataIO;
     private final ChillMediaFlow chillMediaFlow;
     private final SessionCache sessionCache;
-
-    //private final ArrayList<IGenre> genres = new ArrayList<>(); // fjernes
-
-    // TODO:
-    //  - Fjerne LogIn stuff fra Konstruktøren og ned i run() metoden
+    private final LogIn logIn;
 
     public ChillMedia() {
         this.sessionCache = new SessionCache();
         this.dataIO = new FileIO();
+        this.logIn = new LogIn(this);
         load();
-        LogIn logIn = new LogIn(this);
-        logIn.logIn();
-        IUser currentUser = logIn.getCurrentUser();
-        getSessionCache().setUser(currentUser);
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
@@ -38,9 +31,6 @@ public class ChillMedia {
     private void load() {
         getSessionCache().setMovies(getDataIO().loadMovies());
         getSessionCache().setSeries(getDataIO().loadSeries());
-
-        //this.getGenres().addAll(List.of(MovieGenre.values()));
-        //this.getGenres().addAll(List.of(SeriesGenre.values()));
     }
 
     /*
@@ -50,6 +40,10 @@ public class ChillMedia {
      * @return Nothing.
      */
     public void run() {
+        getLogIn().logIn();
+        IUser currentUser = getLogIn().getCurrentUser();
+        getSessionCache().setUser(currentUser);
+
         TextIO.println("Welcome to ChillMedia!");
         TextIO.println("");
         String[] options = new String[] {
@@ -137,12 +131,6 @@ public class ChillMedia {
         }
     }
 
-    /*
-    public ArrayList<IGenre> getGenres() {
-        return this.genres;
-    }
-    */
-
     public IDataIO getDataIO() {
         return this.dataIO;
     }
@@ -153,5 +141,9 @@ public class ChillMedia {
 
     public ChillMediaFlow getChillMediaFlow() {
         return chillMediaFlow;
+    }
+
+    private LogIn getLogIn() {
+        return logIn;
     }
 }
