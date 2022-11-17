@@ -13,6 +13,7 @@ public class Movie extends AWatchable implements IMovie {
         this.year = year;
     }
 
+    @Override
     public int getYear() {
         return this.year;
     }
