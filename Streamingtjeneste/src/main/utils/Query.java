@@ -1,8 +1,7 @@
 package main.utils;
 
+import main.genre.Genre;
 import main.genre.IGenre;
-import main.genre.MovieGenre;
-import main.genre.SeriesGenre;
 import main.media.IMedia;
 import main.media.ISeries;
 import main.media.IMovie;
@@ -19,8 +18,8 @@ public class Query {
      * @param genre The genre to search for
      * @return ArrayList<ISeries> list of series that matches the given genre
      */
-    public static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, SeriesGenre genre) {
-        return series.stream().filter(s -> s.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
+    public static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, IGenre genre) {
+        return series.stream().filter(s -> s.getGenres().contains(genre) && genre.isSeriesGenre()).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*
@@ -31,7 +30,15 @@ public class Query {
      * @return ArrayList<ISeries> list of series that matches the given genre
      */
     public static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, String genre) {
-        return searchSeriesGenre(series, SeriesGenre.valueOf(genre.toUpperCase()));
+        return searchSeriesGenre(series, Genre.valueOf(genre.toUpperCase()));
+    }
+
+    public static ArrayList<ISeries> searchSeriesGenreAgeRestricted(ArrayList<ISeries> series, IGenre genre) {
+        return series.stream().filter(s -> s.getGenres().contains(genre) && genre.isSeriesGenre() && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static ArrayList<ISeries> searchSeriesGenreAgeRestricted(ArrayList<ISeries> series, String genre) {
+        return searchSeriesGenreAgeRestricted(series, Genre.valueOf(genre.toUpperCase()));
     }
 
     /*
@@ -41,8 +48,8 @@ public class Query {
      * @param genre The genre to search for
      * @return ArrayList<IMovie> list of movies that matches the given genre
      */
-    public static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre) {
-        return movies.stream().filter(m -> m.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
+    public static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, IGenre genre) {
+        return movies.stream().filter(m -> m.getGenres().contains(genre) && genre.isMovieGenre()).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*
@@ -53,7 +60,15 @@ public class Query {
      * @return ArrayList<IMovie> list of movies that matches the given genre
      */
     public static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, String genre) {
-        return searchMovieGenre(movies, MovieGenre.valueOf(genre.toUpperCase()));
+        return searchMovieGenre(movies, Genre.valueOf(genre.toUpperCase()));
+    }
+
+    public static ArrayList<IMovie> searchMovieGenreAgeRestricted(ArrayList<IMovie> movies, IGenre genre) {
+        return movies.stream().filter(m -> m.getGenres().contains(genre) && genre.isMovieGenre() && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static ArrayList<IMovie> searchMovieGenreAgeRestricted(ArrayList<IMovie> movies, String genre) {
+        return searchMovieGenreAgeRestricted(movies, Genre.valueOf(genre.toUpperCase()));
     }
 
     /*
@@ -61,6 +76,10 @@ public class Query {
      */
     public static ArrayList<IMedia> searchGenre(ArrayList<IMedia> media, IGenre genre) {
         return media.stream().filter(m -> m.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static ArrayList<IMedia> searchGenreAgeRestricted(ArrayList<IMedia> media, IGenre genre) {
+        return media.stream().filter(m -> m.getGenres().contains(genre) && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*
