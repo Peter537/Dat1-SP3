@@ -1,8 +1,7 @@
 package main.utils.data;
 
+import main.genre.Genre;
 import main.genre.IGenre;
-import main.genre.MovieGenre;
-import main.genre.SeriesGenre;
 import main.media.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -117,15 +116,19 @@ public class FileIO implements IDataIO {
 
                 for (String genre : genreTitles) {
                     String genreName = genre.trim().toUpperCase().replaceAll("-", "_");
+                    if (Arrays.stream(Genre.values()).anyMatch(g -> g.isMovieGenre() && g.name().equals(genreName))) {
+                        movieGenres.add(Genre.valueOf(genreName));
+                    }
+                    /*
                     if (Arrays.stream(MovieGenre.values()).anyMatch(g -> g.name().equals(genreName))) {
                         movieGenres.add(MovieGenre.valueOf(genreName));
                     }
+                     */
                 }
 
                 float rating = Float.parseFloat(values[3].replace(',', '.').trim());
                 movieData.add(new Movie(movieTitles, rating, movieGenres, year));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -166,9 +169,14 @@ public class FileIO implements IDataIO {
 
                 for (String genre : genreTitles) {
                     String genreName = genre.trim().toUpperCase().replaceAll("-", "_");
+                    if (Arrays.stream(Genre.values()).anyMatch(g -> g.isSeriesGenre() && g.name().equals(genreName))) {
+                        seriesGenre.add(Genre.valueOf(genreName));
+                    }
+                    /*
                     if (Arrays.stream(SeriesGenre.values()).anyMatch(g -> g.name().equals(genreName))) {
                         seriesGenre.add(SeriesGenre.valueOf(genreName));
                     }
+                     */
                 }
 
                 float rating = Float.parseFloat(values[3].replaceAll(",", "."));
