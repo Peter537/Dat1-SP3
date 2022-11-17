@@ -10,6 +10,18 @@ public class Series extends AWatchable implements ISeries {
     private final int endYear;
     private final ArrayList<Season> seasons;
 
+    /**
+     * Constructor for Series
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     *
+     * @param title
+     * @param startYear
+     * @param endYear
+     * @param rating
+     * @param genres
+     * @param seasons
+     */
     public Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons) {
         super(title, rating, genres);
         this.startYear = startYear;

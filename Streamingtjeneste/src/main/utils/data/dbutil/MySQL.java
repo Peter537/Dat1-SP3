@@ -6,6 +6,21 @@ public class MySQL {
 
     private Connection connection;
 
+    /**
+     * Constructor for MySQL
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     */
+    public MySQL() { }
+
+    /**
+     *
+     *
+     * @param url
+     * @param name
+     * @param password
+     * @return boolean
+     */
     public boolean openConnection(String url, String name, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -18,11 +33,20 @@ public class MySQL {
         }
     }
 
-    public boolean openConnection(String IP, String Schema, String name, String password) {
+    /**
+     *
+     *
+     * @param ip
+     * @param schema
+     * @param name
+     * @param password
+     * @return boolean
+     */
+    public boolean openConnection(String ip, String schema, String name, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             //Example: "jdbc:mysql://localhost:/world", "root", "12321"
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + IP + ":/" + Schema + "?autoReconnect=true&useSSL=false", name, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":/" + schema + "?autoReconnect=true&useSSL=false", name, password);
             return true;
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -30,6 +54,11 @@ public class MySQL {
         }
     }
 
+    /**
+     *
+     *
+     * @return boolean
+     */
     public boolean closeConnection() {
         try {
             getConnection().close();
@@ -40,6 +69,12 @@ public class MySQL {
         }
     }
 
+    /**
+     *
+     *
+     * @param query
+     * @return ResultSet
+     */
     public ResultSet executeQuery(String query) {
         try {
             return connection.createStatement().executeQuery(query);
@@ -49,6 +84,12 @@ public class MySQL {
         }
     }
 
+    /**
+     *
+     *
+     * @param query
+     * @return boolean
+     */
     public boolean executeChangeQuery(PreparedStatement query) {
         try {
             query.execute();

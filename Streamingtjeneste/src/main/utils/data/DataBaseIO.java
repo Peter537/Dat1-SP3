@@ -18,11 +18,21 @@ public class DataBaseIO implements IDataIO {
 
     private final MySQL mySQL;
 
+    /**
+     * Constructor for DataBaseIO
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     */
     public DataBaseIO() {
         mySQL = new MySQL();
         mySQL.openConnection("localhost", "chillmedia", "root", getPassword());
     }
 
+    /**
+     *
+     *
+     * @return ArrayList<IUser>
+     */
     public ArrayList<IUser> loadUsers() {
         ResultSet userdata = mySQL.executeQuery(SQLStatements.getAllUsers());
         ArrayList<IUser> users = new ArrayList<>();
@@ -45,6 +55,13 @@ public class DataBaseIO implements IDataIO {
         return users;
     }
 
+    /**
+     *
+     *
+     * @param email
+     * @param password
+     * @return IUser
+     */
     public IUser loadUser(String email, String password) {
         ResultSet userdata = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(email, password));
         IUser user = null;
@@ -67,6 +84,11 @@ public class DataBaseIO implements IDataIO {
         return user;
     }
 
+    /**
+     *
+     *
+     * @return ArrayList<IMovie>
+     */
     public ArrayList<IMovie> loadMovies() {
         ResultSet movieData = mySQL.executeQuery(SQLStatements.getAllMovies());
 
@@ -90,6 +112,11 @@ public class DataBaseIO implements IDataIO {
         return movies;
     }
 
+    /**
+     *
+     *
+     * @return ArrayList<ISeries>
+     */
     public ArrayList<ISeries> loadSeries() {
         ResultSet seriesData = mySQL.executeQuery(SQLStatements.getAllSeries());
 
@@ -120,6 +147,12 @@ public class DataBaseIO implements IDataIO {
         return series;
     }
 
+    /**
+     *
+     *
+     * @param user
+     * @return Nothing.
+     */
     public void saveUser(IUser user) {
         PreparedStatement statement = null;
         try {
@@ -147,10 +180,11 @@ public class DataBaseIO implements IDataIO {
         mySQL.closeConnection();
     }
 
-    public MySQL getMySQL() {
-        return mySQL;
-    }
-
+    /**
+     *
+     *
+     * @return String
+     */
     private String getPassword() {
         File file = new File("Data/dbpass.csv");
         try {
@@ -160,5 +194,9 @@ public class DataBaseIO implements IDataIO {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public MySQL getMySQL() {
+        return mySQL;
     }
 }

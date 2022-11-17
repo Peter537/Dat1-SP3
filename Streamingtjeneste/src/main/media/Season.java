@@ -5,6 +5,14 @@ public class Season {
     private final int seasonNumber;
     private final int episodeCount;
 
+    /**
+     * Constructor for Season
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     *
+     * @param seasonNumber
+     * @param episodeCount
+     */
     public Season(int seasonNumber, int episodeCount) {
         this.seasonNumber = seasonNumber;
         this.episodeCount = episodeCount;

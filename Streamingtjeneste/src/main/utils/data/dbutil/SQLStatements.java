@@ -1,6 +1,12 @@
 package main.utils.data.dbutil;
 
 public class SQLStatements {
+
+    /**
+     * Før vi laver kommentarer skal vi lige finde ud af hvilke Statements vi skal bruge
+     */
+
+
     public static String getAllMovies() {
         return "SELECT * FROM chillmedia.movie";
     }

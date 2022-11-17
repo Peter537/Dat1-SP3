@@ -23,18 +23,30 @@ public class FileIO implements IDataIO {
     private final String moviePath = "Data/film.csv";
     private final String seriesPath = "Data/serier.csv";
 
+    /**
+     * Constructor for FileIO
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     */
     public FileIO() { }
 
-    /*
-     * This method loads all users from the file "Data/user.csv" and returns them as an ArrayList.
+    /**
      *
-     * @return ArrayList<IUser> list of users
+     *
+     * @return ArrayList<IUser>
      */
     @Override
     public ArrayList<IUser> loadUsers() {
         return loadUsersFromJson();
     }
 
+    /**
+     *
+     *
+     * @param email
+     * @param password
+     * @return IUser
+     */
     public IUser loadUser(String email, String password) {
         /* TODO: Skal finde ud af om det er bedre at bruge en for loop eller en stream her
         ArrayList<IUser> users = loadUsers();
@@ -47,6 +59,11 @@ public class FileIO implements IDataIO {
         return null;
     }
 
+    /**
+     *
+     *
+     * @return ArrayList<IUser>
+     */
     private ArrayList<IUser> loadUsersFromJson() {
         ArrayList<IUser> users = new ArrayList<>();
         if (movies == null) {
@@ -87,10 +104,10 @@ public class FileIO implements IDataIO {
         return users;
     }
 
-    /*
-     * This method loads all movies from the file "Data/film.csv" and returns them as an ArrayList.
+    /**
      *
-     * @return ArrayList<IMovie> list of movies
+     *
+     * @return ArrayList<IMovie>
      */
     @Override
     public ArrayList<IMovie> loadMovies() {
@@ -119,11 +136,6 @@ public class FileIO implements IDataIO {
                     if (Arrays.stream(Genre.values()).anyMatch(g -> g.isMovieGenre() && g.name().equals(genreName))) {
                         movieGenres.add(Genre.valueOf(genreName));
                     }
-                    /*
-                    if (Arrays.stream(MovieGenre.values()).anyMatch(g -> g.name().equals(genreName))) {
-                        movieGenres.add(MovieGenre.valueOf(genreName));
-                    }
-                     */
                 }
 
                 float rating = Float.parseFloat(values[3].replace(',', '.').trim());
@@ -136,10 +148,10 @@ public class FileIO implements IDataIO {
         return movieData;
     }
 
-    /*
-     * This method loads all series from the file "Data/series.csv" and returns them as an ArrayList.
+    /**
      *
-     * @return ArrayList<ISeries> list of series
+     *
+     * @return ArrayList<ISeries>
      */
     @Override
     public ArrayList<ISeries> loadSeries() {
@@ -172,11 +184,6 @@ public class FileIO implements IDataIO {
                     if (Arrays.stream(Genre.values()).anyMatch(g -> g.isSeriesGenre() && g.name().equals(genreName))) {
                         seriesGenre.add(Genre.valueOf(genreName));
                     }
-                    /*
-                    if (Arrays.stream(SeriesGenre.values()).anyMatch(g -> g.name().equals(genreName))) {
-                        seriesGenre.add(SeriesGenre.valueOf(genreName));
-                    }
-                     */
                 }
 
                 float rating = Float.parseFloat(values[3].replaceAll(",", "."));
@@ -200,10 +207,22 @@ public class FileIO implements IDataIO {
         return seriesData;
     }
 
+    /**
+     *
+     *
+     * @param user
+     * @return Nothing.
+     */
     public void saveUser(IUser user) {
         saveAsJson(user);
     }
 
+    /**
+     *
+     *
+     * @param user
+     * @return Nothing.
+     */
     private void saveAsJson(IUser user) {
         ArrayList<IUser> users = loadUsersFromJson();
         users.add(user);

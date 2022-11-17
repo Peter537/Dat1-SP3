@@ -14,6 +14,13 @@ public class ChillMedia {
     private final SessionCache sessionCache;
     private final LogIn logIn;
 
+    /**
+     * Constructor for ChillMedia
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     *
+     * @param dataIO
+     */
     public ChillMedia(IDataIO dataIO) {
         this.sessionCache = new SessionCache();
         this.dataIO = dataIO;
@@ -22,21 +29,16 @@ public class ChillMedia {
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
-    /*
-     * This method gets the data from FileIO and puts it into the ArrayLists.
+    /**
      *
-     * @return Nothing.
      */
     private void load() {
         getSessionCache().setMovies(getDataIO().loadMovies());
         getSessionCache().setSeries(getDataIO().loadSeries());
     }
 
-    /*
-     * This method starts the program.
-     * The program asks the user to choose between the different options, and executes the methods behind the option.
+    /**
      *
-     * @return Nothing.
      */
     public void run() {
         getLogIn().logIn();
@@ -66,10 +68,8 @@ public class ChillMedia {
         getDataIO().saveUser(getSessionCache().getUser());
     }
 
-    /*
-     * This method prompts the user for options to search for a movie.
+    /**
      *
-     * @return Nothing.
      */
     private void listMovies() {
         String[] options = new String[] {
@@ -99,10 +99,8 @@ public class ChillMedia {
         }
     }
 
-    /*
-     * This method prompts the user for options to search for a series.
+    /**
      *
-     * @return Nothing.
      */
     private void listSeries() {
         String[] options = new String[] {

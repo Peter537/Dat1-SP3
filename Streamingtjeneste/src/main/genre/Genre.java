@@ -29,6 +29,15 @@ public enum Genre implements IGenre {
     private final boolean isSeriesGenre;
     private final boolean isAgeRestricted;
 
+    /**
+     * Constructor for Genre
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     *
+     * @param isMovieGenre
+     * @param isSeriesGenre
+     * @param isAgeRestricted
+     */
     Genre(boolean isMovieGenre, boolean isSeriesGenre, boolean isAgeRestricted) {
         this.isMovieGenre = isMovieGenre;
         this.isSeriesGenre = isSeriesGenre;

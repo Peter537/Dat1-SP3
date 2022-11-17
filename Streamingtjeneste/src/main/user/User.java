@@ -12,6 +12,19 @@ public class User implements IUser {
     private final ArrayList<IMovie> myMovies;
     private final ArrayList<IMovie> watchedMovies;
 
+    /**
+     * Constructor for User
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     *
+     * @param id
+     * @param name
+     * @param email
+     * @param password
+     * @param age
+     * @param myMovies
+     * @param watchedMovies
+     */
     public User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
         this.id = id;
         this.name = name;

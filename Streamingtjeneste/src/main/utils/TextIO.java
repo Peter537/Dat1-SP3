@@ -9,23 +9,23 @@ public class TextIO {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    /*
-     * This method receives a message and displays it to the user and returns the input.
+    /**
      *
-     * @param msg The message to print to the user
-     * @return String The input from the user
+     *
+     * @param msg
+     * @return String
      */
     public static String getUserInput(String msg){
         print(msg);
         return getScanner().nextLine();
     }
 
-    /*
-     * This method receives a message and displays it to the user and displays some options to the user.
+    /**
      *
-     * @param msg The message to print to the user
-     * @param options The options to display to the user
-     * @return String The input from the user
+     *
+     * @param msg
+     * @param options
+     * @return String
      */
     public static String getUserInput(String msg, String[] options) {
         println(msg);
@@ -35,13 +35,13 @@ public class TextIO {
         return getScanner().nextLine();
     }
 
-    /*
-     * This method receives a message and displays it to the user and displays some options to the user.
+    /**
      *
-     * @param msg The message to print to the user
-     * @param startIndex The index to start at
-     * @param options The options to display to the user
-     * @return String The input from the user
+     *
+     * @param msg
+     * @param startIndex
+     * @param options
+     * @return String
      */
     public static String getUserInput(String msg, int startIndex, String[] options) {
         println(msg);
@@ -51,14 +51,14 @@ public class TextIO {
         return getScanner().nextLine();
     }
 
-    /*
-     * This method receives a message and displays it to the user and displays some options to the user.
+    /**
      *
-     * @param msg The message to print to the user
-     * @param page The page that the user is on
-     * @param pageSize The size of the page
-     * @param media The list of media to display to the user
-     * @return String The input from the user
+     *
+     * @param msg
+     * @param page
+     * @param pageSize
+     * @param media
+     * @return String
      */
     public static String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media) {
         println(msg);
@@ -71,26 +71,27 @@ public class TextIO {
         return getScanner().nextLine();
     }
 
-    /*
-     * This method receives a message and displays it on a new line
+    /**
      *
-     * @param msg The message to print to the user
-     * @return Nothing.
+     *
+     * @param msg
      */
     public static void println(String msg) {
         System.out.println(msg);
     }
 
-    /*
-     * This method receives a message and displays it on the same line
+    /**
      *
-     * @param msg The message to print to the user
-     * @return Nothing.
+     *
+     * @param msg
      */
     public static void print(String msg) {
         System.out.print(msg);
     }
 
+    /**
+     *
+     */
     public static void clearConsole() {
         for (int i = 0; i < 50; i++) {
             System.out.println();

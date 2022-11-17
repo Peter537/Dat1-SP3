@@ -12,6 +12,11 @@ public class SessionCache {
     private final ArrayList<ISeries> series = new ArrayList<>();
     private IUser user;
 
+    /**
+     * Constructor for SessionCache
+     * <p>
+     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     */
     public SessionCache() { }
 
     public void setMovies(ArrayList<IMovie> movies) {
