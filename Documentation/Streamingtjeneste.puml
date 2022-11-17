@@ -55,6 +55,8 @@ class ChillMediaFlow {
 
     - int selectMovieOptions()
     - int selectSeriesOptions()
+
+    - accessors methods()
 }
 
 class LogIn {
