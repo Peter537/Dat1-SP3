@@ -17,7 +17,7 @@ public class TextIO {
      */
     public static String getUserInput(String msg){
         print(msg);
-        return scanner.nextLine();
+        return getScanner().nextLine();
     }
 
     /*
@@ -32,7 +32,7 @@ public class TextIO {
         for (int i = 0; i < options.length; i++) {
             println((i) + ". " + options[i]);
         }
-        return scanner.nextLine();
+        return getScanner().nextLine();
     }
 
     /*
@@ -48,7 +48,7 @@ public class TextIO {
         for (int i = 0; i < options.length; i++) {
             println((i + startIndex) + ". " + options[i]);
         }
-        return scanner.nextLine();
+        return getScanner().nextLine();
     }
 
     /*
@@ -68,7 +68,7 @@ public class TextIO {
         for (int i = 0; i < media.size(); i++) {
             println((i + 1 + ((page - 1) * pageSize)) + " - " + media.get(i).getTitle());
         }
-        return scanner.nextLine();
+        return getScanner().nextLine();
     }
 
     /*
@@ -95,5 +95,9 @@ public class TextIO {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
+    }
+
+    public static Scanner getScanner() {
+        return scanner;
     }
 }
