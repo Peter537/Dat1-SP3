@@ -413,7 +413,7 @@ public class ChillMediaFlow {
      * @return Nothing
      */
     private void addMovieToMyMovies(IMovie movie) {
-        if (getCurrentUser().addMyMovie(movie)) {
+        if (getCurrentUser().addToMyMovies(movie)) {
             TextIO.println("Added " + movie.getTitle() + " to your movies.");
         } else {
             TextIO.println("You already have " + movie.getTitle() + " in your movies.");
@@ -429,7 +429,7 @@ public class ChillMediaFlow {
      * @return Nothing
      */
     private void removeMovieFromMyMovies(IMovie movie) {
-        if (getCurrentUser().removeMyMovie(movie)) {
+        if (getCurrentUser().removeFromMyMovies(movie)) {
             TextIO.println("Removed " + movie.getTitle() + " from your movies.");
         } else {
             TextIO.println("You don't have " + movie.getTitle() + " in your movies.");
