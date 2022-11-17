@@ -499,11 +499,11 @@ public class ChillMediaFlow {
         }
     }
 
-    public ChillMedia getChillMedia() {
+    private ChillMedia getChillMedia() {
         return chillMedia;
     }
 
-    public IUser getCurrentUser() {
+    private IUser getCurrentUser() {
         return currentUser;
     }
 }
