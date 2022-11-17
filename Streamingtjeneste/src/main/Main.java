@@ -15,10 +15,10 @@ public class Main {
 
     private static IDataIO getDataIOType() {
         while (true) {
-            String dataIOType = TextIO.getUserInput("Vil du bruge filer eller database? (f/d)", new String[]{"Filer", "Database"});
-            if (dataIOType.equalsIgnoreCase("f") || dataIOType.equalsIgnoreCase("filer")) {
+            String dataIOType = TextIO.getUserInput("Vil du bruge filer eller database?", 1, new String[]{"Filer", "Database"});
+            if (dataIOType.equalsIgnoreCase("1")) {
                 return new FileIO();
-            } else if (dataIOType.equalsIgnoreCase("d") || dataIOType.equalsIgnoreCase("database")) {
+            } else if (dataIOType.equalsIgnoreCase("2")) {
                 return new DataBaseIO();
             }
         }
