@@ -16,15 +16,27 @@ public abstract class AWatchable implements IMedia {
         this.genres = genres;
     }
 
+    @Override
     public String getTitle() {
         return this.title;
     }
 
+    @Override
     public float getRating() {
         return this.rating;
     }
 
+    @Override
     public ArrayList<IGenre> getGenres() {
         return this.genres;
+    }
+
+    @Override
+    public String toString() {
+        return "AWatchable{" +
+                "title='" + getTitle() + '\'' +
+                ", rating=" + getRating() +
+                ", genres=" + getGenres() +
+                '}';
     }
 }
