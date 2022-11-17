@@ -4,7 +4,6 @@ import main.user.IUser;
 import main.utils.ChillMediaFlow;
 import main.utils.LogIn;
 import main.utils.TextIO;
-import main.utils.data.FileIO;
 import main.utils.data.IDataIO;
 import main.utils.data.SessionCache;
 
@@ -15,9 +14,9 @@ public class ChillMedia {
     private final SessionCache sessionCache;
     private final LogIn logIn;
 
-    public ChillMedia() {
+    public ChillMedia(IDataIO dataIO) {
         this.sessionCache = new SessionCache();
-        this.dataIO = new FileIO();
+        this.dataIO = dataIO;
         this.logIn = new LogIn(this);
         load();
         this.chillMediaFlow = new ChillMediaFlow(this);
