@@ -20,7 +20,14 @@ public class SQLStatements {
     {
         return  "SELECT * FROM chillmedia.user WHERE email = '" + email + "'";
     }
-
+    public static String getUserFromEmailAndPassword(String email, String password)
+    {
+        return  "SELECT * FROM chillmedia.user WHERE email = '" + email + "' AND password = '" + password + "'";
+    }
+    public static String getUserFromID(int ID)
+    {
+        return  "SELECT * FROM chillmedia.user WHERE user_id = '" + ID + "'";
+    }
 
 
 
@@ -43,20 +50,20 @@ public class SQLStatements {
 
 
 
-public static String getSeriesFromName (String name)
-{
-    return "SELECT * FROM chillmedia.series WHERE name LIKE %'" + name +"%'";
-}
+    public static String getSeriesFromName (String name)
+    {
+        return "SELECT * FROM chillmedia.series WHERE name LIKE %'" + name +"%'";
+    }
 
-public static String getSeriesFromGenre (String genre)
-{
-    return "SELECT * FROM chillmedia.series WHERE genres LIKE= %'" + genre +"%'";
-}
+    public static String getSeriesFromGenre (String genre)
+    {
+        return "SELECT * FROM chillmedia.series WHERE genres LIKE= %'" + genre +"%'";
+    }
 
-public static String getSeriesWithRating (String rating)
-{
-    return "SELECT * FROM chillmedia.series WHERE rating >= '" + rating +"'";
-}
+    public static String getSeriesWithRating (String rating)
+    {
+        return "SELECT * FROM chillmedia.series WHERE rating >= '" + rating +"'";
+    }
 
 
 }

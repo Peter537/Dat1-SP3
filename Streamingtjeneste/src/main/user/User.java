@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import main.media.IMovie;
 
 public class User implements IUser {
-
-    private static int idCounter = 0;
-    private final int id;
+    private int id;
     private final String name;
     private final String email;
     private final String password;
@@ -15,12 +13,7 @@ public class User implements IUser {
     private final ArrayList<IMovie> watchedMovies;
 
     public User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
-        if (id != -1) {
-            this.id = id;
-        } else {
-            this.id = idCounter;
-        }
-        idCounter++;
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;

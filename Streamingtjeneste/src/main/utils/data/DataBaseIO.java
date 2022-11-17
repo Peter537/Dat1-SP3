@@ -4,10 +4,12 @@ import main.genre.Genre;
 import main.genre.IGenre;
 import main.media.*;
 import main.user.IUser;
+import main.user.User;
 import main.utils.data.dbutil.MySQL;
 import main.utils.data.dbutil.SQLStatements;
 
 import java.io.File;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,11 +25,46 @@ public class DataBaseIO implements IDataIO {
 
     public ArrayList<IUser> loadUsers() {
         ResultSet userdata = mySQL.executeQuery(SQLStatements.getAllUsers());
-        return null;
+        ArrayList<IUser> users = new ArrayList<>();
+        try {
+            while (userdata.next()) {
+                int id = userdata.getInt("user_id");
+                String name = userdata.getString("name");
+                String email = userdata.getString("email");
+                String password = userdata.getString("password");
+                int age = userdata.getInt("age");
+                ArrayList<IMovie> myMovies = new ArrayList<>();
+                ArrayList<IMovie> watchedMovies = new ArrayList<>();
+
+                users.add(new User(id, name, email, password, age, myMovies, watchedMovies));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
     public IUser loadUser(String email, String password) {
-        return null;
+        ResultSet userdata = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(email, password));
+        IUser user = null;
+
+        try {
+            while (userdata.next()) {
+                int id = userdata.getInt("user_id");
+                String name = userdata.getString("name");
+                int age = userdata.getInt("age");
+                ArrayList<IMovie> myMovies = new ArrayList<>();
+                ArrayList<IMovie> watchedMovies = new ArrayList<>();
+
+                user = new User(id, name, email, password, age, myMovies, watchedMovies);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
     public ArrayList<IMovie> loadMovies() {
@@ -84,6 +121,30 @@ public class DataBaseIO implements IDataIO {
     }
 
     public void saveUser(IUser user) {
+        PreparedStatement statement = null;
+        try {
+            if (user.getID() == -1) {
+                statement = mySQL.getConnection().prepareStatement("INSERT INTO user(name, email, password, age) VALUES (?, ?, ?, ?)");
+                statement.setString(1, user.getName());
+                statement.setString(2, user.getEmail());
+                statement.setString(3, user.getPassword());
+                statement.setInt(4, user.getAge());
+            }
+            else {
+                statement = mySQL.getConnection().prepareStatement("UPDATE user SET name = ?, email = ?, password = ?, age = ? WHERE user_id = ?");
+                statement.setString(1, user.getName());
+                statement.setString(2, user.getEmail());
+                statement.setString(3, user.getPassword());
+                statement.setInt(4, user.getAge());
+
+                statement.setInt(5, user.getID());
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        mySQL.executeChangeQuery(statement);
+        mySQL.closeConnection();
     }
 
     public MySQL getMySQL() {
