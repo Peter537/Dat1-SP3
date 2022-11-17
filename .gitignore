@@ -33,3 +33,6 @@ hs_err_pid*
 
 # Ignore database password
 /Data/dbpass.csv
+
+# Ignore Test
+/Test/
