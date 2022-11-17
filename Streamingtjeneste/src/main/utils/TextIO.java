@@ -15,12 +15,6 @@ public class TextIO {
      * @param msg The message to print to the user
      * @return String The input from the user
      */
-    /*
-    public String getUserInput(String msg){
-        print(msg);
-        return scanner.nextLine();
-    }*/
-
     public static String getUserInput(String msg){
         print(msg);
         return scanner.nextLine();
@@ -33,14 +27,6 @@ public class TextIO {
      * @param options The options to display to the user
      * @return String The input from the user
      */
-    /*public String getUserInput(String msg, String[] options) {
-        println(msg);
-        for (int i = 0; i < options.length; i++) {
-            println((i) + ". " + options[i]);
-        }
-        return scanner.nextLine();
-    }*/
-
     public static String getUserInput(String msg, String[] options) {
         println(msg);
         for (int i = 0; i < options.length; i++) {
@@ -57,15 +43,6 @@ public class TextIO {
      * @param options The options to display to the user
      * @return String The input from the user
      */
-    /*
-    public String getUserInput(String msg, int startIndex, String[] options) {
-        println(msg);
-        for (int i = 0; i < options.length; i++) {
-            println((i + startIndex) + ". " + options[i]);
-        }
-        return scanner.nextLine();
-    }*/
-
     public static String getUserInput(String msg, int startIndex, String[] options) {
         println(msg);
         for (int i = 0; i < options.length; i++) {
@@ -83,18 +60,6 @@ public class TextIO {
      * @param media The list of media to display to the user
      * @return String The input from the user
      */
-    /*
-    public String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media) {
-        println(msg);
-        println("-2 - Previous page");
-        println("-1 - Next page");
-        println("0 - Exit");
-        for (int i = 0; i < media.size(); i++) {
-            println((i + 1 + ((page - 1) * pageSize)) + " - " + media.get(i).getTitle());
-        }
-        return scanner.nextLine();
-    }*/
-
     public static String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media) {
         println(msg);
         println("-2 - Previous page");
@@ -112,12 +77,6 @@ public class TextIO {
      * @param msg The message to print to the user
      * @return Nothing.
      */
-    /*
-    public void println(String msg) {
-        System.out.println(msg);
-    }
-     */
-
     public static void println(String msg) {
         System.out.println(msg);
     }
@@ -128,11 +87,6 @@ public class TextIO {
      * @param msg The message to print to the user
      * @return Nothing.
      */
-    /*
-    public void print(String msg) {
-        System.out.print(msg);
-    }*/
-
     public static void print(String msg) {
         System.out.print(msg);
     }
