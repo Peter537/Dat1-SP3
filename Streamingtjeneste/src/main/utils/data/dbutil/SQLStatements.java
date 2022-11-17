@@ -27,12 +27,12 @@ public class SQLStatements {
 
     public static String getMovieFromName (String name)
     {
-        return "SELECT * FROM chillmedia.movie WHERE name LIKE '" + name +"%'";
+        return "SELECT * FROM chillmedia.movie WHERE name LIKE %'" + name +"%'";
     }
 
     public static String getMovieFromGenre (String genre)
     {
-        return "SELECT * FROM chillmedia.movie WHERE genres = '" + genre +"'";
+        return "SELECT * FROM chillmedia.movie WHERE genres LIKE = %'" + genre +"'%";
     }
 
     public static String getMovieWithRating (String rating)
@@ -45,20 +45,18 @@ public class SQLStatements {
 
 public static String getSeriesFromName (String name)
 {
-    return "SELECT * FROM chillmedia.series WHERE name LIKE '" + name +"%'";
+    return "SELECT * FROM chillmedia.series WHERE name LIKE %'" + name +"%'";
 }
 
 public static String getSeriesFromGenre (String genre)
 {
-    return "SELECT * FROM chillmedia.series WHERE genres = '" + genre +"'";
+    return "SELECT * FROM chillmedia.series WHERE genres LIKE= %'" + genre +"%'";
 }
 
 public static String getSeriesWithRating (String rating)
 {
     return "SELECT * FROM chillmedia.series WHERE rating >= '" + rating +"'";
 }
-
-
 
 
 }
