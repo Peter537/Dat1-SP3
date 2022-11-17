@@ -1,8 +1,8 @@
 package main.utils;
 
 import main.ChillMedia;
-import main.genre.MovieGenre;
-import main.genre.SeriesGenre;
+import main.genre.Genre;
+import main.genre.IGenre;
 import main.media.IMedia;
 import main.media.IMovie;
 import main.media.ISeries;
@@ -65,16 +65,24 @@ public class ChillMediaFlow {
         ArrayList<IMovie> movies;
         while (true) {
             String genre = TextIO.getUserInput("Enter a genre to search for: ");
-            if (Arrays.stream(MovieGenre.values()).anyMatch(movieGenre -> movieGenre.name().equalsIgnoreCase(genre))) {
+            if (Arrays.stream(Genre.values()).anyMatch(g -> g.name().equalsIgnoreCase(genre) && g.isMovieGenre())) {
                 movies = Query.searchMovieGenre(chillMedia.getSessionCache().getMovies(), genre);
+                if (!currentUser.isAdult()) {
+                    movies = Query.searchMovieGenreAgeRestricted(movies, genre);
+                }
                 if (movies.size() > 0) {
                     break;
                 }
                 TextIO.println("No movies found.");
             } else {
                 TextIO.println("The genre isn't there, you can choose from: ");
-                for (MovieGenre movieGenre : MovieGenre.values()) {
-                    TextIO.println(" - " + movieGenre.name());
+                for (IGenre g : Genre.values()) {
+                    if (g.isMovieGenre()) {
+                        if (g.isAgeRestricted() && !currentUser.isAdult()) {
+                            continue;
+                        }
+                        TextIO.println(" - " + g);
+                    }
                 }
             }
         }
@@ -241,17 +249,24 @@ public class ChillMediaFlow {
         ArrayList<ISeries> series;
         while (true) {
             String genre = TextIO.getUserInput("Enter a genre to search for: ");
-            if (Arrays.stream(SeriesGenre.values()).anyMatch(seriesGenre -> seriesGenre.name().equalsIgnoreCase(genre))) {
+            if (Arrays.stream(Genre.values()).anyMatch(g -> g.name().equalsIgnoreCase(genre) && g.isSeriesGenre())) {
                 series = Query.searchSeriesGenre(chillMedia.getSessionCache().getSeries(), genre);
+                if (!currentUser.isAdult()) {
+                    series = Query.searchSeriesGenreAgeRestricted(series, genre);
+                }
                 if (series.size() > 0) {
                     break;
                 }
                 TextIO.println("No series found.");
             } else {
-                TextIO.println("The genre isn't there.");
                 TextIO.println("The genre isn't there, you can choose from: ");
-                for (SeriesGenre seriesGenre : SeriesGenre.values()) {
-                    TextIO.println(" - " +seriesGenre.name());
+                for (IGenre g : Genre.values()) {
+                    if (g.isSeriesGenre()) {
+                        if (g.isAgeRestricted() && !currentUser.isAdult()) {
+                            continue;
+                        }
+                        TextIO.println(" - " + g);
+                    }
                 }
             }
         }
