@@ -36,8 +36,8 @@ public class ChillMedia {
      * @return Nothing.
      */
     private void load() {
-        getSessionCache().setMovies(dataIO.loadMovies());
-        getSessionCache().setSeries(dataIO.loadSeries());
+        getSessionCache().setMovies(getDataIO().loadMovies());
+        getSessionCache().setSeries(getDataIO().loadSeries());
 
         //this.getGenres().addAll(List.of(MovieGenre.values()));
         //this.getGenres().addAll(List.of(SeriesGenre.values()));
@@ -70,7 +70,7 @@ public class ChillMedia {
                 default -> TextIO.println("Invalid input!");
             }
         }
-        dataIO.save(getSessionCache().getUser());
+        getDataIO().save(getSessionCache().getUser());
     }
 
     /*
