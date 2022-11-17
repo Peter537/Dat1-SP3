@@ -201,14 +201,12 @@ public class FileIO implements IDataIO {
     }
 
     public void saveUser(IUser user) {
-        // TODO: Skal laves
+        saveAsJson(user);
     }
 
-    public void saveUser(ArrayList<IUser> users) {
-        saveAsJson(users);
-    }
-
-    private void saveAsJson(ArrayList<IUser> users) {
+    private void saveAsJson(IUser user) {
+        ArrayList<IUser> users = loadUsersFromJson();
+        users.add(user);
         JSONArray userArray = new JSONArray();
 
         for (IUser u : users) {

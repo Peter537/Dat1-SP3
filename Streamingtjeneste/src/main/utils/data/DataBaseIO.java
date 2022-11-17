@@ -1,8 +1,7 @@
 package main.utils.data;
 
+import main.genre.Genre;
 import main.genre.IGenre;
-import main.genre.MovieGenre;
-import main.genre.SeriesGenre;
 import main.media.*;
 import main.user.IUser;
 import main.utils.data.dbutil.MySQL;
@@ -42,7 +41,7 @@ public class DataBaseIO implements IDataIO {
                 ArrayList<IGenre> genres = new ArrayList<>();
                 String[] genreStrings = movieData.getString("genres").split(",");
                 for (String genreString : genreStrings) {
-                    genres.add(MovieGenre.valueOf(genreString));
+                    genres.add(Genre.valueOf(genreString));
                 }
                 int year = movieData.getInt("year_of_filming");
                 Movie movie = new Movie(name, rating, genres, year);
@@ -67,7 +66,7 @@ public class DataBaseIO implements IDataIO {
                 ArrayList<IGenre> genres = new ArrayList<>();
                 String[] genreStrings = seriesData.getString("genres").split(",");
                 for (String genreString : genreStrings) {
-                    genres.add(SeriesGenre.valueOf(genreString));
+                    genres.add(Genre.valueOf(genreString));
                 }
                 ArrayList<Season> seasons = new ArrayList<>();
                 String[] seasonStrings = seriesData.getString("seasons").split(",");
@@ -85,11 +84,6 @@ public class DataBaseIO implements IDataIO {
     }
 
     public void saveUser(IUser user) {
-
-    }
-
-    public void saveUser(ArrayList<IUser> users) {
-
     }
 
     public MySQL getMySQL() {
