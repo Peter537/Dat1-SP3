@@ -9,15 +9,10 @@ class Main {
 }
 
 class ChillMedia {
-    - IUser currentUser
-    - final TextIO textIO
-    - final FileIO fileIO
+    - final IDataIO dataIO
     - final ChillMediaFlow chillMediaFlow
-
-    - final ArrayList<IGenre> genres
-    - final ArrayList<IMovie> movies
-    - final ArrayList<ISerie> series
-    - final ArrayList<IUser> users
+    - final SessionCache sessionCache
+    - final LogIn logIn
 
     + ChillMedia()
     - void load()
@@ -79,14 +74,31 @@ class LogIn {
     + accessors methods()
 }
 
+class SessionCache {
+    - final ArrayList<IMovie> movies
+    - final ArrayList<ISeries> series
+    - IUser user
+
+    + SessionCache()
+
+    + accessors methods()
+}
+
 class Query {
     ' STATIC CLASS, EVT. KUNNE MAN LAVE EN INSTANS AF DENNE
     ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
-    + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, SeriesGenre genre)
+    + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, IGenre genre)
     + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, String genre)
-    + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, MovieGenre genre)
+    + static ArrayList<ISeries> searchSeriesGenreAgeRestricted(ArrayList<ISeries> series, IGenre genre)
+    + static ArrayList<ISeries> searchSeriesGenreAgeRestricted(ArrayList<ISeries> series, String genre)
+    + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, IGenre genre)
     + static ArrayList<IMovie> searchMovieGenre(ArrayList<IMovie> movies, String genre)
-    + static ArrayList<IMovie> searchGenre(ArrayList<IMedia> movies, IGenre genre)
+    + static ArrayList<IMovie> searchMovieGenreAgeRestricted(ArrayList<IMovie> movies, IGenre genre)
+    + static ArrayList<IMovie> searchMovieGenreAgeRestricted(ArrayList<IMovie> movies, String genre)
+    + static ArrayList<IMedia> searchGenre(ArrayList<IMedia> movies, IGenre genre)
+    + static ArrayList<IMedia> searchGenre(ArrayList<IMedia> movies, String genre)
+    + static ArrayList<IMedia> searchGenreAgeRestricted(ArrayList<IMedia> movies, IGenre genre)
+    + static ArrayList<IMedia> searchGenreAgeRestricted(ArrayList<IMedia> movies, String genre)
 
     + static ArrayList<ISeries> searchSeriesTitle(ArrayList<ISeries> series, String title)
     + static ISeries searchSeriesTitleSingle(ArrayList<ISeries> series, String title)
@@ -102,15 +114,16 @@ class Query {
 class TextIO {
     - static final Scanner scanner
 
-    + TextIO()
+    + static String getUserInput(String msg)
+    + static String getUserInput(String msg, String[] options)
+    + static String getUserInput(String msg, int startIndex, String[] options)
+    + static String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media)
 
-    + String getUserInput(String msg)
-    + String getUserInput(String msg, String[] options)
-    + String getUserInput(String msg, int startIndex, String[] options)
-    + String getUserInputFromMedia(String msg, int page, int pageSize, ArrayList<IMedia> media)
+    + static void println(String msg)
+    + static void print(String msg)
+    + static void clearConsole()
 
-    + void println(String msg)
-    + void print(String msg)
+    - static Scanner getScanner()
 }
 
 class FileIO implements IDataIO {
@@ -136,14 +149,14 @@ class User implements IUser {
     - final String email
     - final String password
     - final int age
-    - final boolean isAdult
     - final ArrayList<IMovie> myMovies
     - final ArrayList<IMovie> watchedMovies
 
-    + User(int ID, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies)
+    + User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies)
     + boolean addMyMovie(IMovie movie)
     + boolean removeMyMovie(IMovie movie)
     + void addWatchedMovie(IMovie movie)
+    + boolean isAdult()
 
     + accessors methods()
 }
@@ -218,8 +231,8 @@ interface IUser {
     + boolean isAdult()
     + ArrayList<IMovie> getMyMovies()
     + ArrayList<IMovie> getWatchedMovies()
-    + boolean addMyMovie(IMovie movie)
-    + boolean removeMyMovie(IMovie movie)
+    + boolean addToMyMovies(IMovie movie)
+    + boolean removeFromMyMovies(IMovie movie)
     + void addWatchedMovie(IMovie movie)
 }
 
@@ -227,58 +240,53 @@ interface IDataIO {
     + ArrayList<IUser> loadUsers()
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
+    + void saveUser(IUser user)
 }
 
-interface IGenre { }
+interface IGenre {
+    + boolean isMovieGenre()
+    + boolean isSeriesGenre()
+    + boolean isAgeRestricted()
+}
 
 ' *****************
 ' ENUMS
 ' *****************
 
-enum MovieGenre implements IGenre {
-    CRIME,
-    DRAMA,
-    BIOGRAPHY,
-    SPORT,
-    HISTORY,
-    ROMANCE,
-    WAR,
-    MYSTERY,
-    ADVENTURE,
-    FAMILY,
-    FANTASY,
-    THRILLER,
-    HORROR,
-    FILM_NOIR,
-    ACTION,
-    SCI_FI,
-    COMEDY,
-    MUSICAL,
-    WESTERN,
-    MUSIC
-}
+enum Genre implements IGenre {
+    - final boolean isMovieGenre
+    - final boolean isSeriesGenre
+    - final boolean isAgeRestricted
 
-enum SeriesGenre implements IGenre {
-    TALK_SHOW,
-    DOCUMENTARY,
-    CRIME,
-    DRAMA,
-    ACTION,
-    ADVENTURE,
-    COMEDY,
-    FANTASY,
-    ANIMATION,
-    HORROR,
-    SCI_FI,
-    WAR,
-    THRILLER,
-    MYSTERY,
-    BIOGRAPHY,
-    HISTORY,
-    FAMILY,
-    WESTERN,
-    ROMANCE,
-    SPORT
+    + CRIME(true, true, true),
+    + DRAMA(true, true, true),
+    + BIOGRAPHY(true, true, false),
+    + SPORT(true, true, false),
+    + HISTORY(true, true, false),
+    + ROMANCE(true, true, false),
+    + WAR(true, true, true),
+    + MYSTERY(true, true, false),
+    + ADVENTURE(true, true, false),
+    + FAMILY(true, true, false),
+    + FANTASY(true, true, false),
+    + THRILLER(true, true, true),
+    + HORROR(true, true, true),
+    + FILM_NOIR(false, true, false),
+    + ACTION(true, true, false),
+    + SCI_FI(true, true, false),
+    + COMEDY(true, true, false),
+    + MUSICAL(true, false, false),
+    + WESTERN(true, true, true),
+    + MUSIC(true, false, false),
+    + TALK_SHOW(false, true, false),
+    + DOCUMENTARY(false, true, false),
+    + ANIMATION(false, true, false);
+
+    + Genre(boolean isMovieGenre, boolean isSeriesGenre, boolean isAgeRestricted) { })
+
+    + boolean isMovieGenre()
+    + boolean isSeriesGenre()
+    + boolean isAgeRestricted()
 }
 
 ' *****************
@@ -288,11 +296,11 @@ enum SeriesGenre implements IGenre {
 Main *-- ChillMedia
 
 ChillMedia *-- IMedia
-ChillMedia *-- TextIO
 ChillMedia *-- IDataIO
 ChillMedia *-- IUser
 ChillMedia *-- LogIn
 ChillMedia *-- ChillMediaFlow
+ChillMedia *-- SessionCache
 
 Series *-- Season
 
