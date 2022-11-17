@@ -84,11 +84,6 @@ public class DataBaseIO implements IDataIO {
     }
 
     public void saveUser(IUser user) {
-
-    }
-
-    public void saveUser(ArrayList<IUser> users) {
-
     }
 
     public MySQL getMySQL() {

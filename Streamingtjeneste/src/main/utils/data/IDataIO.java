@@ -15,8 +15,5 @@ public interface IDataIO {
     ArrayList<IMovie> loadMovies();
 
     ArrayList<ISeries> loadSeries();
-
-    void saveUser(ArrayList<IUser> users); // TODO: Slettes
-
     void saveUser(IUser user);
 }
