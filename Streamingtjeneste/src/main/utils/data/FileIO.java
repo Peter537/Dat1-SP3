@@ -50,7 +50,6 @@ public class FileIO implements IDataIO {
         if (movies == null) {
             loadMovies();
         }
-
         try {
             JSONParser parser = new JSONParser();
             JSONArray array = (JSONArray) parser.parse(new FileReader(userPath));
@@ -71,11 +70,9 @@ public class FileIO implements IDataIO {
                 for (String s : myMoviesString) {
                     myMovies.add(searchMovieTitleSingle(movies, s));
                 }
-
                 for (String s : myWatchedMoviesString) {
                     myWatchedMovies.add(searchMovieTitleSingle(movies, s));
                 }
-
                 IUser u = new User(ID, userName, email, password, age, myMovies, myWatchedMovies);
                 users.add(u);
             }
@@ -97,7 +94,6 @@ public class FileIO implements IDataIO {
         }
         File file = new File(moviePath);
         ArrayList<IMovie> movieData = new ArrayList<>();
-
         try {
             Scanner readMovies = new Scanner(file);
             int id = 1;
@@ -140,7 +136,6 @@ public class FileIO implements IDataIO {
     public ArrayList<ISeries> loadSeries() {
         File file = new File(seriesPath);
         ArrayList<ISeries> seriesData = new ArrayList<>();
-
         try {
             Scanner readSeries = new Scanner(file);
             int id = 1;
@@ -156,7 +151,7 @@ public class FileIO implements IDataIO {
 
                 int endYear = -1;
 
-                if ( yearsString.length > 1 && !yearsString[1].trim().equals("")) {
+                if (yearsString.length > 1 && !yearsString[1].trim().equals("")) {
                     endYear = Integer.parseInt(yearsString[1].trim());
                 }
 
