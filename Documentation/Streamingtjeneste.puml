@@ -14,7 +14,7 @@ class ChillMedia {
     - final SessionCache sessionCache
     - final LogIn logIn
 
-    + ChillMedia()
+    + ChillMedia(IDataIO dataIO)
     - void load()
     + void run()
 
@@ -22,6 +22,7 @@ class ChillMedia {
     - void listSeries()
 
     + accessors methods()
+    - Login getLogIn()
 }
 
 class ChillMediaFlow {
@@ -61,15 +62,15 @@ class ChillMediaFlow {
 
 class LogIn {
     - IUser currentUser
-    - final TextIO textIO
     - final ArrayList<IUser> users
 
-    + LogIn(ChillMedia cm)
+    + LogIn(ChillMedia chillmedia)
 
     + void logIn()
     - void signUp()
     - void signIn()
-    - void createUser(String name, String email, String password, int age)
+    - boolean confirmPassword(String password)
+    - int getAge()
     - boolean checkEmailInList(String email)
     - IUser getUser(String email, String password)
 
@@ -82,13 +83,13 @@ class SessionCache {
     - IUser user
 
     + SessionCache()
+    + boolean addMovie(IMovie movie)
+    + boolean addSeries(ISeries series)
 
     + accessors methods()
 }
 
 class Query {
-    ' STATIC CLASS, EVT. KUNNE MAN LAVE EN INSTANS AF DENNE
-    ' OG BRUGE DEN I CHILLMEDIA OG DERFRA BRUGE QUERY
     + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, IGenre genre)
     + static ArrayList<ISeries> searchSeriesGenre(ArrayList<ISeries> series, String genre)
     + static ArrayList<ISeries> searchSeriesGenreAgeRestricted(ArrayList<ISeries> series, IGenre genre)
@@ -123,7 +124,6 @@ class TextIO {
 
     + static void println(String msg)
     + static void print(String msg)
-    + static void clearConsole()
 
     - static Scanner getScanner()
 }
@@ -134,18 +134,19 @@ class FileIO implements IDataIO {
     - final String moviePath
     - final String seriesPath
 
+    + FileIO()
     + ArrayList<IUser> loadUsers()
+    + IUser loadUser(String email, String password)
     - ArrayList<IUser> loadUsersFromJson()
-
-    + void save(ArrayList<IUser> users)
-    - void saveAsJson(ArrayList<IUser> users)
-
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
+
+    + void saveUser(ArrayList<IUser> user)
+    - void saveAsJson(ArrayList<IUser> user)
+
 }
 
 class User implements IUser {
-    - static int idCounter
     - final int id
     - final String name
     - final String email
@@ -155,8 +156,8 @@ class User implements IUser {
     - final ArrayList<IMovie> watchedMovies
 
     + User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies)
-    + boolean addMyMovie(IMovie movie)
-    + boolean removeMyMovie(IMovie movie)
+    + boolean addToMyMovies(IMovie movie)
+    + boolean removeFromMyMovies(IMovie movie)
     + void addWatchedMovie(IMovie movie)
     + boolean isAdult()
 
@@ -164,9 +165,10 @@ class User implements IUser {
 }
 
 class Movie extends AWatchable implements IMovie {
+    - final int id;
     - final int year
 
-    + Movie(String title, float rating, ArrayList<IGenre> genres, int year)
+    + Movie(int id, String title, float rating, ArrayList<IGenre> genres, int year)
 
     + accessors methods()
 }
@@ -190,6 +192,38 @@ class Season {
     + accessors methods()
 }
 
+class MySQL {
+- Connection connection
+
++ MySQL()
++ boolean openConnection(String url, String name, String password)
++ boolean openConnection(String ip, String schema, String name, String password)
++ boolean closeConnection()
++ ResultSet executeQuery(String query)
++ boolean executeChangeQuery(PreparedStatement query)
+
++ accessor methods()
+}
+
+class SQLStatements {
+
+}
+
+class DataBaseIO implements IDataIO {
+- final MySQL mySQL
+
++ DataBaseIO()
++ ArrayList<IUser> loadUsers()
++ IUser loadUser(String email, String password)
++ ArrayList<IMovie> loadMovies()
++ ArrayList<ISeries> loadSeries()
++ void saveUser(IUser user)
+- void saveMoviesToUser(IUser user)
+- String getPassword()
+
++ accessor methods()
+}
+
 ' *****************
 ' ABSTRACT CLASS
 ' *****************
@@ -201,7 +235,7 @@ abstract class AWatchable implements IMedia {
 
     + AWatchable(String title, float rating, ArrayList<IGenre> genres)
 
-    + accessors methods()
+    + accessor methods()
 }
 
 ' *****************
@@ -222,6 +256,7 @@ interface ISeries extends IMedia {
 
 interface IMovie extends IMedia {
     + int getYear()
+    + int getID()
 }
 
 interface IUser {
@@ -240,6 +275,7 @@ interface IUser {
 
 interface IDataIO {
     + ArrayList<IUser> loadUsers()
+    + IUser loadUser(String email, String password)
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
     + void saveUser(IUser user)
@@ -303,6 +339,8 @@ ChillMedia *-- IUser
 ChillMedia *-- LogIn
 ChillMedia *-- ChillMediaFlow
 ChillMedia *-- SessionCache
+ChillMedia *-- MySQL
+ChillMedia *-- SQLStatements
 
 Series *-- Season
 
