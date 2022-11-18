@@ -6,13 +6,14 @@ import java.util.ArrayList;
 
 public class Movie extends AWatchable implements IMovie {
 
+    private final int id;
     private final int year;
-    private int id;
     /**
      * Constructor for Movie
      * <p>
      * KOMMENTAR_TIL_KONSTRUKTØREN_HER
      *
+     * @param id
      * @param title
      * @param rating
      * @param genres
@@ -24,13 +25,13 @@ public class Movie extends AWatchable implements IMovie {
         this.id = id;
     }
 
+    public int getID() {
+        return this.id;
+    }
+    
     @Override
     public int getYear() {
         return this.year;
-    }
-
-    public int getID() {
-        return this.id;
     }
 
     @Override
