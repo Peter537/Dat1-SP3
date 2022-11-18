@@ -61,7 +61,8 @@ class ChillMediaFlow {
 }
 
 class LogIn {
-    - IUser currentUser
+    - final ChillMedia chillMedia
+    - IUser user
     - final ArrayList<IUser> users
 
     + LogIn(ChillMedia chillmedia)
@@ -75,6 +76,7 @@ class LogIn {
     - IUser getUser(String email, String password)
 
     + accessors methods()
+    - ChillMedia getChillMedia()
 }
 
 class SessionCache {
@@ -165,7 +167,7 @@ class User implements IUser {
 }
 
 class Movie extends AWatchable implements IMovie {
-    - final int id;
+    - final int id
     - final int year
 
     + Movie(int id, String title, float rating, ArrayList<IGenre> genres, int year)
@@ -318,7 +320,7 @@ enum Genre implements IGenre {
     + MUSIC(true, false, false),
     + TALK_SHOW(false, true, false),
     + DOCUMENTARY(false, true, false),
-    + ANIMATION(false, true, false);
+    + ANIMATION(false, true, false)
 
     + Genre(boolean isMovieGenre, boolean isSeriesGenre, boolean isAgeRestricted) { })
 
