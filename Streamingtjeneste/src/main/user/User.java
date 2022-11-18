@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import main.media.IMovie;
 
 public class User implements IUser {
-    private int id;
+
+    private final int id;
     private final String name;
     private final String email;
     private final String password;
