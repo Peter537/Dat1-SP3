@@ -28,7 +28,6 @@ class ChillMedia {
 
 class ChillMediaFlow {
     - final ChillMedia chillMedia
-    - final IUser currentUser
 
     + ChillMediaFlow(ChillMedia chillMedia)
 
@@ -59,6 +58,7 @@ class ChillMediaFlow {
     - int selectSeriesOptions()
 
     - accessors methods()
+    - IUser getCurrentUser()
 }
 
 class LogIn {
@@ -76,7 +76,7 @@ class LogIn {
     - boolean checkEmailInList(String email)
     - IUser getUser(String email, String password)
 
-    + accessors methods()
+    + IUser getUser()
     - ChillMedia getChillMedia()
 }
 
