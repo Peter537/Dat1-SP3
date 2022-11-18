@@ -10,8 +10,6 @@ public interface IDataIO {
 
     ArrayList<IUser> loadUsers(); // TODO: Not sure om denne skal være privat
 
-    IUser loadUser(String email, String password);
-
     ArrayList<IMovie> loadMovies();
 
     ArrayList<ISeries> loadSeries();

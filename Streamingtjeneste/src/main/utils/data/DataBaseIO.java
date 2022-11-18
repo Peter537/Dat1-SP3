@@ -70,52 +70,7 @@ public class DataBaseIO implements IDataIO {
         }
         return users;
     }
-
-    /**
-     *
-     *
-     * @param email
-     * @param password
-     * @return IUser
-     */
-    public IUser loadUser(String email, String password) {
-        ResultSet userdata = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(email, password));
-        IUser user = null;
-
-        try {
-            while (userdata.next()) {
-                int id = userdata.getInt("user_id");
-                String name = userdata.getString("name");
-                int age = userdata.getInt("age");
-                ResultSet userMovies = mySQL.executeQuery(SQLStatements.getMoviesFromUserByEmailAndPassword(email, password));
-                ArrayList<IMovie> myMovies = new ArrayList<>();
-                ArrayList<IMovie> watchedMovies = new ArrayList<>();
-
-                while (userMovies.next()) {
-                    ArrayList<IMovie> allMovies = loadMovies();
-                    for (IMovie movie : allMovies) {
-                        if (movie.getID() == userMovies.getInt("um_movie_id")) {
-                            if (userMovies.getString("um_movie_status").equals("WATCHED")) {
-                                watchedMovies.add(movie);
-                            }
-                            else {
-                                myMovies.add(movie);
-                            }
-                        }
-                    }
-                }
-                user = new User(id, name, email, password, age, myMovies, watchedMovies);
-                myMoviesCached = myMovies;
-                watchedMoviesCached = watchedMovies;
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return user;
-    }
-
+    
     /**
      *
      *

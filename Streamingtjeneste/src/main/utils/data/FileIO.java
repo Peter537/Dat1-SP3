@@ -43,25 +43,6 @@ public class FileIO implements IDataIO {
     /**
      *
      *
-     * @param email
-     * @param password
-     * @return IUser
-     */
-    public IUser loadUser(String email, String password) {
-        /* TODO: Skal finde ud af om det er bedre at bruge en for loop eller en stream her
-        ArrayList<IUser> users = loadUsers();
-        for (IUser user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return user;
-            }
-        }
-         */
-        return null;
-    }
-
-    /**
-     *
-     *
      * @return ArrayList<IUser>
      */
     private ArrayList<IUser> loadUsersFromJson() {
