@@ -29,6 +29,10 @@ public class Movie extends AWatchable implements IMovie {
         return this.year;
     }
 
+    public int getID() {
+        return this.id;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
