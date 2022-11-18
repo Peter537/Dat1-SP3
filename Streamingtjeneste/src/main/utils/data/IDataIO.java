@@ -17,4 +17,6 @@ public interface IDataIO {
     ArrayList<ISeries> loadSeries();
 
     void saveUser(IUser user);
+
+    void setCache(IUser user);
 }
