@@ -32,7 +32,7 @@ public class LogIn {
                 "Sign up"
         };
         while (true) {
-            String input = TextIO.getUserInput("Do you want to sign in, or create a new user?", 1, options);
+            String input = TextIO.getUserInput("Do you want to sign in, or sign up?", 1, options);
             if (input.equals("1")) {
                 signIn();
             } else if (input.equals("2")) {
@@ -48,7 +48,7 @@ public class LogIn {
      *
      */
     private void signUp() {
-        String email = TextIO.getUserInput("You are signing up. Write email address, press 0 to go back: ");
+        String email = TextIO.getUserInput("You are signing up. Write your email address, or press 0 to go back: ");
         if (email.equals("0")) {
             logIn();
             return;
@@ -57,7 +57,7 @@ public class LogIn {
         if (checkEmailInList(email)) {
             TextIO.println("Email already in use...");
             while (true) {
-                String input = TextIO.getUserInput("Press 1 to continue signing up or press 2 to switch to sign in: ");
+                String input = TextIO.getUserInput("Press 1 to go back to signing up, or press 2 to switch to sign in: ");
                 if (input.equals("1")) {
                     signUp();
                     return;
@@ -92,14 +92,14 @@ public class LogIn {
             return;
         }
 
-        createUser(name, password, email, age);
+        this.currentUser = new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>());
     }
 
     /**
      *
      */
     private void signIn() {
-        String email = TextIO.getUserInput("You are signing in. Write email address, press 0 to go back: ");
+        String email = TextIO.getUserInput("You are signing in. Write your email address, or press 0 to go back: ");
         if (email.equals("0")) {
             logIn();
             return;
@@ -121,19 +121,23 @@ public class LogIn {
             }
         }
 
-        String password = TextIO.getUserInput("Write your password, press 0 to go back: ");
-        if (password.equals("0")) {
-            logIn();
-            return;
-        }
+        String msg = "Write your password, press 0 to go back: ";
+        IUser user;
+        while (true) {
+            String password = TextIO.getUserInput(msg);
+            if (password.equals("0")) {
+                logIn();
+                return;
+            }
 
-        IUser user = getUser(email, password);
-        if (user == null) {
-            TextIO.println("Password does not match, please try again");
-            signIn();
-            return;
+            user = getUser(email, password);
+            if (user == null) {
+                msg = "Password does not match, please try again: ";
+            } else {
+                break;
+            }
         }
-        currentUser = user;
+        this.currentUser = user;
     }
 
     /**
@@ -174,22 +178,6 @@ public class LogIn {
                 TextIO.println("Please write a number.");
             }
         }
-    }
-
-    /**
-     * Eventuelt fjerne denne metode? ret irrelevant ift. det kun er 1 linje
-     * <p>
-     * Vi har et ID som er '-1', men det skal det ikke være.
-     * Vi skal lige have kigget det igennem og fundet en anden løsning,
-     * når vi skal oprette en user herinde i login.
-     *
-     * @param name
-     * @param email
-     * @param password
-     * @param age
-     */
-    private void createUser(String name, String email, String password, int age) {
-        currentUser = new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>());
     }
 
     /**
