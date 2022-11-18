@@ -26,6 +26,7 @@ public class Movie extends AWatchable implements IMovie {
         this.id = id;
     }
 
+    @Override
     public int getID() {
         return this.id;
     }
