@@ -146,7 +146,7 @@ public class LogIn {
      * @param password
      * @return boolean
      */
-    public boolean confirmPassword(String password) {
+    private boolean confirmPassword(String password) {
         String msg = "You are signing up. Confirm password, press 0 to go back: ";
         while (true) {
             String confirmPW = TextIO.getUserInput(msg);
@@ -166,7 +166,7 @@ public class LogIn {
      *
      * @return int
      */
-    public int getAge() {
+    private int getAge() {
         while (true) {
             try {
                 String userAge = TextIO.getUserInput("You are signing up. Write your age, press 0 to go back: ");
