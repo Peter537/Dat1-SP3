@@ -198,15 +198,12 @@ public class LogIn {
      * @return boolean
      */
     private boolean checkEmailInList(String email) {
-        return users.stream().anyMatch(user -> user.getEmail().equals(email));
-        /*
         for (IUser p : users) {
             if (p.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }
         }
         return false;
-         */
     }
 
     /**
@@ -217,15 +214,12 @@ public class LogIn {
      * @return IUser
      */
     private IUser getUser(String email, String password) {
-        return users.stream().filter(user -> user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)).findFirst().orElse(null);
-        /*
         for (IUser p : users) {
             if (p.getEmail().equals(email) && p.getPassword().equals(password)) {
                 return p;
             }
         }
         return null;
-         */
     }
 
     public IUser getCurrentUser() {
