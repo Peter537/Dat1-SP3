@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface IDataIO {
 
-    ArrayList<IUser> loadUsers(); // TODO: Not sure om denne skal være privat
+    ArrayList<IUser> loadUsers();
 
     ArrayList<IMovie> loadMovies();
 
