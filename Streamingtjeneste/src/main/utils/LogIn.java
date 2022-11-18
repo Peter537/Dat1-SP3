@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class LogIn {
 
     private final ChillMedia chillMedia;
-    private IUser currentUser;
+    private IUser user;
     private final ArrayList<IUser> users;
 
     /**
@@ -21,7 +21,7 @@ public class LogIn {
      */
     public LogIn(ChillMedia chillmedia) {
         this.chillMedia = chillmedia;
-        this.currentUser = null;
+        this.user = null;
         this.users = chillmedia.getDataIO().loadUsers();
     }
 
@@ -40,7 +40,7 @@ public class LogIn {
             } else if (input.equals("2")) {
                 signUp();
             }
-            if (currentUser != null) {
+            if (user != null) {
                 return;
             }
         }
@@ -94,7 +94,7 @@ public class LogIn {
             return;
         }
 
-        this.currentUser = new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>());
+        this.user = new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>());
     }
 
     /**
@@ -139,7 +139,7 @@ public class LogIn {
                 break;
             }
         }
-        this.currentUser = user;
+        this.user = user;
         getChillMedia().getDataIO().setCache(user);
     }
 
@@ -214,8 +214,8 @@ public class LogIn {
         return null;
     }
 
-    public IUser getCurrentUser() {
-        return currentUser;
+    public IUser getUser() {
+        return user;
     }
 
     private ChillMedia getChillMedia() {
