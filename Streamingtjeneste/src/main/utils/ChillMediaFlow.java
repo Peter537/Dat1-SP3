@@ -67,7 +67,7 @@ public class ChillMediaFlow {
             String genre = TextIO.getUserInput("Enter a genre to search for: ");
             if (Arrays.stream(Genre.values()).anyMatch(g -> g.name().equalsIgnoreCase(genre) && g.isMovieGenre())) {
                 movies = Query.searchMovieGenre(getChillMedia().getSessionCache().getMovies(), genre);
-                if (!getCurrentUser().isAdult()) {
+                if (!getUser().isAdult()) {
                     movies = Query.searchMovieGenreAgeRestricted(movies, genre);
                 }
                 if (movies.size() > 0) {
@@ -78,7 +78,7 @@ public class ChillMediaFlow {
                 TextIO.println("The genre isn't there, you can choose from: ");
                 for (IGenre g : Genre.values()) {
                     if (g.isMovieGenre()) {
-                        if (g.isAgeRestricted() && !getCurrentUser().isAdult()) {
+                        if (g.isAgeRestricted() && !getUser().isAdult()) {
                             continue;
                         }
                         TextIO.println(" - " + g);
@@ -116,7 +116,7 @@ public class ChillMediaFlow {
      *
      */
     private void searchMyMovies() {
-        ArrayList<IMovie> movies = getCurrentUser().getMyMovies();
+        ArrayList<IMovie> movies = getUser().getMyMovies();
         if (movies.size() == 0) {
             TextIO.println("No movies found.");
             return;
@@ -128,7 +128,7 @@ public class ChillMediaFlow {
      *
      */
     private void searchMyWatchedMovies() {
-        ArrayList<IMovie> movies = getCurrentUser().getWatchedMovies();
+        ArrayList<IMovie> movies = getUser().getWatchedMovies();
         if (movies.size() == 0) {
             TextIO.println("No movies found.");
             return;
@@ -239,7 +239,7 @@ public class ChillMediaFlow {
             String genre = TextIO.getUserInput("Enter a genre to search for: ");
             if (Arrays.stream(Genre.values()).anyMatch(g -> g.name().equalsIgnoreCase(genre) && g.isSeriesGenre())) {
                 series = Query.searchSeriesGenre(getChillMedia().getSessionCache().getSeries(), genre);
-                if (!getCurrentUser().isAdult()) {
+                if (!getUser().isAdult()) {
                     series = Query.searchSeriesGenreAgeRestricted(series, genre);
                 }
                 if (series.size() > 0) {
@@ -250,7 +250,7 @@ public class ChillMediaFlow {
                 TextIO.println("The genre isn't there, you can choose from: ");
                 for (IGenre g : Genre.values()) {
                     if (g.isSeriesGenre()) {
-                        if (g.isAgeRestricted() && !getCurrentUser().isAdult()) {
+                        if (g.isAgeRestricted() && !getUser().isAdult()) {
                             continue;
                         }
                         TextIO.println(" - " + g);
@@ -396,7 +396,7 @@ public class ChillMediaFlow {
      * @return Nothing.
      */
     private void addMovieToMyMovies(IMovie movie) {
-        if (getCurrentUser().addToMyMovies(movie)) {
+        if (getUser().addToMyMovies(movie)) {
             TextIO.println("Added " + movie.getTitle() + " to your movies.");
         } else {
             TextIO.println("You already have " + movie.getTitle() + " in your movies.");
@@ -409,7 +409,7 @@ public class ChillMediaFlow {
      * @param movie
      */
     private void removeMovieFromMyMovies(IMovie movie) {
-        if (getCurrentUser().removeFromMyMovies(movie)) {
+        if (getUser().removeFromMyMovies(movie)) {
             TextIO.println("Removed " + movie.getTitle() + " from your movies.");
         } else {
             TextIO.println("You don't have " + movie.getTitle() + " in your movies.");
@@ -422,7 +422,7 @@ public class ChillMediaFlow {
      * @param movie
      */
     private void watchMovie(IMovie movie) {
-        getCurrentUser().addWatchedMovie(movie);
+        getUser().addWatchedMovie(movie);
         TextIO.println("You are now watching " + movie.getTitle() + ".");
     }
 
@@ -481,7 +481,7 @@ public class ChillMediaFlow {
         return chillMedia;
     }
 
-    private IUser getCurrentUser() {
+    private IUser getUser() {
         return getChillMedia().getSessionCache().getUser();
     }
 }
