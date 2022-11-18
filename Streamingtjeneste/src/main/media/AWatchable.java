@@ -16,6 +16,7 @@ public abstract class AWatchable implements IMedia {
      * <p>
      * KOMMENTAR_TIL_KONSTRUKTØREN_HER
      *
+     * @param id
      * @param title
      * @param rating
      * @param genres
@@ -50,7 +51,8 @@ public abstract class AWatchable implements IMedia {
     @Override
     public String toString() {
         return "AWatchable{" +
-                "title='" + getTitle() + '\'' +
+                "id=" + getID() +
+                ", title='" + getTitle() + '\'' +
                 ", rating=" + getRating() +
                 ", genres=" + getGenres() +
                 '}';

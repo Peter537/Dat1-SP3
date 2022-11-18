@@ -15,6 +15,7 @@ public class Series extends AWatchable implements ISeries {
      * <p>
      * KOMMENTAR_TIL_KONSTRUKTØREN_HER
      *
+     * @param id
      * @param title
      * @param startYear
      * @param endYear
@@ -47,11 +48,12 @@ public class Series extends AWatchable implements ISeries {
     @Override
     public String toString() {
         return "Series{" +
-                "title='" + getTitle() + '\'' +
-                ", rating=" + getRating() +
-                ", genres=" + getGenres() +
+                "id=" + getID() +
+                ", title='" + getTitle() + '\'' +
                 ", startYear=" + getStartYear() +
                 ", endYear=" + ((endYear == -1) ? "ongoing" : getEndYear()) +
+                ", rating=" + getRating() +
+                ", genres=" + getGenres() +
                 ", seasons=" + getSeasons() +
                 '}';
     }
