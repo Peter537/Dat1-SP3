@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class DataBaseIO implements IDataIO {
 
     private final MySQL mySQL;
-    public ArrayList<IMovie> myMoviesCached;
-    public ArrayList<IMovie> watchedMoviesCached;
+    private ArrayList<IMovie> myMoviesCached;
+    private ArrayList<IMovie> watchedMoviesCached;
 
     /**
      * Constructor for DataBaseIO
@@ -45,12 +45,24 @@ public class DataBaseIO implements IDataIO {
                 String email = userdata.getString("email");
                 String password = userdata.getString("password");
                 int age = userdata.getInt("age");
+                ResultSet userMovies = mySQL.executeQuery(SQLStatements.getMoviesFromUserByEmailAndPassword(email, password));
                 ArrayList<IMovie> myMovies = new ArrayList<>();
                 ArrayList<IMovie> watchedMovies = new ArrayList<>();
 
+                while (userMovies.next()) {
+                    ArrayList<IMovie> allMovies = loadMovies();
+                    for (IMovie movie : allMovies) {
+                        if (movie.getID() == userMovies.getInt("um_movie_id")) {
+                            if (userMovies.getString("um_movie_status").equals("WATCHED")) {
+                                watchedMovies.add(movie);
+                            }
+                            else {
+                                myMovies.add(movie);
+                            }
+                        }
+                    }
+                }
                 users.add(new User(id, name, email, password, age, myMovies, watchedMovies));
-                myMoviesCached = myMovies;
-                watchedMoviesCached = watchedMovies;
             }
         }
         catch (Exception e) {
@@ -92,9 +104,9 @@ public class DataBaseIO implements IDataIO {
                         }
                     }
                 }
-
-
                 user = new User(id, name, email, password, age, myMovies, watchedMovies);
+                myMoviesCached = myMovies;
+                watchedMoviesCached = watchedMovies;
             }
         }
         catch (Exception e) {
@@ -257,6 +269,11 @@ public class DataBaseIO implements IDataIO {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setCache(IUser user) {
+        this.watchedMoviesCached = user.getWatchedMovies();
+        this.myMoviesCached = user.getMyMovies();
     }
 
     /**
