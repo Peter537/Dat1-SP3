@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class LogIn {
 
+    private final ChillMedia chillMedia;
     private IUser currentUser;
     private final ArrayList<IUser> users;
 
@@ -138,6 +139,7 @@ public class LogIn {
             }
         }
         this.currentUser = user;
+        chillMedia.getDataIO().setCache(user);
     }
 
     /**
@@ -213,5 +215,9 @@ public class LogIn {
 
     public IUser getCurrentUser() {
         return currentUser;
+    }
+
+    public ChillMedia getChillMedia() {
+        return chillMedia;
     }
 }

@@ -257,4 +257,9 @@ public class FileIO implements IDataIO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void setCache(IUser user) {
+        // nothing to do here
+    }
 }
