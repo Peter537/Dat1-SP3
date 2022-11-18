@@ -17,6 +17,8 @@ import java.util.Scanner;
 public class DataBaseIO implements IDataIO {
 
     private final MySQL mySQL;
+    public ArrayList<IMovie> myMoviesCached;
+    public ArrayList<IMovie> watchedMoviesCached;
 
     /**
      * Constructor for DataBaseIO
@@ -47,6 +49,8 @@ public class DataBaseIO implements IDataIO {
                 ArrayList<IMovie> watchedMovies = new ArrayList<>();
 
                 users.add(new User(id, name, email, password, age, myMovies, watchedMovies));
+                myMoviesCached = myMovies;
+                watchedMoviesCached = watchedMovies;
             }
         }
         catch (Exception e) {
@@ -177,24 +181,66 @@ public class DataBaseIO implements IDataIO {
             e.printStackTrace();
         }
         mySQL.executeChangeQuery(statement);
-        ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
 
+        saveMoviesToUser(user);
+
+        mySQL.closeConnection();
+    }
+
+    private void saveMoviesToUser(IUser user) {
+        ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
         int id;
-        PreparedStatement statement2 = null;
+        PreparedStatement statement = null;
         try {
-            id = rs.getInt("user_id");
-            for (IMovie movie : user.getMyMovies()) {
-                statement2 = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(user_id, movie_id) VALUES (?, ?)");
-                statement2.setInt(1, id);
-                statement2.setInt(2, movie.getID());
-                mySQL.executeChangeQuery(statement2);
+            while (rs.next()) {
+                id = rs.getInt("user_id");
+                for (IMovie movie : user.getWatchedMovies()) {
+                    if (!watchedMoviesCached.contains(movie)) {
+                        statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
+                        statement.setInt(1, id);
+                        statement.setInt(2, movie.getID());
+                        if (user.getMyMovies().contains(movie)) {
+                            statement.setString(3, "WATCHED,WANTTO");
+                            user.removeFromMyMovies(movie);
+                        }
+                        else {
+                            statement.setString(3, "WATCHED");
+                        }
+                        mySQL.executeChangeQuery(statement);
+                    }
+                }
+                for (IMovie movie : watchedMoviesCached) {
+                    if (!user.getWatchedMovies().contains(movie)) {
+                        statement = mySQL.getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?, um_movie_status = ?");
+                        statement.setInt(1, id);
+                        statement.setInt(2, movie.getID());
+                        statement.setString(3, "WATCHED");
+                        mySQL.executeChangeQuery(statement);
+                    }
+                }
+                for (IMovie movie : user.getMyMovies()) {
+                    if (!myMoviesCached.contains(movie)) {
+                        statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
+                        statement.setInt(1, id);
+                        statement.setInt(2, movie.getID());
+                        statement.setString(3, "WANTTO");
+                        mySQL.executeChangeQuery(statement);
+                    }
+                }
+                for (IMovie movie : myMoviesCached) {
+                    if (!user.getMyMovies().contains(movie)) {
+                        statement = mySQL.getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?");
+                        statement.setInt(1, id);
+                        statement.setInt(2, movie.getID());
+//                        statement.setString(3, "WANTTO");
+                        mySQL.executeChangeQuery(statement);
+                    }
+                }
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        mySQL.closeConnection();
     }
 
     /**
