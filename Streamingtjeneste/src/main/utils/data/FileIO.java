@@ -119,6 +119,7 @@ public class FileIO implements IDataIO {
 
         try {
             Scanner readMovies = new Scanner(file);
+            int id = 0;
 
             while (readMovies.hasNextLine()) {
                 String line = readMovies.nextLine();
@@ -139,7 +140,8 @@ public class FileIO implements IDataIO {
                 }
 
                 float rating = Float.parseFloat(values[3].replace(',', '.').trim());
-                movieData.add(new Movie(movieTitles, rating, movieGenres, year));
+                movieData.add(new Movie(id, movieTitles, rating, movieGenres, year));
+                id++;
             }
         } catch (Exception e) {
             e.printStackTrace();
