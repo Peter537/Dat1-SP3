@@ -42,8 +42,8 @@ public class ChillMedia {
      */
     public void run() {
         getLogIn().logIn();
-        IUser currentUser = getLogIn().getCurrentUser();
-        getSessionCache().setUser(currentUser);
+        IUser user = getLogIn().getUser();
+        getSessionCache().setUser(user);
 
         TextIO.println("Welcome to ChillMedia!");
         TextIO.println("");
