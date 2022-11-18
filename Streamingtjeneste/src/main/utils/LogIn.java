@@ -54,16 +54,17 @@ public class LogIn {
             return;
         }
 
-        /* HVAD SKER DER HVIS MAN SKRIVER "3" */
         if (checkEmailInList(email)) {
             TextIO.println("Email already in use...");
-            String input = TextIO.getUserInput("Press 1 to continue signing up or press 2 to switch to sign in: ");
-            if (input.equals("1")) {
-                signUp();
-                return;
-            } else if (input.equals("2")) {
-                signIn();
-                return;
+            while (true) {
+                String input = TextIO.getUserInput("Press 1 to continue signing up or press 2 to switch to sign in: ");
+                if (input.equals("1")) {
+                    signUp();
+                    return;
+                } else if (input.equals("2")) {
+                    signIn();
+                    return;
+                }
             }
         }
 
