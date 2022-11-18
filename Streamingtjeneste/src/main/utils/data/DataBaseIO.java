@@ -151,7 +151,6 @@ public class DataBaseIO implements IDataIO {
      *
      *
      * @param user
-     * @return Nothing.
      */
     public void saveUser(IUser user) {
         PreparedStatement statement = null;
