@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Movie extends AWatchable implements IMovie {
 
     private final int year;
-
+    private int id;
     /**
      * Constructor for Movie
      * <p>
@@ -18,9 +18,10 @@ public class Movie extends AWatchable implements IMovie {
      * @param genres
      * @param year
      */
-    public Movie(String title, float rating, ArrayList<IGenre> genres, int year) {
+    public Movie(String title, float rating, ArrayList<IGenre> genres, int year, int id) {
         super(title, rating, genres);
         this.year = year;
+        this.id = id;
     }
 
     @Override

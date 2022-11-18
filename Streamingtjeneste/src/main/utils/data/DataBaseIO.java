@@ -151,7 +151,6 @@ public class DataBaseIO implements IDataIO {
      *
      *
      * @param user
-     * @return Nothing.
      */
     public void saveUser(IUser user) {
         PreparedStatement statement = null;
@@ -177,6 +176,23 @@ public class DataBaseIO implements IDataIO {
             e.printStackTrace();
         }
         mySQL.executeChangeQuery(statement);
+        ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
+
+        int id;
+        PreparedStatement statement2 = null;
+        try {
+            id = rs.getInt("user_id");
+            for (IMovie movie : user.getMyMovies()) {
+                statement2 = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(user_id, movie_id) VALUES (?, ?)");
+                statement2.setInt(1, id);
+                statement2.setInt(2, movie.getID());
+                mySQL.executeChangeQuery(statement2);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mySQL.closeConnection();
     }
 
