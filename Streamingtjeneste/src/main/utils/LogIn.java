@@ -140,7 +140,7 @@ public class LogIn {
             }
         }
         this.currentUser = user;
-        chillMedia.getDataIO().setCache(user);
+        getChillMedia().getDataIO().setCache(user);
     }
 
     /**
@@ -218,7 +218,7 @@ public class LogIn {
         return currentUser;
     }
 
-    public ChillMedia getChillMedia() {
+    private ChillMedia getChillMedia() {
         return chillMedia;
     }
 }
