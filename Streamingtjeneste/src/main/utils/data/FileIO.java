@@ -211,7 +211,6 @@ public class FileIO implements IDataIO {
      *
      *
      * @param user
-     * @return Nothing.
      */
     public void saveUser(IUser user) {
         saveAsJson(user);
@@ -221,7 +220,6 @@ public class FileIO implements IDataIO {
      *
      *
      * @param user
-     * @return Nothing.
      */
     private void saveAsJson(IUser user) {
         ArrayList<IUser> users = loadUsersFromJson();
