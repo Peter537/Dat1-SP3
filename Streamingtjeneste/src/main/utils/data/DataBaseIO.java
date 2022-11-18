@@ -272,8 +272,8 @@ public class DataBaseIO implements IDataIO {
     }
 
     public void setCache(IUser user) {
-        this.watchedMoviesCached = user.getWatchedMovies();
-        this.myMoviesCached = user.getMyMovies();
+        this.watchedMoviesCached = (ArrayList<IMovie>) user.getWatchedMovies().clone();
+        this.myMoviesCached = (ArrayList<IMovie>) user.getMyMovies().clone();
     }
 
     /**
