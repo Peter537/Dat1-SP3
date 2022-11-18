@@ -16,6 +16,9 @@ public class MySQL {
     /**
      *
      *
+     * Example of how to use this method:
+     * openConnection("localhost:/world", "root", "12321");
+     *
      * @param url
      * @param name
      * @param password
@@ -24,7 +27,6 @@ public class MySQL {
     public boolean openConnection(String url, String name, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            //Example: "jdbc:mysql://localhost:/world", "root", "12321"
             this.connection = DriverManager.getConnection("jdbc:mysql://" + url + "?autoReconnect=true&useSSL=false", name, password);
             return true;
         } catch (SQLException | ClassNotFoundException e) {
@@ -36,6 +38,9 @@ public class MySQL {
     /**
      *
      *
+     * Example of how to use this method:
+     * openConnection("localhost", "world", "root", "12321");
+     *
      * @param ip
      * @param schema
      * @param name
@@ -43,6 +48,8 @@ public class MySQL {
      * @return boolean
      */
     public boolean openConnection(String ip, String schema, String name, String password) {
+        return openConnection(ip + ":/" + schema, name, password);
+        /*
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             //Example: "jdbc:mysql://localhost:/world", "root", "12321"
@@ -51,7 +58,7 @@ public class MySQL {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             return false;
-        }
+        }*/
     }
 
     /**
