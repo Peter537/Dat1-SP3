@@ -18,7 +18,7 @@ public class Movie extends AWatchable implements IMovie {
      * @param genres
      * @param year
      */
-    public Movie(String title, float rating, ArrayList<IGenre> genres, int year, int id) {
+    public Movie(int id, String title, float rating, ArrayList<IGenre> genres, int year) {
         super(title, rating, genres);
         this.year = year;
         this.id = id;
