@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Query {
 
-    /*
+    /**
      *
      *
      * @param series
@@ -22,7 +22,7 @@ public class Query {
         return series.stream().filter(s -> s.getGenres().contains(genre) && genre.isSeriesGenre()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param series
@@ -33,7 +33,7 @@ public class Query {
         return searchSeriesGenre(series, Genre.valueOf(genre.toUpperCase()));
     }
 
-    /*
+    /**
      *
      *
      * @param series
@@ -44,7 +44,7 @@ public class Query {
         return series.stream().filter(s -> s.getGenres().contains(genre) && genre.isSeriesGenre() && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param series
@@ -55,7 +55,7 @@ public class Query {
         return searchSeriesGenreAgeRestricted(series, Genre.valueOf(genre.toUpperCase()));
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -66,7 +66,7 @@ public class Query {
         return movies.stream().filter(m -> m.getGenres().contains(genre) && genre.isMovieGenre()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -77,7 +77,7 @@ public class Query {
         return searchMovieGenre(movies, Genre.valueOf(genre.toUpperCase()));
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -88,7 +88,7 @@ public class Query {
         return movies.stream().filter(m -> m.getGenres().contains(genre) && genre.isMovieGenre() && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -99,7 +99,7 @@ public class Query {
         return searchMovieGenreAgeRestricted(movies, Genre.valueOf(genre.toUpperCase()));
     }
 
-    /*
+    /**
      *
      *
      * @param media
@@ -110,7 +110,7 @@ public class Query {
         return media.stream().filter(m -> m.getGenres().contains(genre)).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param media
@@ -121,7 +121,7 @@ public class Query {
         return searchGenre(media, Genre.valueOf(genre.toUpperCase()));
     }
 
-    /*
+    /**
      *
      *
      * @param media
@@ -132,7 +132,7 @@ public class Query {
         return media.stream().filter(m -> m.getGenres().contains(genre) && !genre.isAgeRestricted()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param media
@@ -143,7 +143,7 @@ public class Query {
         return searchGenreAgeRestricted(media, Genre.valueOf(genre.toUpperCase()));
     }
 
-    /*
+    /**
      *
      *
      * @param series
@@ -154,7 +154,7 @@ public class Query {
         return series.stream().filter(s -> s.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param series
@@ -165,7 +165,7 @@ public class Query {
         return series.stream().filter(s -> s.getTitle().equals(title)).findFirst().orElse(null);
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -176,7 +176,7 @@ public class Query {
         return movies.stream().filter(m -> m.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -187,7 +187,7 @@ public class Query {
         return movies.stream().filter(m -> m.getTitle().equals(title)).findFirst().orElse(null);
     }
 
-    /*
+    /**
      *
      *
      * @param media
@@ -198,7 +198,7 @@ public class Query {
         return media.stream().filter(m -> m.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param series
@@ -209,7 +209,7 @@ public class Query {
         return series.stream().filter(s -> s.getRating() >= minimumRating).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param movies
@@ -220,7 +220,7 @@ public class Query {
         return movies.stream().filter(m -> m.getRating() >= minimumRating).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /*
+    /**
      *
      *
      * @param media
