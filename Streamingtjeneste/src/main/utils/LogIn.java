@@ -20,6 +20,7 @@ public class LogIn {
      * @param chillmedia
      */
     public LogIn(ChillMedia chillmedia) {
+        this.chillMedia = chillmedia;
         this.currentUser = null;
         this.users = chillmedia.getDataIO().loadUsers();
     }
