@@ -8,6 +8,7 @@ public class Movie extends AWatchable implements IMovie {
 
     private final int id;
     private final int year;
+
     /**
      * Constructor for Movie
      * <p>
