@@ -32,6 +32,7 @@ public class SQLStatements {
     /**
      *
      *
+     * @param username
      * @return String
      */
     public static String getUserFromUserName(String username) {
@@ -41,6 +42,7 @@ public class SQLStatements {
     /**
      *
      *
+     * @param email
      * @return String
      */
     public static String getUserFromEmail(String email) {
@@ -50,6 +52,8 @@ public class SQLStatements {
     /**
      *
      *
+     * @param email
+     * @param password
      * @return String
      */
     public static String getUserFromEmailAndPassword(String email, String password) {
@@ -59,6 +63,8 @@ public class SQLStatements {
     /**
      *
      *
+     * @param email
+     * @param password
      * @return String
      */
     public static String getMoviesFromUserByEmailAndPassword(String email, String password) {
@@ -68,15 +74,17 @@ public class SQLStatements {
     /**
      *
      *
+     * @param id
      * @return String
      */
-    public static String getUserFromID(int ID) {
-        return  "SELECT * FROM chillmedia.user WHERE user_id = '" + ID + "'";
+    public static String getUserFromID(int id) {
+        return  "SELECT * FROM chillmedia.user WHERE user_id = '" + id + "'";
     }
 
     /**
      *
      *
+     * @param name
      * @return String
      */
     public static String getMovieFromName(String name) {
@@ -86,6 +94,7 @@ public class SQLStatements {
     /**
      *
      *
+     * @param genre
      * @return String
      */
     public static String getMovieFromGenre(String genre) {
@@ -95,15 +104,17 @@ public class SQLStatements {
     /**
      *
      *
+     * @param minimumRating
      * @return String
      */
-    public static String getMovieWithRating(String rating) {
-        return "SELECT * FROM chillmedia.movie WHERE rating >= '" + rating +"'";
+    public static String getMovieWithRating(String minimumRating) {
+        return "SELECT * FROM chillmedia.movie WHERE rating >= '" + minimumRating +"'";
     }
 
     /**
      *
      *
+     * @param name
      * @return String
      */
     public static String getSeriesFromName(String name) {
@@ -113,6 +124,7 @@ public class SQLStatements {
     /**
      *
      *
+     * @param genre
      * @return String
      */
     public static String getSeriesFromGenre(String genre) {
@@ -122,9 +134,10 @@ public class SQLStatements {
     /**
      *
      *
+     * @param minimumRating
      * @return String
      */
-    public static String getSeriesWithRating(String rating) {
-        return "SELECT * FROM chillmedia.series WHERE rating >= '" + rating +"'";
+    public static String getSeriesWithRating(String minimumRating) {
+        return "SELECT * FROM chillmedia.series WHERE rating >= '" + minimumRating +"'";
     }
 }
