@@ -58,7 +58,7 @@ class ChillMediaFlow {
     - int selectSeriesOptions()
 
     - accessors methods()
-    - IUser getCurrentUser()
+    - IUser getUser()
 }
 
 class LogIn {
@@ -342,9 +342,9 @@ ChillMedia *-- IUser
 ChillMedia *-- LogIn
 ChillMedia *-- ChillMediaFlow
 ChillMedia *-- SessionCache
-ChillMedia *-- MySQL
-ChillMedia *-- SQLStatements
 
 Series *-- Season
+
+DataBaseIO *-- MySQL
 
 @enduml
