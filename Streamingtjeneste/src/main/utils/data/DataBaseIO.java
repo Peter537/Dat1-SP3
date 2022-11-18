@@ -215,6 +215,11 @@ public class DataBaseIO implements IDataIO {
         mySQL.closeConnection();
     }
 
+    /**
+     *
+     *
+     * @param user
+     */
     private void saveMoviesToUser(IUser user) {
         ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
         int id;
@@ -271,6 +276,11 @@ public class DataBaseIO implements IDataIO {
         }
     }
 
+    /**
+     *
+     *
+     * @param user
+     */
     public void setCache(IUser user) {
         this.watchedMoviesCached = (ArrayList<IMovie>) user.getWatchedMovies().clone();
         this.myMoviesCached = (ArrayList<IMovie>) user.getMyMovies().clone();
