@@ -39,7 +39,8 @@ public class Movie extends AWatchable implements IMovie {
     @Override
     public String toString() {
         return "Movie{" +
-                "title='" + getTitle() + '\'' +
+                "id=" + getID() +
+                ", title='" + getTitle() + '\'' +
                 ", rating=" + getRating() +
                 ", genres=" + getGenres() +
                 ", year=" + getYear() +
