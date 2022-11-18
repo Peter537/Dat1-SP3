@@ -6,6 +6,7 @@
 
 class Main {
     + static void main(String[] args)
+    - static IDataIO getDataIOType()
 }
 
 class ChillMedia {
