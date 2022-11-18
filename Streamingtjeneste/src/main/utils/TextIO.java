@@ -89,15 +89,6 @@ public class TextIO {
         System.out.print(msg);
     }
 
-    /**
-     *
-     */
-    public static void clearConsole() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
-    }
-
     public static Scanner getScanner() {
         return scanner;
     }
