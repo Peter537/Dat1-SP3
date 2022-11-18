@@ -103,7 +103,8 @@ public class DataBaseIO implements IDataIO {
                     genres.add(Genre.valueOf(genreString));
                 }
                 int year = movieData.getInt("year_of_filming");
-                Movie movie = new Movie(name, rating, genres, year);
+                int id = movieData.getInt("movie_id");
+                Movie movie = new Movie(name, rating, genres, year, id);
                 movies.add(movie);
             }
         } catch (Exception e) {
