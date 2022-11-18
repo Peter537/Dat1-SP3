@@ -30,6 +30,10 @@ public class SQLStatements {
     {
         return  "SELECT * FROM chillmedia.user WHERE email = '" + email + "' AND password = '" + password + "'";
     }
+    public static String getMoviesFromUserByEmailAndPassword(String email, String password)
+    {
+        return  "SELECT u.user_id, um.um_user_id, um.um_movie_id, um.um_movie_status FROM user_movie AS um JOIN user AS u ON u.user_id = um.um_user_id WHERE u.email = '"+ email +"' AND u.password = '" + password + "' AND u.user_id = um_user_id";
+    }
     public static String getUserFromID(int ID)
     {
         return  "SELECT * FROM chillmedia.user WHERE user_id = '" + ID + "'";

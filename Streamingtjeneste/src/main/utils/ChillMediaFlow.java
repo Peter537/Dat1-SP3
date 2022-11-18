@@ -14,7 +14,6 @@ import java.util.Arrays;
 public class ChillMediaFlow {
 
     private final ChillMedia chillMedia;
-    private final IUser currentUser;
 
     /**
      * Constructor for ChillMediaFlow
@@ -25,7 +24,6 @@ public class ChillMediaFlow {
      */
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
-        this.currentUser = chillMedia.getSessionCache().getUser();
     }
 
     /**
@@ -484,6 +482,6 @@ public class ChillMediaFlow {
     }
 
     private IUser getCurrentUser() {
-        return currentUser;
+        return getChillMedia().getSessionCache().getUser();
     }
 }
