@@ -100,7 +100,7 @@ public class FileIO implements IDataIO {
 
         try {
             Scanner readMovies = new Scanner(file);
-            int id = 0;
+            int id = 1;
 
             while (readMovies.hasNextLine()) {
                 String line = readMovies.nextLine();
@@ -143,6 +143,7 @@ public class FileIO implements IDataIO {
 
         try {
             Scanner readSeries = new Scanner(file);
+            int id = 1;
 
             while (readSeries.hasNextLine()) {
                 String line = readSeries.nextLine();
@@ -182,7 +183,8 @@ public class FileIO implements IDataIO {
                     Season thisSeason = new Season (seasonCount,episodeCount);
                     seasonsEpisodes.add(thisSeason);
                 }
-                seriesData.add(new Series(title, startYear, endYear, rating, seriesGenre, seasonsEpisodes));
+                seriesData.add(new Series(id, title, startYear, endYear, rating, seriesGenre, seasonsEpisodes));
+                id++;
             }
         } catch (IOException e) {
             e.printStackTrace();

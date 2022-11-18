@@ -11,4 +11,6 @@ public interface IMedia {
     float getRating();
 
     ArrayList<IGenre> getGenres();
+
+    int getID();
 }

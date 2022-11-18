@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public abstract class AWatchable implements IMedia {
 
+    private final int id;
     private final String title;
     private final float rating;
     private final ArrayList<IGenre> genres;
@@ -19,10 +20,16 @@ public abstract class AWatchable implements IMedia {
      * @param rating
      * @param genres
      */
-    public AWatchable(String title, float rating, ArrayList<IGenre> genres) {
+    public AWatchable(int id, String title, float rating, ArrayList<IGenre> genres) {
+        this.id = id;
         this.title = title;
         this.rating = rating;
         this.genres = genres;
+    }
+
+    @Override
+    public int getID() {
+        return this.id;
     }
 
     @Override

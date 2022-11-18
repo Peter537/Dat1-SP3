@@ -115,6 +115,7 @@ public class DataBaseIO implements IDataIO {
                 int startYear = seriesData.getInt("start_year");
                 int endYear = seriesData.getInt("end_year");
                 float rating = seriesData.getFloat("rating");
+                int id = seriesData.getInt("series_id");
                 ArrayList<IGenre> genres = new ArrayList<>();
                 String[] genreStrings = seriesData.getString("genres").split(",");
                 for (String genreString : genreStrings) {
@@ -126,7 +127,7 @@ public class DataBaseIO implements IDataIO {
                     seasons.add(new Season(Integer.parseInt(seasonString.split("-")[0]), Integer.parseInt(seasonString.split("-")[1])));
                 }
 
-                Series serie = new Series(name, startYear, endYear, rating, genres, seasons);
+                Series serie = new Series(id, name, startYear, endYear, rating, genres, seasons);
                 series.add(serie);
             }
         } catch (Exception e) {
