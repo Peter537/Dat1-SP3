@@ -22,7 +22,7 @@ class ChillMedia {
     - void listMovies()
     - void listSeries()
 
-    + accessors methods()
+    + accessor methods()
     - Login getLogIn()
 }
 
@@ -57,16 +57,16 @@ class ChillMediaFlow {
     - int selectMovieOptions()
     - int selectSeriesOptions()
 
-    - accessors methods()
+    - accessor methods()
     - IUser getUser()
 }
 
 class LogIn {
     - final ChillMedia chillMedia
-    - IUser user
     - final ArrayList<IUser> users
+    - IUser user
 
-    + LogIn(ChillMedia chillmedia)
+    + LogIn(ChillMedia chillMedia)
 
     + void logIn()
     - void signUp()
@@ -76,8 +76,8 @@ class LogIn {
     - boolean checkEmailInList(String email)
     - IUser getUser(String email, String password)
 
+    - accessor methods()
     + IUser getUser()
-    - ChillMedia getChillMedia()
 }
 
 class SessionCache {
@@ -89,7 +89,7 @@ class SessionCache {
     + boolean addMovie(IMovie movie)
     + boolean addSeries(ISeries series)
 
-    + accessors methods()
+    + accessor methods()
 }
 
 class Query {
@@ -139,14 +139,14 @@ class FileIO implements IDataIO {
 
     + FileIO()
     + ArrayList<IUser> loadUsers()
-    + IUser loadUser(String email, String password)
     - ArrayList<IUser> loadUsersFromJson()
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
 
-    + void saveUser(ArrayList<IUser> user)
-    - void saveAsJson(ArrayList<IUser> user)
+    + void saveUser(IUser user)
+    - void saveAsJson(IUser user)
 
+    + void setCache(IUser user)
 }
 
 class User implements IUser {
@@ -164,16 +164,15 @@ class User implements IUser {
     + void addWatchedMovie(IMovie movie)
     + boolean isAdult()
 
-    + accessors methods()
+    + accessor methods()
 }
 
 class Movie extends AWatchable implements IMovie {
-    - final int id
     - final int year
 
     + Movie(int id, String title, float rating, ArrayList<IGenre> genres, int year)
 
-    + accessors methods()
+    + accessor methods()
 }
 
 class Series extends AWatchable implements ISeries {
@@ -181,9 +180,9 @@ class Series extends AWatchable implements ISeries {
     - final int endYear
     - final ArrayList<Season> seasons
 
-    + Series(String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons)
+    + Series(int id, String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons)
 
-    + accessors methods()
+    + accessor methods()
 }
 
 class Season {
@@ -192,39 +191,45 @@ class Season {
 
     + Season(int seasonNumber, int episodeCount)
 
-    + accessors methods()
+    + accessor methods()
 }
 
 class MySQL {
-- Connection connection
+    - Connection connection
 
-+ MySQL()
-+ boolean openConnection(String url, String name, String password)
-+ boolean openConnection(String ip, String schema, String name, String password)
-+ boolean closeConnection()
-+ ResultSet executeQuery(String query)
-+ boolean executeChangeQuery(PreparedStatement query)
+    + MySQL()
+    + boolean openConnection(String url, String name, String password)
+    + boolean openConnection(String ip, String schema, String name, String password)
+    + boolean closeConnection()
+    + ResultSet executeQuery(String query)
+    + boolean executeChangeQuery(PreparedStatement query)
 
-+ accessor methods()
+    + accessor methods()
 }
 
 class SQLStatements {
-
+    + static String getAllMovies()
+    + static String getAllSeries()
+    + static String getAllUsers()
+    + static String getUserFromEmailAndPassword(String email, String password)
+    + static String getMoviesFromUserByEmailAndPassword(String email, String password)
 }
 
 class DataBaseIO implements IDataIO {
-- final MySQL mySQL
+    - final MySQL mySQL
+    - ArrayList<IMovie> myMoviesCached
+    - ArrayList<IMovie> watchedMoviesCached
 
-+ DataBaseIO()
-+ ArrayList<IUser> loadUsers()
-+ IUser loadUser(String email, String password)
-+ ArrayList<IMovie> loadMovies()
-+ ArrayList<ISeries> loadSeries()
-+ void saveUser(IUser user)
-- void saveMoviesToUser(IUser user)
-- String getPassword()
+    + DataBaseIO()
+    + ArrayList<IUser> loadUsers()
+    + ArrayList<IMovie> loadMovies()
+    + ArrayList<ISeries> loadSeries()
+    + void saveUser(IUser user)
+    - void saveMoviesToUser(IUser user)
+    + void setCache(IUser user)
+    - String getPassword()
 
-+ accessor methods()
+    + MySQL getMySQL()
 }
 
 ' *****************
@@ -232,11 +237,12 @@ class DataBaseIO implements IDataIO {
 ' *****************
 
 abstract class AWatchable implements IMedia {
+    - final int id
     - final String title
     - final float rating
     - final ArrayList<IGenre> genres
 
-    + AWatchable(String title, float rating, ArrayList<IGenre> genres)
+    + AWatchable(int id, String title, float rating, ArrayList<IGenre> genres)
 
     + accessor methods()
 }
@@ -249,6 +255,7 @@ interface IMedia {
     + String getTitle()
     + float getRating()
     + ArrayList<IGenre> getGenres()
+    + int getID()
 }
 
 interface ISeries extends IMedia {
@@ -259,7 +266,6 @@ interface ISeries extends IMedia {
 
 interface IMovie extends IMedia {
     + int getYear()
-    + int getID()
 }
 
 interface IUser {
@@ -278,10 +284,10 @@ interface IUser {
 
 interface IDataIO {
     + ArrayList<IUser> loadUsers()
-    + IUser loadUser(String email, String password)
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
     + void saveUser(IUser user)
+    + void setCache(IUser user)
 }
 
 interface IGenre {
@@ -323,11 +329,9 @@ enum Genre implements IGenre {
     + DOCUMENTARY(false, true, false),
     + ANIMATION(false, true, false)
 
-    + Genre(boolean isMovieGenre, boolean isSeriesGenre, boolean isAgeRestricted) { })
+    + Genre(boolean isMovieGenre, boolean isSeriesGenre, boolean isAgeRestricted)
 
-    + boolean isMovieGenre()
-    + boolean isSeriesGenre()
-    + boolean isAgeRestricted()
+    + accessor methods()
 }
 
 ' *****************
