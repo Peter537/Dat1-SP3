@@ -30,7 +30,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param username
      * @return String
@@ -40,7 +40,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param email
      * @return String
@@ -72,7 +72,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param id
      * @return String
@@ -82,7 +82,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param name
      * @return String
@@ -92,7 +92,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param genre
      * @return String
@@ -102,7 +102,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param minimumRating
      * @return String
@@ -112,7 +112,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param name
      * @return String
@@ -122,7 +122,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param genre
      * @return String
@@ -132,7 +132,7 @@ public class SQLStatements {
     }
 
     /**
-     *
+     * NOT IN USE, NOT IN UML
      *
      * @param minimumRating
      * @return String
