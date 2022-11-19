@@ -9,20 +9,20 @@ import java.util.ArrayList;
 public class LogIn {
 
     private final ChillMedia chillMedia;
-    private IUser user;
     private final ArrayList<IUser> users;
+    private IUser user;
 
     /**
      * Constructor for LogIn
      * <p>
      * KOMMENTAR_TIL_KONSTRUKTØREN_HER
      *
-     * @param chillmedia
+     * @param chillMedia
      */
-    public LogIn(ChillMedia chillmedia) {
-        this.chillMedia = chillmedia;
+    public LogIn(ChillMedia chillMedia) {
+        this.chillMedia = chillMedia;
+        this.users = chillMedia.getDataIO().loadUsers();
         this.user = null;
-        this.users = chillmedia.getDataIO().loadUsers();
     }
 
     /**
@@ -40,7 +40,7 @@ public class LogIn {
             } else if (input.equals("2")) {
                 signUp();
             }
-            if (user != null) {
+            if (getUser() != null) {
                 return;
             }
         }
@@ -94,7 +94,7 @@ public class LogIn {
             return;
         }
 
-        this.user = new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>());
+        setUser(new User(-1, name, email, password, age, new ArrayList<>(), new ArrayList<>()));
     }
 
     /**
@@ -139,7 +139,7 @@ public class LogIn {
                 break;
             }
         }
-        this.user = user;
+        setUser(user);
         getChillMedia().getDataIO().setCache(user);
     }
 
@@ -190,7 +190,7 @@ public class LogIn {
      * @return boolean
      */
     private boolean checkEmailInList(String email) {
-        for (IUser p : users) {
+        for (IUser p : getUsers()) {
             if (p.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }
@@ -206,7 +206,7 @@ public class LogIn {
      * @return IUser
      */
     private IUser getUser(String email, String password) {
-        for (IUser p : users) {
+        for (IUser p : getUsers()) {
             if (p.getEmail().equals(email) && p.getPassword().equals(password)) {
                 return p;
             }
@@ -214,11 +214,19 @@ public class LogIn {
         return null;
     }
 
-    public IUser getUser() {
-        return user;
+    private ArrayList<IUser> getUsers() {
+        return this.users;
     }
 
     private ChillMedia getChillMedia() {
-        return chillMedia;
+        return this.chillMedia;
+    }
+
+    private void setUser(IUser user) {
+        this.user = user;
+    }
+
+    public IUser getUser() {
+        return this.user;
     }
 }
