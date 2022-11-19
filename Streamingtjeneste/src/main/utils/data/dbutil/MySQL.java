@@ -49,16 +49,6 @@ public class MySQL {
      */
     public boolean openConnection(String ip, String schema, String name, String password) {
         return openConnection(ip + ":/" + schema, name, password);
-        /*
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //Example: "jdbc:mysql://localhost:/world", "root", "12321"
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":/" + schema + "?autoReconnect=true&useSSL=false", name, password);
-            return true;
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }*/
     }
 
     /**
