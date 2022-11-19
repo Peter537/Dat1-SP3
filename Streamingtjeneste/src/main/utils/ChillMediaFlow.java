@@ -393,7 +393,6 @@ public class ChillMediaFlow {
      *
      *
      * @param movie
-     * @return Nothing.
      */
     private void addMovieToMyMovies(IMovie movie) {
         if (getUser().addToMyMovies(movie)) {
