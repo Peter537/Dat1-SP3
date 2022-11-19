@@ -165,11 +165,10 @@ public class DataBaseIO implements IDataIO {
      */
     private void saveMoviesToUser(IUser user) {
         ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
-        int id;
         PreparedStatement statement;
         try {
             while (rs.next()) {
-                id = rs.getInt("user_id");
+                int id = rs.getInt("user_id");
                 for (IMovie movie : user.getWatchedMovies()) {
                     if (!watchedMoviesCached.contains(movie)) {
                         statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
