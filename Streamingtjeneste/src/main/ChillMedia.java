@@ -25,7 +25,7 @@ public class ChillMedia {
         this.sessionCache = new SessionCache();
         this.dataIO = dataIO;
         this.logIn = new LogIn(this);
-        load();
+        this.load();
         this.chillMediaFlow = new ChillMediaFlow(this);
     }
 
@@ -45,7 +45,7 @@ public class ChillMedia {
         IUser user = getLogIn().getUser();
         getSessionCache().setUser(user);
 
-        TextIO.println("Welcome to ChillMedia!");
+        TextIO.println("Welcome to ChillMedia, " + user.getName() + "!");
         TextIO.println("");
         String[] options = new String[] {
                 "Log out",
