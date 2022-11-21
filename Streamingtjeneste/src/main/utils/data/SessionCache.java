@@ -15,7 +15,7 @@ public class SessionCache {
     /**
      * Constructor for SessionCache
      * <p>
-     * This constructor is empty
+     * This constructor is empty as to show the SessionCache constructor doesn't do anything
      */
     public SessionCache() { }
 
