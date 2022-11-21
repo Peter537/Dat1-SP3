@@ -26,26 +26,17 @@ public class FileIO implements IDataIO {
     /**
      * Constructor for FileIO
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor is empty as to show the FileIO instance does not need any data
      */
     public FileIO() { }
 
     /**
+     * This method loads users from the list user.json and creates user-objects so we have them all loaded upon startup
+     * We chose json filetype as it is simply easier to work with when you can split values into keys in any order
      *
-     *
-     * @return ArrayList<IUser>
+     * @return ArrayList<IUser> returns an arraylist of IUsers with all the values mentioned in User-class' constructor
      */
-    @Override
     public ArrayList<IUser> loadUsers() {
-        return loadUsersFromJson();
-    }
-
-    /**
-     *
-     *
-     * @return ArrayList<IUser>
-     */
-    private ArrayList<IUser> loadUsersFromJson() {
         ArrayList<IUser> users = new ArrayList<>();
         if (movies == null) {
             loadMovies();
@@ -83,9 +74,9 @@ public class FileIO implements IDataIO {
     }
 
     /**
+     * loads movies from film.csv and instantiates objects of each movie.
      *
-     *
-     * @return ArrayList<IMovie>
+     * @return ArrayList<IMovie> returns an arraylist of IMovie using the information in movie-class' constructor
      */
     @Override
     public ArrayList<IMovie> loadMovies() {
@@ -128,9 +119,9 @@ public class FileIO implements IDataIO {
     }
 
     /**
+     * This method loads all series into java objects upon startup
      *
-     *
-     * @return ArrayList<ISeries>
+     * @return ArrayList<ISeries> returns an arraylist of ISeries
      */
     @Override
     public ArrayList<ISeries> loadSeries() {
@@ -188,21 +179,12 @@ public class FileIO implements IDataIO {
     }
 
     /**
+     * This method saves all currently active/created users by re-writing all old and new info into user.json
      *
-     *
-     * @param user
+     * @param user this parameter takes the current user and saves their info before they log out of the program
      */
     public void saveUser(IUser user) {
-        saveAsJson(user);
-    }
-
-    /**
-     *
-     *
-     * @param user
-     */
-    private void saveAsJson(IUser user) {
-        ArrayList<IUser> users = loadUsersFromJson();
+        ArrayList<IUser> users = loadUsers();
         users.add(user);
         JSONArray userArray = new JSONArray();
 
@@ -236,6 +218,7 @@ public class FileIO implements IDataIO {
         }
     }
 
+    // This method is not being used
     @Override
     public void setCache(IUser user) {
         // nothing to do here
