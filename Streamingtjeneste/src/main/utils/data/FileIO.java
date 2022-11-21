@@ -36,6 +36,7 @@ public class FileIO implements IDataIO {
      *
      * @return ArrayList<IUser> returns an arraylist of IUsers with all the values mentioned in User-class' constructor
      */
+    @Override
     public ArrayList<IUser> loadUsers() {
         ArrayList<IUser> users = new ArrayList<>();
         if (movies == null) {
@@ -183,6 +184,7 @@ public class FileIO implements IDataIO {
      *
      * @param user this parameter takes the current user and saves their info before they log out of the program
      */
+    @Override
     public void saveUser(IUser user) {
         ArrayList<IUser> users = loadUsers();
         users.add(user);
@@ -218,9 +220,9 @@ public class FileIO implements IDataIO {
         }
     }
 
-    // This method is not being used
+    /**
+     * This method is not being used, it's for the other IO's to use
+     */
     @Override
-    public void setCache(IUser user) {
-        // nothing to do here
-    }
+    public void setCache(IUser user) { }
 }
