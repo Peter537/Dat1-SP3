@@ -16,15 +16,15 @@ public class User implements IUser {
     /**
      * Constructor for User
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This contructor creates a new user object
      *
-     * @param id
-     * @param name
-     * @param email
-     * @param password
-     * @param age
-     * @param myMovies
-     * @param watchedMovies
+     * @param id represents the unique ID every user should be given
+     * @param name represents the user's self-chosen name
+     * @param email represents the email associated with user's account
+     * @param password represents the user's password
+     * @param age represents the user's age
+     * @param myMovies represents the movies the user would like to set aside for later/save
+     * @param watchedMovies represents the movies the user has already watched
      */
     public User(int id, String name, String email, String password, int age, ArrayList<IMovie> myMovies, ArrayList<IMovie> watchedMovies) {
         this.id = id;
@@ -61,6 +61,8 @@ public class User implements IUser {
         return this.age;
     }
 
+
+// this checks if the user is eligible to watch certain 18+ movies. It has not really been used yet.
     @Override
     public boolean isAdult() {
         return getAge() >= 18;
@@ -76,6 +78,9 @@ public class User implements IUser {
         return this.watchedMovies;
     }
 
+
+    // adds movies the user set aside for later/saved
+    // returns true if the selected movie was added successfully (which it should be if it doesnt already exist there)
     @Override
     public boolean addToMyMovies(IMovie movie) {
         if (!getMyMovies().contains(movie)) {
@@ -85,6 +90,9 @@ public class User implements IUser {
         return false;
     }
 
+
+    // removes the movie, user previously saved/set aside for later
+    //returns true if movie was removed successfully (checks if the saved movie was actually in the saved-movies list)
     @Override
     public boolean removeFromMyMovies(IMovie movie) {
         if (getMyMovies().contains(movie)) {
@@ -94,6 +102,8 @@ public class User implements IUser {
         return false;
     }
 
+
+    // adds any move the user has already watched to the watchedMovie list, if it has not already been seen.
     @Override
     public void addWatchedMovie(IMovie movie) {
         if (!getWatchedMovies().contains(movie)) {

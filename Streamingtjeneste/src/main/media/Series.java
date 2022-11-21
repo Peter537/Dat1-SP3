@@ -13,15 +13,15 @@ public class Series extends AWatchable implements ISeries {
     /**
      * Constructor for Series
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor creates series objects paired with an arraylist of seasons
      *
-     * @param id
-     * @param title
-     * @param startYear
-     * @param endYear
-     * @param rating
-     * @param genres
-     * @param seasons
+     * @param id represents the series-watchable's ID
+     * @param title represents series title
+     * @param startYear represents the start-year of airing the series
+     * @param endYear represents the end-year of airing the series
+     * @param rating represesnts the rating of the series
+     * @param genres represents the title of the series
+     * @param seasons represents the seasons-data of the series
      */
     public Series(int id, String title, int startYear, int endYear, float rating, ArrayList<IGenre> genres, ArrayList<Season> seasons) {
         super(id, title, rating, genres);

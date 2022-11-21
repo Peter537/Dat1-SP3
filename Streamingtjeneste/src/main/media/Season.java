@@ -8,10 +8,11 @@ public class Season {
     /**
      * Constructor for Season
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * As a series is not a watchable on its own, this class represents the exact season/episode of a series' watachable
+     * This class is not currently used as we were not given any episode-data.
      *
-     * @param seasonNumber
-     * @param episodeCount
+     * @param seasonNumber represents the exact season of a series
+     * @param episodeCount represents the amount of episodes within a season
      */
     public Season(int seasonNumber, int episodeCount) {
         this.seasonNumber = seasonNumber;

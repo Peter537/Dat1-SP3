@@ -14,12 +14,12 @@ public abstract class AWatchable implements IMedia {
     /**
      * Constructor for AWatchable
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor represents all watchable media on ChillMedia.
      *
-     * @param id
-     * @param title
-     * @param rating
-     * @param genres
+     * @param id represents the ID of the watchable
+     * @param title represents the title of the watchable
+     * @param rating represents the rating of the watchable
+     * @param genres represents the genre(s) of the watchable
      */
     public AWatchable(int id, String title, float rating, ArrayList<IGenre> genres) {
         this.id = id;

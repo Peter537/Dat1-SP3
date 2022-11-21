@@ -11,13 +11,14 @@ public class Movie extends AWatchable implements IMovie {
     /**
      * Constructor for Movie
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * extends the scheme of AWatchable and uses this + IMovie into constructor
+     * This constructor creates new movies as java objects
      *
-     * @param id
-     * @param title
-     * @param rating
-     * @param genres
-     * @param year
+     * @param id represents the ID of the watchable
+     * @param title represents the title of the watchable
+     * @param rating represents the rating of the watchable
+     * @param genres represents the genre(s) of the watchable
+     * @param year represents release-year of the movie
      */
     public Movie(int id, String title, float rating, ArrayList<IGenre> genres, int year) {
         super(id, title, rating, genres);
