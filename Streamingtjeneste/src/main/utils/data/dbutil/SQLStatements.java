@@ -24,7 +24,7 @@ public class SQLStatements {
     }
 
     /**
-     * queries the SQL database for a user by email and passowrd
+     * queries the SQL database for a user by email and password
      *
      * @param email the inputted email
      * @param password the inputted password
@@ -35,7 +35,7 @@ public class SQLStatements {
     }
 
     /**
-     *This method gets the user's saved movies by their email and passowrd
+     *This method gets the user's saved movies by their email and password
      *
      * @param email the inputted email
      * @param password the inputted password
