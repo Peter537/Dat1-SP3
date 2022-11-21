@@ -31,7 +31,7 @@ public class SQLStatements {
      * @return String returns the user associated with the matching email and password
      */
     public static String getUserFromEmailAndPassword(String email, String password) {
-        return  "SELECT * FROM chillmedia.user WHERE email = '" + email + "' AND password = '" + password + "'";
+        return "SELECT * FROM chillmedia.user WHERE email = '" + email + "' AND password = '" + password + "'";
     }
 
     /**
@@ -42,6 +42,6 @@ public class SQLStatements {
      * @return String returns the user associated with the matching email and password
      */
     public static String getMoviesFromUserByEmailAndPassword(String email, String password) {
-        return  "SELECT u.user_id, um.um_user_id, um.um_movie_id, um.um_movie_status FROM user_movie AS um JOIN user AS u ON u.user_id = um.um_user_id WHERE u.email = '"+ email +"' AND u.password = '" + password + "' AND u.user_id = um_user_id";
+        return "SELECT u.user_id, um.um_user_id, um.um_movie_id, um.um_movie_status FROM user_movie AS um JOIN user AS u ON u.user_id = um.um_user_id WHERE u.email = '"+ email +"' AND u.password = '" + password + "' AND u.user_id = um_user_id";
     }
 }
