@@ -2,6 +2,10 @@ package main.media;
 
 public interface IMovie extends IMedia {
 
-   // movies dont have a start-to-end year, but it has a releasedate.
+    /**
+     * As different Watchables can have multiple years, this method returns the year the movie was released.
+     *
+     * @return int The release date of the movie
+     */
     int getYear();
 }

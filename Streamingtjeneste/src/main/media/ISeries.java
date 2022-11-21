@@ -4,13 +4,24 @@ import java.util.ArrayList;
 
 public interface ISeries extends IMedia {
 
-    // this interface adds a start year and end year as series arent single-date watchables.
-
-
+    /**
+     * As different Watchables can have multiple years, this method returns the year the series started.
+     *
+     * @return int The year the series started
+     */
     int getStartYear();
 
+    /**
+     * As different Watchables can have multiple years, this method returns the year the series ended.
+     *
+     * @return int The year the series ended
+     */
     int getEndYear();
 
-    // not all watchables have seasons, but series do.
+    /**
+     * This method will return the seasons the series has.
+     *
+     * @return ArrayList<Season> The seasons of the series
+     */
     ArrayList<Season> getSeasons();
 }
