@@ -52,10 +52,19 @@ public class DataBaseIO implements IDataIO {
                     ArrayList<IMovie> allMovies = loadMovies();
                     for (IMovie movie : allMovies) {
                         if (movie.getID() == userMovies.getInt("um_movie_id")) {
-                            if (userMovies.getString("um_movie_status").equals("WATCHED")) {
-                                watchedMovies.add(movie);
-                            } else {
-                                myMovies.add(movie);
+                            switch (userMovies.getString("um_movie_status")) {
+                                case "WATCHED":
+                                    watchedMovies.add(movie);
+                                    break;
+                                case "WANTTO":
+                                    myMovies.add(movie);
+                                    break;
+                                case "WANTTO,WATCHED":
+                                    watchedMovies.add(movie);
+                                    myMovies.add(movie);
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                     }
