@@ -17,9 +17,10 @@ public class ChillMedia {
     /**
      * Constructor for ChillMedia
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor is what initiates the object-data in this program. From IDataIO we load the movies, series and users
+     * From here we initiate the login session and the flow session where the user finally can choose their desired media
      *
-     * @param dataIO
+     * @param dataIO is the type of IDataIO the user has chosen to initialise the program with
      */
     public ChillMedia(IDataIO dataIO) {
         this.sessionCache = new SessionCache();
@@ -30,7 +31,7 @@ public class ChillMedia {
     }
 
     /**
-     *
+     * loads all media (series and movies)
      */
     private void load() {
         getSessionCache().setMovies(getDataIO().loadMovies());
@@ -38,7 +39,8 @@ public class ChillMedia {
     }
 
     /**
-     *
+     * Welcomes the user to the chillmedia flow and prompts the user what they want to do
+     * initiates the chillmedia flow
      */
     public void run() {
         getLogIn().logIn();
@@ -69,7 +71,7 @@ public class ChillMedia {
     }
 
     /**
-     *
+     * This method lists the searchoptions for the user within movies
      */
     private void listMovies() {
         String[] options = new String[] {
@@ -100,7 +102,7 @@ public class ChillMedia {
     }
 
     /**
-     *
+     * This method lists the searchoptions for the user within series
      */
     private void listSeries() {
         String[] options = new String[] {

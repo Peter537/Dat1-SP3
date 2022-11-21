@@ -8,7 +8,7 @@ import main.utils.data.IDataIO;
 public class Main {
 
     /**
-     * Main method
+     * Main method that initialises the program
      *
      * @param args default parameter
      */
@@ -19,9 +19,9 @@ public class Main {
     }
 
     /**
+     * prompts the user whether they want to use the textfiles (could be a local offline mode) or database (online) for the program-instance
      *
-     *
-     * @return IDataIO
+     * @return IDataIO returns the type of DataIO the user would like to use
      */
     private static IDataIO getDataIOType() {
         while (true) {
