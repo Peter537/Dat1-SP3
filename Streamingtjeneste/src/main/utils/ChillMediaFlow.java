@@ -18,18 +18,19 @@ public class ChillMediaFlow {
     /**
      * Constructor for ChillMediaFlow
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This contructor takes an instance of chillMedia upon startup and lets the user prompt through the chillMedia flow
+     * Here they can directly interact with the program
      *
-     * @param chillMedia
+     * @param chillMedia is an instance of ChillMedia
      */
     public ChillMediaFlow(ChillMedia chillMedia) {
         this.chillMedia = chillMedia;
     }
 
     /**
+     * This method lets the user search movies by different parameters (eg. title, genre, rating as listed below)
      *
-     *
-     * @param number
+     * @param number is the number the user has chosen to prompt into the program
      */
     public void searchMovies(int number) {
         switch (number) {
@@ -43,7 +44,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * This method lets the user search movies by title
      */
     private void searchMoviesByTitle() {
         ArrayList<IMovie> movies;
@@ -59,7 +60,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * This method lets the user search movies by genre
      */
     private void searchMoviesByGenre() {
         ArrayList<IMovie> movies;
@@ -90,7 +91,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * This method lets the user search movies by rating
      */
     private void searchMoviesByRating() {
         ArrayList<IMovie> movies;
@@ -113,7 +114,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * This method shows the user a list of their saved movies, or tells them the list is empty
      */
     private void searchMyMovies() {
         ArrayList<IMovie> movies = getUser().getMyMovies();
@@ -125,7 +126,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * Shows user a list of movies they have already watched
      */
     private void searchMyWatchedMovies() {
         ArrayList<IMovie> movies = getUser().getWatchedMovies();
@@ -137,9 +138,10 @@ public class ChillMediaFlow {
     }
 
     /**
+     * Determines how the page of displayed movies are shown to the user. Here we made it so that only 10 movies a shown per page
+     * This method also lets the user browse through a certain amount of pages depending on their search
      *
-     *
-     * @param movies
+     * @param movies is the arraylist of movies loaded by one of the other methods based on how the user searched for movies
      */
     private void searchMovies(ArrayList<IMovie> movies) {
         int page = 1;
@@ -201,9 +203,9 @@ public class ChillMediaFlow {
 
 
     /**
+     * This method gives the user multiple options of searching for a series (eg. by title, genre or rating as listed below)
      *
-     *
-     * @param number
+     * @param number is the number the user prompted into the program.
      */
     public void searchSeries(int number) {
         switch (number) {
@@ -215,7 +217,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * Lets the user search series by title
      */
     private void searchSeriesByTitle() {
         ArrayList<ISeries> series;
@@ -231,7 +233,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * Lets the user search series by genre
      */
     private void searchSeriesByGenre() {
         ArrayList<ISeries> series;
@@ -262,7 +264,7 @@ public class ChillMediaFlow {
     }
 
     /**
-     *
+     * Lets the user search series by rating
      */
     private void searchSeriesByRating() {
         ArrayList<ISeries> series;
@@ -285,9 +287,11 @@ public class ChillMediaFlow {
     }
 
     /**
+     * This method determines how the list of searched movies is displayed.
+     * currently this method is set to show 10 movies per page and lets user browse through a certain amount of
+     * series based on their query
      *
-     *
-     * @param seriesList
+     * @param seriesList is the list of series loaded in by one of the above methods. They return a list of series that match the query
      */
     private void searchSeries(ArrayList<ISeries> seriesList) {
         int page = 1;
@@ -337,36 +341,36 @@ public class ChillMediaFlow {
     }
 
     /**
+     * This method converts ISeries list of movies to IMedia
      *
-     *
-     * @param series
-     * @param page
-     * @param pageSize
-     * @return int
+     * @param series is an arraylist of series
+     * @param page is the pagenumber
+     * @param pageSize is the pagesize (here we have chosen 10 movies per page is shown)
+     * @return int returns the index number of displayed series (they are displayed as numbers and titles)
      */
     private int chooseSeries(ArrayList<ISeries> series, int page, int pageSize) {
         return chooseMedia(new ArrayList<>(series), page, pageSize);
     }
 
     /**
+     *This method convertes IMovie list of movies to IMedia
      *
-     *
-     * @param movies
-     * @param page
-     * @param pageSize
-     * @return int
+     * @param movies is an arraylist of movies
+     * @param page is the pagenumber
+     * @param pageSize is the pagesize (here we have chosen it should be 10 displayed movies per page)
+     * @return int returns the index number of displayed movies which the user chose by prompting a number (they are displayed as numbers and titles)
      */
     private int chooseMovie(ArrayList<IMovie> movies, int page, int pageSize) {
         return chooseMedia(new ArrayList<>(movies), page, pageSize);
     }
 
     /**
+     *This method is what displays each media for the user to choose from based on the user's query
      *
-     *
-     * @param media
-     * @param page
-     * @param pageSize
-     * @return int
+     * @param media is an arraylist of type IMedia that has a list of media objects
+     * @param page is the pagenumber
+     * @param pageSize is the pagesize( here we have chosen it should be 10 dispalyed media per page)
+     * @return int returns the index number of displayed media which the user chose by prompting a number (they are displayed as numbers and titles)
      */
     private int chooseMedia(ArrayList<IMedia> media, int page, int pageSize) {
         while (true) {
@@ -390,9 +394,9 @@ public class ChillMediaFlow {
     }
 
     /**
+     * This method calls the methods created in FileIO that adds an instance of a movie that was not already saved to myMovies
      *
-     *
-     * @param movie
+     * @param movie is the selected movie instance to add to this list
      */
     private void addMovieToMyMovies(IMovie movie) {
         if (getUser().addToMyMovies(movie)) {
@@ -403,9 +407,9 @@ public class ChillMediaFlow {
     }
 
     /**
+     This method calls the methods created in FileIO that removes an instance of a movie that was previously saved to myMovies
      *
-     *
-     * @param movie
+     * @param movie is the selected movie instance to remove from this list
      */
     private void removeMovieFromMyMovies(IMovie movie) {
         if (getUser().removeFromMyMovies(movie)) {
@@ -416,9 +420,9 @@ public class ChillMediaFlow {
     }
 
     /**
+     * This method is what displays what the user has chosen to watch. This is the same as the user watching the media
      *
-     *
-     * @param movie
+     * @param movie is the movie instance the user has chosen to watch
      */
     private void watchMovie(IMovie movie) {
         getUser().addWatchedMovie(movie);
@@ -426,18 +430,18 @@ public class ChillMediaFlow {
     }
 
     /**
+     * This method is what displays what the user has chosen to watch. This is the same as the user watching the media
      *
-     *
-     * @param series
+     * @param series is the series instance the user has chosen to watch
      */
     private void watchSeries(ISeries series) {
         TextIO.println("You are now watching " + series.getTitle() + ".");
     }
 
     /**
+     * prompts the user what they want to do with the selected movie
      *
-     *
-     * @return int
+     * @return int returns the integer choice based on the numerical listed options they were shown below.
      */
     private int selectMovieOptions() {
         String[] movieOptions = new String[]{
@@ -457,9 +461,9 @@ public class ChillMediaFlow {
     }
 
     /**
+     * This method prompts the user what they want to do with the selected series
      *
-     *
-     * @return int
+     * @return int returns the integer choice based on numerical listed options they were shown below.
      */
     private int selectSeriesOptions() {
         String[] seriesOptions = new String[]{
