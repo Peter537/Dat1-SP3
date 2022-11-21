@@ -217,7 +217,7 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
-     *loads watched movies and my movies before the user can access them
+     * Loads watched movies and my movies before the user can access them
      *
      * @param user is the active user object
      */
