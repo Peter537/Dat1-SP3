@@ -15,7 +15,7 @@ public class SessionCache {
     /**
      * Constructor for SessionCache
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor is empty
      */
     public SessionCache() { }
 
