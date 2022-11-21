@@ -33,22 +33,6 @@ public class SessionCache {
         this.user = user;
     }
 
-    public boolean addMovie(IMovie movie) {
-        if (!getMovies().contains(movie)) {
-            getMovies().add(movie);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean addSeries(ISeries series) {
-        if (!getSeries().contains(series)) {
-            getSeries().add(series);
-            return true;
-        }
-        return false;
-    }
-
     public ArrayList<IMovie> getMovies() {
         return this.movies;
     }
