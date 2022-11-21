@@ -47,8 +47,8 @@ public class LogIn {
     }
 
     /**
-     * this method takes the user through the sign up flow.
-     * This method has a "go back" option so they can exist out of sign In
+     * This method takes the user through the sign-up flow.
+     * This method has a "go back" option, so they can exist out of sign In
      */
     private void signUp() {
         String email = TextIO.getUserInput("You are signing up. Write your email address, or press 0 to go back: ");
@@ -99,8 +99,8 @@ public class LogIn {
     }
 
     /**
-     * this method takes the user through the sign in flow.
-     * This method has a "go back" option so they can exist out of signup
+     * This method takes the user through the sign-in flow.
+     * This method has a "go back" option, so they can exist out of signup
      */
     private void signIn() {
         String email = TextIO.getUserInput("You are signing in. Write your email address, or press 0 to go back: ");
@@ -146,10 +146,10 @@ public class LogIn {
     }
 
     /**
-     * this method prompts the user to confirm whether or not they password they entered was what they wanted
+     * This method prompts the user to confirm whether the password they entered was what they wanted
      *
-     * @param password is the password they initially typed and that they must confirm is the right passowrd
-     * @return boolean returns true once the user re-enters the correct password and moves on through the sign up flow
+     * @param password is the password they initially typed and that they must confirm is the right password
+     * @return boolean Returns true once the user re-enters the correct password and moves on through the sign-up flow
      */
     private boolean confirmPassword(String password) {
         String msg = "You are signing up. Confirm password, press 0 to go back: ";
@@ -169,7 +169,7 @@ public class LogIn {
     /**
      * This method prompts the user for their age
      *
-     * @return int is the integer value of the user's age
+     * @return int The integer value of the user's age
      */
     private int getAge() {
         while (true) {
@@ -186,11 +186,11 @@ public class LogIn {
     }
 
     /**
-     * This method is part of both signIn/SignUp flow and checks if the email used to sign in matches the typed string
+     * This method is part of both signIn/SignUp flow and checks if the email used to sign in matches the typed string,
      * or it is used to check if the email they are trying to sign up with already is associated with an existing account
      *
-     * @param email
-     * @return boolean
+     * @param email The email to check
+     * @return boolean Returns true if the email is found in the list of users
      */
     private boolean checkEmailInList(String email) {
         for (IUser p : getUsers()) {
@@ -206,7 +206,7 @@ public class LogIn {
      *
      * @param email is the email that matches the user's input.
      * @param password is the password that matches the user's input
-     * @return IUser returns the user's account-instance so they can operate they own account through chillmedia flow
+     * @return IUser returns the user's account-instance, so they can operate they own account through chillmedia flow
      */
     private IUser getUser(String email, String password) {
         for (IUser p : getUsers()) {
