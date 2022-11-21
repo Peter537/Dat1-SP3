@@ -23,7 +23,7 @@ public class DataBaseIO implements IDataIO {
     /**
      * Constructor for DataBaseIO
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor establishes a connection to the database
      */
     public DataBaseIO() {
         mySQL = new MySQL();
@@ -31,9 +31,9 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
+     * This method loads all users from the SQL database
      *
-     *
-     * @return ArrayList<IUser>
+     * @return ArrayList<IUser> returns an arraylist of user objects
      */
     public ArrayList<IUser> loadUsers() {
         ResultSet userdata = mySQL.executeQuery(SQLStatements.getAllUsers());
@@ -69,9 +69,9 @@ public class DataBaseIO implements IDataIO {
     }
     
     /**
+     *This method loads all movies from the SQL database
      *
-     *
-     * @return ArrayList<IMovie>
+     * @return ArrayList<IMovie> returns an arraylist of movie objects
      */
     public ArrayList<IMovie> loadMovies() {
         ResultSet movieData = mySQL.executeQuery(SQLStatements.getAllMovies());
@@ -96,9 +96,9 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
+     * This method loads all series from the SQL database
      *
-     *
-     * @return ArrayList<ISeries>
+     * @return ArrayList<ISeries> returns an arralist of series objects
      */
     public ArrayList<ISeries> loadSeries() {
         ResultSet seriesData = mySQL.executeQuery(SQLStatements.getAllSeries());
@@ -129,9 +129,9 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
+     * this method saves a user's data.
      *
-     *
-     * @param user
+     * @param user is the user object referenced
      */
     public void saveUser(IUser user) {
         PreparedStatement statement = null;
@@ -159,9 +159,9 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
+     * This method saves the "My movies" tab to the active user.
      *
-     *
-     * @param user
+     * @param user is the active user object
      */
     private void saveMoviesToUser(IUser user) {
         ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
@@ -217,9 +217,9 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
+     *loads watched movies and my movies before the user can access them
      *
-     *
-     * @param user
+     * @param user is the active user object
      */
     public void setCache(IUser user) {
         this.watchedMoviesCached = (ArrayList<IMovie>) user.getWatchedMovies().clone();
@@ -227,9 +227,9 @@ public class DataBaseIO implements IDataIO {
     }
 
     /**
+     * This method returns the password (or any text) written in the referenced textfile
      *
-     *
-     * @return String
+     * @return String returns the password written in the textfile as a string
      */
     private String getPassword() {
         File file = new File("Data/dbpass.csv");

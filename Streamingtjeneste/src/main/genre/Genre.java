@@ -32,11 +32,12 @@ public enum Genre implements IGenre {
     /**
      * Constructor for Genre
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This enum constructor displays all enums with a set of boolean values
+     * depending on if the genre is a movie genre, series genre or is age restricted (18+)
      *
-     * @param isMovieGenre
-     * @param isSeriesGenre
-     * @param isAgeRestricted
+     * @param isMovieGenre is the boolean for if the genre can be a movie genre
+     * @param isSeriesGenre is the boolean for if genre can be a series genre
+     * @param isAgeRestricted is the boolean for if the media is age restricted (18+)
      */
     Genre(boolean isMovieGenre, boolean isSeriesGenre, boolean isAgeRestricted) {
         this.isMovieGenre = isMovieGenre;

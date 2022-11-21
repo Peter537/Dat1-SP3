@@ -9,20 +9,20 @@ public class MySQL {
     /**
      * Constructor for MySQL
      * <p>
-     * KOMMENTAR_TIL_KONSTRUKTØREN_HER
+     * This constructor is left empty to show that it does not do anything within the constructor
      */
     public MySQL() { }
 
     /**
-     *
+     * This method establishes a connection to the database
      *
      * Example of how to use this method:
      * openConnection("localhost:/world", "root", "12321");
      *
-     * @param url
-     * @param name
-     * @param password
-     * @return boolean
+     * @param url is the unique url of our database
+     * @param name is the name of the database
+     * @param password is the password of the database
+     * @return boolean returns there a connection was succesfully estrablished or not
      */
     public boolean openConnection(String url, String name, String password) {
         try {
@@ -36,25 +36,25 @@ public class MySQL {
     }
 
     /**
-     *
+     * This is an overloaded method that an opposed to using a url, uses an ip and a local schema to establish a connection
      *
      * Example of how to use this method:
      * openConnection("localhost", "world", "root", "12321");
      *
-     * @param ip
-     * @param schema
-     * @param name
-     * @param password
-     * @return boolean
+     * @param ip is the ip inputted
+     * @param schema is the schema name inputted
+     * @param name is the database name
+     * @param password is the database password
+     * @return boolean returns true if a connection was established
      */
     public boolean openConnection(String ip, String schema, String name, String password) {
         return openConnection(ip + ":/" + schema, name, password);
     }
 
     /**
+     * closes a connection manually before closing the program as a common courtesy.
      *
-     *
-     * @return boolean
+     * @return boolean returns true if connection was closed successfully
      */
     public boolean closeConnection() {
         try {
@@ -67,10 +67,10 @@ public class MySQL {
     }
 
     /**
+     * This method lets the user query within the database (which contains all loaded/saved data)
      *
-     *
-     * @param query
-     * @return ResultSet
+     * @param query is the string value the user inputted
+     * @return ResultSet returns the results of the query
      */
     public ResultSet executeQuery(String query) {
         try {
@@ -82,10 +82,11 @@ public class MySQL {
     }
 
     /**
+     * This method is similar to the above executeQuery, however this method used prepared statements so no human
+     * erros can be made when changing and handling the data on the database
      *
-     *
-     * @param query
-     * @return boolean
+     * @param query is the prepared statement inputted
+     * @return boolean returns true if the prepared statement was executed properly
      */
     public boolean executeChangeQuery(PreparedStatement query) {
         try {
@@ -99,6 +100,8 @@ public class MySQL {
 
     /**
      * NOTE: This method is not tested yet, and it's not in the UML yet
+     *
+     * This method is a prepared statement to be used in DataBaseIO
      *
      * @param p
      * @param startIndex
@@ -119,6 +122,8 @@ public class MySQL {
 
     /**
      * NOTE: This method is not tested yet, and it's not in the UML yet
+     *
+     * This method is a prepared statement to be used in DataBaseIO
      *
      * @param p
      * @param startIndex
