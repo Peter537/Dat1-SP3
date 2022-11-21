@@ -15,7 +15,7 @@ public class SessionCache {
     /**
      * Constructor for SessionCache
      * <p>
-     * This constructor is empty
+     * This constructor is empty as to show the SessionCache constructor doesn't do anything
      */
     public SessionCache() { }
 
@@ -31,22 +31,6 @@ public class SessionCache {
 
     public void setUser(IUser user) {
         this.user = user;
-    }
-
-    public boolean addMovie(IMovie movie) {
-        if (!getMovies().contains(movie)) {
-            getMovies().add(movie);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean addSeries(ISeries series) {
-        if (!getSeries().contains(series)) {
-            getSeries().add(series);
-            return true;
-        }
-        return false;
     }
 
     public ArrayList<IMovie> getMovies() {

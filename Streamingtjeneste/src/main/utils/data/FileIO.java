@@ -26,7 +26,7 @@ public class FileIO implements IDataIO {
     /**
      * Constructor for FileIO
      * <p>
-     * This constructor is empty as to show the FileIO instance does not need any data
+     * This constructor is empty as to show the FileIO constructor doesn't do anything
      */
     public FileIO() { }
 
