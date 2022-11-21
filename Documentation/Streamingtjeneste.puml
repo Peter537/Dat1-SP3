@@ -86,8 +86,6 @@ class SessionCache {
     - IUser user
 
     + SessionCache()
-    + boolean addMovie(IMovie movie)
-    + boolean addSeries(ISeries series)
 
     + accessor methods()
 }
@@ -139,12 +137,10 @@ class FileIO implements IDataIO {
 
     + FileIO()
     + ArrayList<IUser> loadUsers()
-    - ArrayList<IUser> loadUsersFromJson()
     + ArrayList<IMovie> loadMovies()
     + ArrayList<ISeries> loadSeries()
 
     + void saveUser(IUser user)
-    - void saveAsJson(IUser user)
 
     + void setCache(IUser user)
 }
