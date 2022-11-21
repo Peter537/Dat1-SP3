@@ -187,7 +187,9 @@ public class FileIO implements IDataIO {
     @Override
     public void saveUser(IUser user) {
         ArrayList<IUser> users = loadUsers();
-        users.add(user);
+        if (users.stream().noneMatch(u -> u.getID() == user.getID())) {
+            users.add(user);
+        }
         JSONArray userArray = new JSONArray();
 
         for (IUser u : users) {
