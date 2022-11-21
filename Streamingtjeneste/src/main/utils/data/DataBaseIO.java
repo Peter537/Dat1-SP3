@@ -138,17 +138,27 @@ public class DataBaseIO implements IDataIO {
         try {
             if (user.getID() == -1) {
                 statement = mySQL.getConnection().prepareStatement("INSERT INTO user(name, email, password, age) VALUES (?, ?, ?, ?)");
+                statement = mySQL.setStrings(statement, 1, user.getName(), user.getEmail(), user.getPassword());
+                /*
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getPassword());
+                 */
                 statement.setInt(4, user.getAge());
             } else {
                 statement = mySQL.getConnection().prepareStatement("UPDATE user SET name = ?, email = ?, password = ?, age = ? WHERE user_id = ?");
+
+                statement = mySQL.setStrings(statement, 1, user.getName(), user.getEmail(), user.getPassword());
+                statement = mySQL.setInts(statement,4,user.getAge(), user.getID());
+                /*
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getPassword());
+
                 statement.setInt(4, user.getAge());
                 statement.setInt(5, user.getID());
+
+                */
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,8 +182,12 @@ public class DataBaseIO implements IDataIO {
                 for (IMovie movie : user.getWatchedMovies()) {
                     if (!watchedMoviesCached.contains(movie)) {
                         statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
+
+                        statement = mySQL.setInts(statement, 1, id, movie.getID());
+                       /*
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
+                        */
                         if (user.getMyMovies().contains(movie)) {
                             statement.setString(3, "WATCHED,WANTTO");
                             user.removeFromMyMovies(movie);
@@ -186,8 +200,12 @@ public class DataBaseIO implements IDataIO {
                 for (IMovie movie : watchedMoviesCached) {
                     if (!user.getWatchedMovies().contains(movie)) {
                         statement = mySQL.getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?, um_movie_status = ?");
+
+                        statement = mySQL.setInts(statement, 1, id, movie.getID());
+                        /*
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
+                         */
                         statement.setString(3, "WATCHED");
                         mySQL.executeChangeQuery(statement);
                     }
@@ -195,8 +213,12 @@ public class DataBaseIO implements IDataIO {
                 for (IMovie movie : user.getMyMovies()) {
                     if (!myMoviesCached.contains(movie)) {
                         statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
+                        statement = mySQL.setInts(statement, 1, id, movie.getID());
+                        /*
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
+
+                         */
                         statement.setString(3, "WANTTO");
                         mySQL.executeChangeQuery(statement);
                     }
@@ -204,8 +226,13 @@ public class DataBaseIO implements IDataIO {
                 for (IMovie movie : myMoviesCached) {
                     if (!user.getMyMovies().contains(movie)) {
                         statement = mySQL.getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?");
+                        statement = mySQL.setInts(statement, 1, id, movie.getID());
+
+                        /*
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
+
+                         */
 //                        statement.setString(3, "WANTTO");
                         mySQL.executeChangeQuery(statement);
                     }
