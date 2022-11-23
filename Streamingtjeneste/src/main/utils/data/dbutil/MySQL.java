@@ -99,6 +99,6 @@ public class MySQL {
     }
 
     public Connection getConnection() {
-        return connection;
+        return this.connection;
     }
 }
