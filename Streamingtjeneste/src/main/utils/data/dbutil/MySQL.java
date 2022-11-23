@@ -98,50 +98,6 @@ public class MySQL {
         }
     }
 
-    /**
-     * NOTE: This method is not tested yet, and it's not in the UML yet
-     *
-     * This method is a prepared statement to be used in DataBaseIO
-     *
-     * @param p
-     * @param startIndex
-     * @param strings
-     * @return PreparedStatement
-     */
-    public PreparedStatement setStrings(PreparedStatement p, int startIndex, String... strings) {
-        try {
-            for (int i = 0; i < strings.length; i++) {
-                p.setString(startIndex + i, strings[i]);
-            }
-            return p;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * NOTE: This method is not tested yet, and it's not in the UML yet
-     *
-     * This method is a prepared statement to be used in DataBaseIO
-     *
-     * @param p
-     * @param startIndex
-     * @param ints
-     * @return PreparedStatement
-     */
-    public PreparedStatement setInts(PreparedStatement p, int startIndex, int... ints) {
-        try {
-            for (int i = 0; i < ints.length; i++) {
-                p.setInt(startIndex + i, ints[i]);
-            }
-            return p;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public Connection getConnection() {
         return connection;
     }
