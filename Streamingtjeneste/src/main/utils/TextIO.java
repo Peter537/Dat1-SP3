@@ -75,7 +75,7 @@ public class TextIO {
     }
 
     /**
-     * We made a method for println so we can rid the program of cluttering "System.out.println"-lines
+     * We made a method for println, so we can get rid the program of cluttering "System.out.println"-lines
      *
      * @param msg is the message to be displayed
      */
@@ -84,7 +84,7 @@ public class TextIO {
     }
 
     /**
-     * We made a method for println so we can rid the program of cluttering "System.out.print"-lines
+     * We made a method for println, so we can get rid the program of cluttering "System.out.print"-lines
      *
      * @param msg is the message to be displayed
      */
