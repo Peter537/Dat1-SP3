@@ -36,7 +36,7 @@ public class DataBaseIO implements IDataIO {
      * @return ArrayList<IUser> returns an arraylist of user objects
      */
     public ArrayList<IUser> loadUsers() {
-        ResultSet userdata = mySQL.executeQuery(SQLStatements.getAllUsers());
+        ResultSet userdata = getMySQL().executeQuery(SQLStatements.getAllUsers());
         ArrayList<IUser> users = new ArrayList<>();
         try {
             while (userdata.next()) {
@@ -45,7 +45,7 @@ public class DataBaseIO implements IDataIO {
                 String email = userdata.getString("email");
                 String password = userdata.getString("password");
                 int age = userdata.getInt("age");
-                ResultSet userMovies = mySQL.executeQuery(SQLStatements.getMoviesFromUserByEmailAndPassword(email, password));
+                ResultSet userMovies = getMySQL().executeQuery(SQLStatements.getMoviesFromUserByEmailAndPassword(email, password));
                 ArrayList<IMovie> myMovies = new ArrayList<>();
                 ArrayList<IMovie> watchedMovies = new ArrayList<>();
                 while (userMovies.next()) {
@@ -83,7 +83,7 @@ public class DataBaseIO implements IDataIO {
      * @return ArrayList<IMovie> returns an arraylist of movie objects
      */
     public ArrayList<IMovie> loadMovies() {
-        ResultSet movieData = mySQL.executeQuery(SQLStatements.getAllMovies());
+        ResultSet movieData = getMySQL().executeQuery(SQLStatements.getAllMovies());
         ArrayList<IMovie> movies = new ArrayList<>();
         try {
             while (movieData.next()) {
@@ -110,7 +110,7 @@ public class DataBaseIO implements IDataIO {
      * @return ArrayList<ISeries> returns an arralist of series objects
      */
     public ArrayList<ISeries> loadSeries() {
-        ResultSet seriesData = mySQL.executeQuery(SQLStatements.getAllSeries());
+        ResultSet seriesData = getMySQL().executeQuery(SQLStatements.getAllSeries());
         ArrayList<ISeries> series = new ArrayList<>();
         try {
             while (seriesData.next()) {
@@ -146,13 +146,13 @@ public class DataBaseIO implements IDataIO {
         PreparedStatement statement = null;
         try {
             if (user.getID() == -1) {
-                statement = mySQL.getConnection().prepareStatement("INSERT INTO user(name, email, password, age) VALUES (?, ?, ?, ?)");
+                statement = getMySQL().getConnection().prepareStatement("INSERT INTO user(name, email, password, age) VALUES (?, ?, ?, ?)");
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getPassword());
                 statement.setInt(4, user.getAge());
             } else {
-                statement = mySQL.getConnection().prepareStatement("UPDATE user SET name = ?, email = ?, password = ?, age = ? WHERE user_id = ?");
+                statement = getMySQL().getConnection().prepareStatement("UPDATE user SET name = ?, email = ?, password = ?, age = ? WHERE user_id = ?");
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getEmail());
                 statement.setString(3, user.getPassword());
@@ -162,9 +162,9 @@ public class DataBaseIO implements IDataIO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mySQL.executeChangeQuery(statement);
+        getMySQL().executeChangeQuery(statement);
         saveMoviesToUser(user);
-        mySQL.closeConnection();
+        getMySQL().closeConnection();
     }
 
     /**
@@ -173,14 +173,14 @@ public class DataBaseIO implements IDataIO {
      * @param user is the active user object
      */
     private void saveMoviesToUser(IUser user) {
-        ResultSet rs = mySQL.executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
+        ResultSet rs = getMySQL().executeQuery(SQLStatements.getUserFromEmailAndPassword(user.getEmail(), user.getPassword()));
         PreparedStatement statement;
         try {
             while (rs.next()) {
                 int id = rs.getInt("user_id");
                 for (IMovie movie : user.getWatchedMovies()) {
                     if (!watchedMoviesCached.contains(movie)) {
-                        statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
+                        statement = getMySQL().getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
                         if (user.getMyMovies().contains(movie)) {
@@ -189,34 +189,33 @@ public class DataBaseIO implements IDataIO {
                         } else {
                             statement.setString(3, "WATCHED");
                         }
-                        mySQL.executeChangeQuery(statement);
+                        getMySQL().executeChangeQuery(statement);
                     }
                 }
                 for (IMovie movie : watchedMoviesCached) {
                     if (!user.getWatchedMovies().contains(movie)) {
-                        statement = mySQL.getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?, um_movie_status = ?");
+                        statement = getMySQL().getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?, um_movie_status = ?");
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
                         statement.setString(3, "WATCHED");
-                        mySQL.executeChangeQuery(statement);
+                        getMySQL().executeChangeQuery(statement);
                     }
                 }
                 for (IMovie movie : user.getMyMovies()) {
                     if (!myMoviesCached.contains(movie)) {
-                        statement = mySQL.getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
+                        statement = getMySQL().getConnection().prepareStatement("INSERT INTO user_movie(um_user_id, um_movie_id, um_movie_status) VALUES (?, ?, ?)");
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
                         statement.setString(3, "WANTTO");
-                        mySQL.executeChangeQuery(statement);
+                        getMySQL().executeChangeQuery(statement);
                     }
                 }
                 for (IMovie movie : myMoviesCached) {
                     if (!user.getMyMovies().contains(movie)) {
-                        statement = mySQL.getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?");
+                        statement = getMySQL().getConnection().prepareStatement("DELETE FROM user_movie WHERE um_user_id = ? AND um_movie_id = ?");
                         statement.setInt(1, id);
                         statement.setInt(2, movie.getID());
-//                        statement.setString(3, "WANTTO");
-                        mySQL.executeChangeQuery(statement);
+                        getMySQL().executeChangeQuery(statement);
                     }
                 }
             }
@@ -252,6 +251,6 @@ public class DataBaseIO implements IDataIO {
     }
 
     public MySQL getMySQL() {
-        return mySQL;
+        return this.mySQL;
     }
 }
