@@ -15,7 +15,7 @@ public class MySQL {
 
     /**
      * This method establishes a connection to the database
-     *
+     * <p>
      * Example of how to use this method:
      * openConnection("localhost:/world", "root", "12321");
      *
@@ -37,7 +37,7 @@ public class MySQL {
 
     /**
      * This is an overloaded method that an opposed to using a url, uses an ip and a local schema to establish a connection
-     *
+     * <p>
      * Example of how to use this method:
      * openConnection("localhost", "world", "root", "12321");
      *
